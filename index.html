@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ETC Apparel | The Editorial Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;0,900;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#c5c6cc",
+                        "secondary-fixed-dim": "#ffb86b",
+                        "primary-fixed": "#dce3f2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#151c27",
+                        "surface-container-high": "#ece7e3",
+                        "on-background": "#1d1b19",
+                        "inverse-surface": "#32302e",
+                        "on-surface": "#1d1b19",
+                        "on-primary-container": "#949baa",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#601b00",
+                        "inverse-primary": "#c0c7d6",
+                        "on-surface-variant": "#45474c",
+                        "surface-container-low": "#f8f3ef",
+                        "secondary-fixed": "#ffdcbc",
+                        "on-tertiary-fixed-variant": "#822700",
+                        "on-tertiary-container": "#f97241",
+                        "surface-container": "#f2ede9",
+                        "surface": "#fef8f4",
+                        "on-tertiary-fixed": "#390c00",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#feb564",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#2c1700",
+                        "tertiary": "#3c0e00",
+                        "surface-bright": "#fef8f4",
+                        "on-primary-fixed-variant": "#404754",
+                        "tertiary-fixed-dim": "#ffb59c",
+                        "surface-variant": "#e6e2de",
+                        "surface-tint": "#585f6c",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#764500",
+                        "primary-fixed-dim": "#c0c7d6",
+                        "primary": "#171e29",
+                        "inverse-on-surface": "#f5f0ec",
+                        "primary-container": "#2c333f",
+                        "secondary": "#885203",
+                        "on-error": "#ffffff",
+                        "background": "#fef8f4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#683d00",
+                        "outline": "#75777c",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e6e2de",
+                        "surface-dim": "#ded9d5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        .hero-gradient { background: linear-gradient(135deg, #171e29 0%, #2c333f 100%); }
+        .noise-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+        }
+        /* Dropdown styles to match Image 2 */
+        .group:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Carousel Styles */
+        .carousel-slide {
+            transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .carousel-item {
+            flex: 0 0 100%;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fef8f4]/95 backdrop-blur-xl border-b border-surface-variant/30">
+<nav class="flex justify-between items-center w-full px-8 md:px-16 py-4 mx-auto">
+<div class="flex items-center gap-12">
+<a class="text-2xl font-black text-[#171e29] tracking-tighter font-headline" href="#">ETC Apparel</a>
+<div class="hidden md:flex items-center gap-8 font-body font-medium tracking-tight text-sm">
+<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="index.html">Home</a>
+<a class="text-[#885203]" href="about-us.html">About Us</a>
+<div class="relative group">
+<button class="flex items-center gap-1 text-[#171e29] hover:text-[#885203] transition-colors">
+                            Products
+                            <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<!-- Dropdown Menu styled after Image 2 -->
+<div class="dropdown-menu absolute left-0 top-full pt-4 w-56 animate-in fade-in slide-in-from-top-2 duration-200">
+<div class="bg-surface-container-lowest border border-surface-variant/20 rounded-lg overflow-hidden py-2">
+<a class="block px-6 py-3 text-[#171e29] hover:bg-surface-container-low transition-colors" href="all-products.html">Kids</a>
+<a class="block px-6 py-3 text-[#171e29] hover:bg-surface-container-low transition-colors" href="all-products.html">Mens</a>
+<a class="block px-6 py-3 text-[#171e29] hover:bg-surface-container-low transition-colors" href="all-products.html">Womens</a>
+<div class="h-px bg-surface-variant/20 my-1"></div>
+<a class="block px-6 py-3 text-[#171e29] font-semibold hover:bg-surface-container-low transition-colors" href="all-products.html">View All Categories</a>
+</div>
+</div>
+</div>
+<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="management.html">Management</a>
+<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="#">Contact Us</a>
+<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="#">News &amp; Events</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none focus:ring-1 focus:ring-secondary rounded-lg text-xs w-56 transition-all" placeholder="Search curated collections..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<a href="sign-in.html" class="text-[#171e29] hover:text-[#885203] transition-colors">
+<span class="material-symbols-outlined text-xl">person</span>
+</a>
+<button class="text-[#171e29] hover:text-[#885203] transition-colors relative">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-[10px] text-white w-4 h-4 flex items-center justify-center rounded-full">2</span>
+</button>
+</div>
+</div>
+</nav>
+</header>
+<main class="relative">
+<!-- Hero Section -->
+<section class="h-screen w-full relative overflow-hidden bg-primary" id="hero-carousel">
+<!-- Carousel Content Layer -->
+<div class="container mx-auto px-8 md:px-16 grid grid-cols-1 md:grid-cols-12 h-full items-center z-30 relative pointer-events-none">
+<div class="md:col-span-6 pointer-events-auto">
+<span class="text-secondary tracking-[0.4em] text-xs uppercase font-label mb-6 block">Collection 2024</span>
+<h1 class="text-white font-headline text-6xl md:text-8xl font-black leading-[1.1] mb-8 tracking-tighter">
+                        Refining the <br/><span class="italic text-surface-container-high font-medium">Modern Silhouette.</span>
+</h1>
+<p class="text-on-primary-container font-body text-lg max-w-md mb-12 leading-relaxed">
+                        An editorial journey through textile innovation and architectural tailoring. Crafted for the global curator who values silence over noise.
+                    </p>
+<div class="flex gap-4">
+<button class="px-8 py-4 hero-gradient text-white rounded-lg font-bold tracking-wide flex items-center gap-2 group transition-all active:scale-95">
+                            Shop Collections
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</button>
+<button class="px-8 py-4 bg-transparent border border-white/20 text-white rounded-lg font-bold hover:bg-white/10 transition-all active:scale-95">
+                            View Lookbook
+                        </button>
+</div>
+</div>
+</div>
+<!-- Image Slider Container -->
+<div class="absolute inset-0 z-10 flex">
+<div class="carousel-slide flex h-full w-full" id="carousel-track">
+<!-- Slide 1 -->
+<div class="carousel-item relative h-full w-full shrink-0">
+<img alt="Modern minimalist fashion model" class="w-full h-full object-cover grayscale-[20%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFEUfiXKuCs4XIVo0ZQLi6YKTn-LDS_pkNruKhP5Yu_z-xwGT56CMFcYORqNjT_wz58pWmEDLTrxxElMDqmcqc3kDFtUVau1OmhrQOXI-hx4yLP19U1p3RZKtyIVO3WrexQNvEUDoZZeL9dAFBD64Gc8dbBUKTlFtiK58BPQwOQAH_18c--J4gQOyMOe2kfhPrtsRuiLlXXP0lAtnjgdsCKQvhlZlwcMcaBTf_sMNCQiBwlEWiBRSTHCnt4dAt7QgFeeC10Mh-fDpW"/>
+</div>
+<!-- Slide 2 -->
+<div class="carousel-item relative h-full w-full shrink-0">
+<img alt="Architectural brutalist detail" class="w-full h-full object-cover grayscale-[15%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7h06E9qDUKq9xalBzao-1lZAZNK0Kgu6VLGnKxCrlE2miNi7oxtpqkdB1nfaq8fDtpO-pehlLFpuYfIfBhm5rivJG1pc1mF-41PW3MFht7dlJSjjQ_cmHU42-yISdMPkogdjhQ1Dlm-7um0fZAeWU5JbT-FdGX_O47dG2pjLBDtSIm3VNWTBTtwXy3FdZW8FtmPKz6WU8s38_vmeEohAtFUWi6j9YyYhW_A0I5lhiyAi32Fp2Q_Sw15zaWBYL6Cn7AJQaTKbCaBR"/>
+</div>
+<!-- Slide 3 -->
+<div class="carousel-item relative h-full w-full shrink-0">
+<img alt="High fashion silhouette" class="w-full h-full object-cover grayscale-[10%]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9WlH5JDUbxluGtsNw7Wosolq2H6v3BjMkVFZLJrKMV8oN0qS-NwjOYkopQySW5YLR-tVM73gN-G4CIcfzacPboZwyiSxACV2yGnLGliyFwld5Fx5PySZgl63uIK0AQctFx_-ZwL29zBjPT9T7Oma6Nei095hXsqM5uD53j-kapSSG7lxNDuZzLPLI-qVd9KDMXQYfIiR0-1zG4H2beMwS4hX9fRzXOy6LHMldJPr0mSwtzM7w28GwByETfTItwWpB4BkRgGV9G-LA"/>
+</div>
+</div>
+</div>
+<!-- Overlays -->
+<div class="absolute inset-0 z-20 pointer-events-none">
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent"></div>
+<div class="noise-texture absolute inset-0"></div>
+</div>
+<!-- Carousel Nav Dots -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-40 flex gap-3">
+<button class="carousel-dot w-12 h-1 bg-white/40 hover:bg-white transition-all" onclick="goToSlide(0)"></button>
+<button class="carousel-dot w-12 h-1 bg-white/20 hover:bg-white transition-all" onclick="goToSlide(1)"></button>
+<button class="carousel-dot w-12 h-1 bg-white/20 hover:bg-white transition-all" onclick="goToSlide(2)"></button>
+</div>
+</section>
+<!-- Script for Hero Carousel -->
+<script>
+            let currentSlide = 0;
+            const track = document.getElementById('carousel-track');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const totalSlides = 3;
+
+            function goToSlide(index) {
+                currentSlide = index;
+                const offset = -index * 100;
+                track.style.transform = `translateX(${offset}%)`;
+                
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.style.backgroundColor = i === index ? 'rgba(255, 255, 255, 0.8)' : 'rgba(255, 255, 255, 0.2)';
+                });
+            }
+
+            // Auto-advance
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            }, 6000);
+
+            // Init
+            goToSlide(0);
+        </script>
+<!-- Heritage Section -->
+<section class="py-32 px-8 lg:px-12 max-w-screen-2xl mx-auto bg-surface">
+<div class="editorial-grid gap-y-16">
+<div class="col-span-12 md:col-span-5 flex flex-col justify-center">
+<h2 class="font-headline text-4xl md:text-5xl text-primary leading-tight mb-8">
+                        A Legacy of <br/>Quiet Authority
+                    </h2>
+<div class="space-y-6 text-on-surface-variant font-body text-lg leading-relaxed max-w-md">
+<p>
+                            Founded in the pursuit of the perfect silhouette, ETC Apparel represents the intersection of traditional tailoring and modern utility. Our atelier works exclusively with natural fibers, sourced from generational mills.
+                        </p>
+<p>
+                            We believe that true luxury is found in the invisible details—the reinforced seam, the hand-finished buttonhole, and the way a fabric breathes against the skin.
+                        </p>
+</div>
+<div class="mt-12">
+<a class="inline-flex items-center gap-2 font-label uppercase tracking-widest text-sm text-secondary font-semibold hover:gap-4 transition-all" href="about-us.html">
+                            Our Story <span class="material-symbols-outlined text-lg">arrow_right_alt</span>
+</a>
+</div>
+</div>
+<div class="col-span-12 md:col-span-6 md:col-start-7 relative">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-lg">
+<img alt="" class="w-full h-full object-cover" data-alt="close up of artisan hands measuring high quality wool fabric with a wooden ruler in a sunlit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAalLxfcyT0yY_oRq7th1Fzh_iIBrZvxlvMnz61vpd_yY_-81uyPcvjEYTQQKG2DwgODGOu4Tyumos7LY8qBx0BS1O20CJFiLXP3i8pskT4EUENpHd9szrqV_5JxvhcoEG1tjUjMyh4AKaJ5bldtvIod3_R39GaBOYcWHjFR-mzOQvnFVYmRsnoDDWQLmB4JqjDygBcjN0XW5pVHnTnRgT3D1WsGA2tUEWmy8cTxG4mIv7PqqHx-1tmQIuhYUJ3sEUrpwSCQEIOkHBv"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-surface-container-highest p-8 max-w-[240px] hidden md:block">
+<p class="font-headline italic text-tertiary text-xl">"Craft is the memory of the hands."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Atelier Series -->
+<section class="py-32 bg-surface-container-low relative">
+<div class="container mx-auto px-8 md:px-16">
+<div class="mb-20 flex justify-between items-end">
+<div>
+<h2 class="font-headline text-5xl font-bold text-primary mb-4">The Atelier Series</h2>
+<div class="w-16 h-1 bg-secondary"></div>
+</div>
+<a class="font-label text-sm font-bold tracking-widest text-primary hover:text-secondary transition-colors flex items-center gap-2 group" href="all-products.html">
+                        BROWSE ALL COLLECTIONS
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 h-[800px]">
+<div class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-lg">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Man in a structured grey wool coat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7h06E9qDUKq9xalBzao-1lZAZNK0Kgu6VLGnKxCrlE2miNi7oxtpqkdB1nfaq8fDtpO-pehlLFpuYfIfBhm5rivJG1pc1mF-41PW3MFht7dlJSjjQ_cmHU42-yISdMPkogdjhQ1Dlm-7um0fZAeWU5JbT-FdGX_O47dG2pjLBDtSIm3VNWTBTtwXy3FdZW8FtmPKz6WU8s38_vmeEohAtFUWi6j9YyYhW_A0I5lhiyAi32Fp2Q_Sw15zaWBYL6Cn7AJQaTKbCaBR"/>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
+<div class="absolute bottom-10 left-10 text-white">
+<p class="font-label text-xs tracking-[0.3em] mb-2">CURATED FOR HIM</p>
+<h3 class="font-headline text-4xl font-bold">Menswear</h3>
+</div>
+</div>
+<div class="md:col-span-2 relative group overflow-hidden rounded-lg">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Elegant woman in a flowing silk dress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9WlH5JDUbxluGtsNw7Wosolq2H6v3BjMkVFZLJrKMV8oN0qS-NwjOYkopQySW5YLR-tVM73gN-G4CIcfzacPboZwyiSxACV2yGnLGliyFwld5Fx5PySZgl63uIK0AQctFx_-ZwL29zBjPT9T7Oma6Nei095hXsqM5uD53j-kapSSG7lxNDuZzLPLI-qVd9KDMXQYfIiR0-1zG4H2beMwS4hX9fRzXOy6LHMldJPr0mSwtzM7w28GwByETfTItwWpB4BkRgGV9G-LA"/>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
+<div class="absolute bottom-8 left-8 text-white">
+<p class="font-label text-xs tracking-[0.3em] mb-2">CURATED FOR HER</p>
+<h3 class="font-headline text-3xl font-bold">Womenswear</h3>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-lg">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Premium leather bags" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBsnjcKhDzcQIQ8DLe5XmlN8puBsUgNPGFShKiMi05iKeTWq9cb_adpPttT6D5-0MLmDvthHWegd-Oevgl6RdnmFOLEqRmqfI_-MmhMcfu56d5HubeR8hU5qj_kxw7FOcThcXxitV6vuAfRn_q1mk-fLd278waYDKWKJ8sq3xQPiPCNJeE8Ln95A28yA6HYcXuDJXaeeFPaibRnzb904T04vHZYJaPK_n8RCV8L5tNvCVPvNTcmBpHLZ01yDlf93m39iZ6_P-P_wxQ"/>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<h3 class="font-headline text-xl font-bold">Accessories</h3>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-lg">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Children's clothing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa5p-ctTWjDmLIndxEfCA8dt5Sx5WC-RQMRhBn2NrjXlSKOPlH-m0YnYFDB_uJvhE6df9Naks90uffU0MTaakIKa38aqwcBocfxoPS5VKoX40JLLtY6dWFLB0aMz3R_jFtXKCeCRV80Hb7LknxElUsv8imWvoHBwOqpMdjceAWgbLyhFE7EKFcNXccAnppY783dIxPjelPcEqkUqXtBwm3WKp3AEQhcivryAOziGjJ7Gs9kHizLyAIqNEM2grwMFHxcIzwN3cnjZvJ"/>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<h3 class="font-headline text-xl font-bold">Kids Collection</h3>
+</div>
+</div>
+</div>
+</div>
+<div class="noise-texture absolute inset-0"></div>
+</section>
+<!-- Studio Journals -->
+<section class="py-32 bg-white relative overflow-hidden">
+<div class="container mx-auto px-8 md:px-16 relative z-10">
+<div class="mb-24 flex flex-col items-center text-center">
+<span class="text-secondary font-label text-xs tracking-[0.5em] uppercase mb-4">Behind the Seams</span>
+<h2 class="font-headline text-6xl md:text-7xl font-black text-primary italic mb-6">Studio Journals</h2>
+<p class="text-on-surface-variant max-w-xl font-body text-lg leading-relaxed">Craftsmanship stories, editorial insights, and the silent evolution of our latest collections.</p>
+</div>
+<div class="grid grid-cols-12 gap-8 md:gap-12">
+<article class="col-span-12 md:col-span-7 flex flex-col group">
+<div class="relative mb-10 overflow-hidden rounded-lg aspect-[16/10]">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Tailor's hands working with linen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTB7xdDgw2KV0r_1p2ASwnlBFS_a7bsKW7K1dlibQ08IFG9F1VGsoehFE_EJGbzP-ZpiC20paaVEg4qzrYwesl_wKazLDoirv4e-k3YZUvM-8qbRlLqisK7rjyVh4DToeDJHTDC3WM6muay2bsMkyXBsw0WLNrDTTHPN7rX4N9TvEimg41ySED4TFN9R36wXrxHelE0pKGD0wUpPjLhhmM3DLNEdcZxGfNtTxsk8NEu3uN9lAF1Lgd3zzruyD9zMJ98nvZCrHBCdXN"/>
+</div>
+<div class="px-4 -mt-20 relative z-20 bg-white/90 backdrop-blur-sm p-8 md:w-4/5 shadow-2xl shadow-primary/5 rounded-lg ml-0 md:ml-12 border border-surface-container">
+<span class="text-secondary font-label text-[10px] tracking-widest uppercase mb-4 block">Craftsmanship / Technique</span>
+<h3 class="font-headline text-3xl md:text-4xl font-bold mb-4 leading-tight text-primary hover:text-secondary transition-colors cursor-pointer">The Art of the Unstructured Blazer</h3>
+<p class="text-on-surface-variant font-body mb-8 leading-relaxed">Exploring the delicate balance between ease and architecture in our latest spring silhouettes, where form follows feeling.</p>
+<a class="font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary" href="#">Read Narrative</a>
+</div>
+</article>
+<article class="col-span-12 md:col-span-5 flex flex-col md:pt-32">
+<div class="group flex flex-col">
+<div class="aspect-[3/4] overflow-hidden rounded-lg mb-8 relative">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Natural dye samples" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzIreyi2RqokiLTKgmFp3RIAs-gerlGNZLkpKGkHXYynoCcaO5b0UlPdyBb1v1lq89-usnknvjhTXhuBFkGr3i-Gt7HOACVCXBQiE2a4z-Lx_DpbsEPmLKxRtNF_Aym64P-tPmw0lTnDomj5Jh_mebUQy-VIgxOrcPiRNqYnhVoC4w7iT7J-7gmVcKLmTYwgrcvTeMEmaAygqxdN7QUdOIsoCO1fduoXWNCfTqFUO3DD7QAU8Gse-Srr0ayZShZqrH-fTpnIHRMadx"/>
+<div class="absolute top-6 right-6 bg-primary text-white text-[10px] tracking-widest px-4 py-2 uppercase rounded-full">New Entry</div>
+</div>
+<span class="text-secondary font-label text-[10px] tracking-widest uppercase mb-4 block">Sustainability / Studio</span>
+<h3 class="font-headline text-3xl font-bold mb-4 leading-tight hover:text-secondary transition-colors cursor-pointer">Zero-Waste Pattern Cutting</h3>
+<p class="text-on-surface-variant font-body mb-8 leading-relaxed">How our studio is reimagining the cutting room floor to achieve near-zero textile waste through mathematical precision.</p>
+<a class="font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary" href="#">Read Narrative</a>
+</div>
+</article>
+<article class="col-span-12 mt-12 grid grid-cols-1 md:grid-cols-12 items-center gap-12">
+<div class="md:col-span-6 order-2 md:order-1">
+<span class="text-secondary font-label text-[10px] tracking-widest uppercase mb-4 block">Events / Private Preview</span>
+<h3 class="font-headline text-4xl font-bold mb-6 leading-tight">SS24 Series: An Intimate Studio Preview</h3>
+<p class="text-on-surface-variant font-body mb-8 text-lg">Recapping our intimate studio showcase with industry curators and archival collectors, set against the backdrop of our brutalist workshop.</p>
+<div class="flex items-center gap-6">
+<a class="font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary" href="#">View Gallery</a>
+<span class="text-outline-variant font-label text-[10px] uppercase tracking-widest">Duration: 12 min read</span>
+</div>
+</div>
+<div class="md:col-span-6 order-1 md:order-2">
+<div class="aspect-square md:aspect-video overflow-hidden rounded-lg group">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" data-alt="Model walking down minimalist staircase" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7U2vtTith-YkREY5_7ZPl_rWjnHoq8Dchh8r-OXGEgG1b899JQnuWL9LqOLPdc0hxhOl9ODAaTvzGo1NhZSNoiWIWRoZV2m1W6px0VZtXlLp2UMrBLkeWHOTexBE5Ro8Op0PjBPVy0tuDyQxtlReOdDt9ngShv-ZB4EcRdaPwerFGQYKvI7ggpTrb41-LZQa8NrIEimxFt1amdiCI-C5NCcOlGUZTjT3PY4Cod7vJ0bKRToXrPVjIiLuwWnWcHvX9mPrPv2fdUN_d"/>
+</div>
+</div>
+</article>
+</div>
+</div>
+<div class="absolute left-0 bottom-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
+</section>
+<!-- Customer Review Section -->
+<section class="py-32 bg-background relative overflow-hidden">
+<div class="absolute -right-20 top-0 text-[40rem] font-headline text-surface-container-low select-none opacity-50 z-0">E</div>
+<div class="max-w-4xl mx-auto px-8 relative z-10 text-center">
+<span class="material-symbols-outlined text-secondary text-5xl mb-12" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<div class="space-y-16">
+<figure>
+<blockquote class="font-headline text-3xl md:text-4xl text-primary italic leading-relaxed">
+                            "ETC Apparel doesn't just sell clothing; they offer a perspective on how to move through the world with grace. The tactile quality of their wool trousers is simply unmatched."
+                        </blockquote>
+<figcaption class="mt-8">
+<cite class="not-italic font-label uppercase tracking-widest text-sm text-secondary font-bold">Julian Vane, Creative Director</cite>
+</figcaption>
+</figure>
+<div class="flex justify-center gap-4">
+<button class="w-2 h-2 rounded-full bg-secondary"></button>
+<button class="w-2 h-2 rounded-full bg-outline-variant hover:bg-secondary transition-colors"></button>
+<button class="w-2 h-2 rounded-full bg-outline-variant hover:bg-secondary transition-colors"></button>
+</div>
+</div>
+<div class="mt-24 pt-16 border-t border-outline-variant/10">
+<div class="flex flex-wrap justify-center items-center gap-x-12 md:gap-x-16 gap-y-8 font-headline text-sm tracking-[0.2em] text-primary/60">
+<div class="flex flex-col items-center gap-2">
+<span class="font-label text-[10px] uppercase tracking-widest opacity-40">Mill Partner</span>
+<span class="font-bold">DRESDEN TEXTILES</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="font-label text-[10px] uppercase tracking-widest opacity-40">Fabric Source</span>
+<span class="font-bold">MILAN SILK CO.</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="font-label text-[10px] uppercase tracking-widest opacity-40">Design Studio</span>
+<span class="font-bold">ATELIER V</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<span class="font-label text-[10px] uppercase tracking-widest opacity-40">Heritage weaver</span>
+<span class="font-bold">HERITAGE MILLS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter -->
+<section class="py-24 bg-surface-container-highest relative overflow-hidden">
+<div class="container mx-auto px-8 md:px-16 text-center max-w-3xl relative z-10">
+<h2 class="font-headline text-4xl font-bold text-primary mb-6 italic">Curate your inbox.</h2>
+<p class="text-on-surface-variant font-body mb-12">Receive exclusive access to atelier previews, limited archival drops, and editorial journals.</p>
+<form class="flex flex-col md:flex-row gap-4">
+<input class="flex-grow px-6 py-4 bg-surface border-none focus:ring-1 focus:ring-secondary rounded-lg transition-all outline-none" placeholder="Your email address" type="email"/>
+<button class="px-10 py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-all">Subscribe</button>
+</form>
+<p class="mt-6 text-xs text-on-surface-variant/60 font-label">By subscribing, you agree to our Privacy Policy.</p>
+</div>
+<div class="absolute -right-24 -top-24 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"></div>
+<div class="absolute -left-24 -bottom-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+</main>
+<footer class="w-full mt-24 bg-[#171e29] text-slate-100 border-t border-[#171e29]/5">
+<div class="flex flex-col md:flex-row justify-between items-start w-full px-8 md:px-16 py-20 gap-16 mx-auto container">
+<div class="max-w-xs">
+<a class="font-headline text-3xl font-bold text-white mb-8 block tracking-tighter" href="#">ETC Apparel</a>
+<p class="font-body text-sm tracking-wide text-slate-400 leading-relaxed mb-8">
+                    Handcrafted for the modern curator. We bridge the gap between architectural precision and artisanal warmth.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">public</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-sm">mail</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-12 flex-grow">
+<div>
+<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Collections</h4>
+<ul class="space-y-4">
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Menswear</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Womenswear</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Accessories</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="about-us.html">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Support</h4>
+<ul class="space-y-4 font-body text-sm tracking-wide">
+<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Shipping</a></li>
+<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Returns</a></li>
+<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Store Locator</a></li>
+</ul>
+</div>
+<div class="col-span-2 md:col-span-1">
+<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Offices</h4>
+<div class="space-y-6">
+<div>
+<p class="text-white font-bold text-sm mb-1">UK Studio</p>
+<p class="text-slate-400 text-xs leading-relaxed">24 Savile Row, Mayfair<br/>London, W1S 3PR</p>
+</div>
+<div>
+<p class="text-white font-bold text-sm mb-1">Bangladesh Atelier</p>
+<p class="text-slate-400 text-xs leading-relaxed">Gulshan 2, Road 90<br/>Dhaka, 1212</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full px-8 md:px-16 py-8 border-t border-white/5 bg-slate-950/50">
+<div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-slate-600 font-label">
+<p>© 2024 ETC Apparel. Handcrafted for the modern curator.</p>
+<div class="flex gap-8">
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Accessibility</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Settings</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

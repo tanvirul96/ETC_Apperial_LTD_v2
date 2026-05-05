@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | CURATOR EDITORIAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#ffb86b",
+                      "on-primary-fixed-variant": "#404754",
+                      "secondary": "#885203",
+                      "surface-container": "#f2ede9",
+                      "outline": "#75777c",
+                      "tertiary-fixed-dim": "#ffb59c",
+                      "surface-dim": "#ded9d5",
+                      "on-background": "#1d1b19",
+                      "surface-bright": "#fef8f4",
+                      "tertiary": "#3c0e00",
+                      "surface": "#fef8f4",
+                      "secondary-container": "#feb564",
+                      "inverse-primary": "#c0c7d6",
+                      "background": "#fef8f4",
+                      "primary-container": "#2c333f",
+                      "primary-fixed-dim": "#c0c7d6",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#32302e",
+                      "on-tertiary-fixed": "#390c00",
+                      "on-secondary-container": "#764500",
+                      "secondary-fixed": "#ffdcbc",
+                      "on-tertiary-container": "#f97241",
+                      "primary": "#171e29",
+                      "error-container": "#ffdad6",
+                      "surface-variant": "#e6e2de",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f5f0ec",
+                      "outline-variant": "#c5c6cc",
+                      "on-secondary-fixed": "#2c1700",
+                      "surface-container-highest": "#e6e2de",
+                      "surface-container-low": "#f8f3ef",
+                      "tertiary-container": "#601b00",
+                      "tertiary-fixed": "#ffdbcf",
+                      "on-primary-fixed": "#151c27",
+                      "primary-fixed": "#dce3f2",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#822700",
+                      "on-primary-container": "#949baa",
+                      "error": "#ba1a1a",
+                      "surface-container-high": "#ece7e3",
+                      "on-surface-variant": "#45474c",
+                      "on-surface": "#1d1b19",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#585f6c",
+                      "on-secondary-fixed-variant": "#683d00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Noto Serif"],
+                      "body": ["Manrope"],
+                      "label": ["Inter"]
+              }
+            },
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-gradient {
+            background: linear-gradient(135deg, #171e29 0%, #2c333f 100%);
+        }
+        .subtle-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed min-h-screen flex flex-col">
+<!-- TopNavBar: Suppressed per shell visibility rules (Linear/Transactional Page) -->
+<main class="flex-grow flex flex-col md:flex-row relative overflow-hidden">
+<div class="absolute inset-0 subtle-noise"></div>
+<!-- Left Column: Editorial Imagery -->
+<div class="hidden md:flex md:w-1/2 bg-surface-container-low relative items-center justify-center p-12 lg:p-24 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale opacity-40" data-alt="Monochromatic architectural detail of a brutalist building with clean lines and soft shadows during twilight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAy4mLWUeY7NQySTh4JiQ-c4hkNVjQkgQvAPXVWwk77Xb5Q37E1nVi5qunEMN3uPTQ40n5GaItRXhShu4V1N5MWWjdOL3IIHGo5Rsy67VspgF8T_DYfQzYPWTIPuq4S4YRYqGVitSUtJwwJpgQYRdNZXWSU89uvNO404qQaUILdVhSIlOB1kuzxYy20sU4yqObi1QlETCz9zMm8XUANqf-8VqhMNBeK3QxzliMiOOzkDimoeahdhSMW7DqSS2GX5eK0E7bp1rttzwse"/>
+</div>
+<div class="relative z-10 max-w-lg">
+<h1 class="font-headline text-5xl lg:text-7xl tracking-tighter text-primary mb-8 leading-tight">
+                    Refined <br/><span class="italic font-normal">Essentials</span>
+</h1>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed max-w-sm">
+                    Access your curated collection. A seamless transition from digital exploration to physical craftsmanship.
+                </p>
+<div class="mt-12 w-16 h-px bg-primary/20"></div>
+</div>
+</div>
+<!-- Right Column: Login Form -->
+<div class="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 lg:p-24 bg-surface z-10">
+<div class="w-full max-w-md">
+<div class="mb-12 text-center md:text-left">
+<h2 class="text-[0.65rem] tracking-[0.3em] uppercase font-label text-secondary mb-4">ETC Apparel</h2>
+<h3 class="font-headline text-3xl text-primary">Welcome back</h3>
+</div>
+<form class="space-y-8">
+<!-- Email Field -->
+<div class="relative">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2" for="email">Email Address</label>
+<input class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 py-3 px-0 text-on-surface font-body placeholder:text-outline-variant/50" id="email" name="email" placeholder="name@example.com" type="email"/>
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-outline-variant/30"></div>
+</div>
+<!-- Password Field -->
+<div class="relative">
+<div class="flex justify-between items-center mb-2">
+<label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant" for="password">Password</label>
+<a class="text-[10px] font-label uppercase tracking-widest text-secondary hover:text-primary transition-colors" href="#">Forgot Password?</a>
+</div>
+<input class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 py-3 px-0 text-on-surface font-body placeholder:text-outline-variant/50" id="password" name="password" placeholder="••••••••" type="password"/>
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-outline-variant/30"></div>
+</div>
+<!-- CTA Section -->
+<div class="pt-4">
+<button class="w-full editorial-gradient text-on-primary py-4 px-8 rounded-DEFAULT font-label text-xs uppercase tracking-[0.2em] shadow-sm hover:opacity-90 active:scale-[0.98] transition-all duration-300" type="submit">
+                            Sign In
+                        </button>
+</div>
+<!-- Divider -->
+<div class="relative py-6 flex items-center justify-center">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/15"></div>
+</div>
+<span class="relative px-4 bg-surface text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Or continue with</span>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 border border-outline-variant/30 bg-surface-container-low py-3 px-4 rounded-DEFAULT hover:bg-surface-container-high transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="google">google</span>
+<span class="text-[10px] font-label uppercase tracking-widest">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 border border-outline-variant/30 bg-surface-container-low py-3 px-4 rounded-DEFAULT hover:bg-surface-container-high transition-colors active:scale-95" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="apple">ios</span>
+<span class="text-[10px] font-label uppercase tracking-widest">Apple</span>
+</button>
+</div>
+<!-- Create Account -->
+<div class="text-center pt-8">
+<p class="text-[11px] font-body text-on-surface-variant">
+                            New to Curator? <a class="text-primary font-semibold hover:underline decoration-secondary/30 underline-offset-4 ml-1" href="create-account.html">Create an account</a>
+</p>
+</div>
+</form>
+</div>
+</div>
+</main>
+<!-- Footer: Shared Component -->
+<footer class="bg-[#f8f3ef] dark:bg-[#2c333f] text-[#171e29] dark:text-[#fef8f4] w-full mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 border-t border-[#c5c6cc]/15">
+<div class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 mb-6 md:mb-0">
+                © 2024 CURATOR EDITORIAL. ALL RIGHTS RESERVED.
+            </div>
+<nav class="flex gap-8">
+<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Privacy</a>
+<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Terms</a>
+<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Sustainability</a>
+<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+</body></html>
