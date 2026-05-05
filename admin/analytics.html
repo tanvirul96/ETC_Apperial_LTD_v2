@@ -7,93 +7,21 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                "secondary-container": "#feb564",
-                "on-background": "#1d1b19",
-                "inverse-primary": "#c0c7d6",
-                "on-primary-fixed-variant": "#404754",
-                "on-tertiary-container": "#f97241",
-                "on-surface": "#1d1b19",
-                "tertiary-fixed-dim": "#ffb59c",
-                "surface-tint": "#585f6c",
-                "surface-container-low": "#f8f3ef",
-                "on-error-container": "#93000a",
-                "surface-container-lowest": "#ffffff",
-                "on-tertiary-fixed": "#390c00",
-                "error-container": "#ffdad6",
-                "on-secondary-container": "#764500",
-                "surface-bright": "#fef8f4",
-                "surface-container-highest": "#e6e2de",
-                "on-secondary-fixed-variant": "#683d00",
-                "surface": "#fef8f4",
-                "surface-container-high": "#ece7e3",
-                "primary-container": "#2c333f",
-                "tertiary-fixed": "#ffdbcf",
-                "secondary-fixed": "#ffdcbc",
-                "outline-variant": "#c5c6cc",
-                "inverse-on-surface": "#f5f0ec",
-                "on-primary-fixed": "#151c27",
-                "on-primary-container": "#949baa",
-                "on-secondary-fixed": "#2c1700",
-                "error": "#ba1a1a",
-                "tertiary-container": "#601b00",
-                "on-tertiary": "#ffffff",
-                "on-secondary": "#ffffff",
-                "tertiary": "#3c0e00",
-                "surface-container": "#f2ede9",
-                "outline": "#75777c",
-                "on-tertiary-fixed-variant": "#822700",
-                "on-surface-variant": "#45474c",
-                "primary": "#171e29",
-                "primary-fixed-dim": "#c0c7d6",
-                "secondary": "#885203",
-                "primary-fixed": "#dce3f2",
-                "background": "#fef8f4",
-                "surface-variant": "#e6e2de",
-                "inverse-surface": "#32302e",
-                "secondary-fixed-dim": "#ffb86b",
-                "on-error": "#ffffff",
-                "surface-dim": "#ded9d5",
-                "on-primary": "#ffffff"
-            },
-            "borderRadius": {
-                "DEFAULT": "0.125rem",
-                "lg": "0.25rem",
-                "xl": "0.5rem",
-                "full": "0.75rem"
-            },
-            "fontFamily": {
-                "headline": ["Noto Serif"],
-                "body": ["Manrope"],
-                "label": ["Inter"]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body { font-family: 'Manrope', sans-serif; }
-        .font-serif { font-family: 'Noto Serif', serif; }
-        .font-inter { font-family: 'Inter', sans-serif; }
-    </style>
+
+
+
+<link rel="stylesheet" href="/css/global.css">
+<script src="/js/tailwind-theme.js"></script>
 </head>
 <body class="bg-surface text-on-surface flex min-h-screen">
-    
     <div id="admin-sidebar-placeholder"></div>
     <div id="admin-header-placeholder"></div>
-
+    
     <main class="ml-64 flex-1">
+        <!-- Canvas -->
         <section class="p-12 max-w-7xl mx-auto space-y-12">
             <!-- Page Header & Filters -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-8">
                 <div>
                     <p class="font-inter text-secondary text-xs font-bold uppercase tracking-[0.2em] mb-2">Performance Dashboard</p>
                     <h2 class="font-serif text-4xl font-bold text-primary">Enterprise Insights</h2>
@@ -208,19 +136,16 @@
                     </div>
                     <!-- Mock Chart -->
                     <div class="h-64 w-full flex items-end gap-1 relative overflow-hidden">
-                        <!-- Background Grid -->
                         <div class="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
                             <div class="h-px w-full bg-outline"></div>
                             <div class="h-px w-full bg-outline"></div>
                             <div class="h-px w-full bg-outline"></div>
                             <div class="h-px w-full bg-outline"></div>
                         </div>
-                        <!-- SVG Line Chart Mockup -->
                         <svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
                             <path d="M0,80 Q20,60 40,75 T80,30 T100,45" fill="none" stroke="#885203" stroke-width="2"></path>
                             <path d="M0,90 Q20,80 40,85 T80,60 T100,70" fill="none" stroke="#171e29" stroke-dasharray="2,2" stroke-width="1.5"></path>
                         </svg>
-                        <!-- Markers -->
                         <div class="absolute left-1/4 top-1/2 -translate-y-full flex flex-col items-center">
                             <div class="bg-primary text-on-primary text-[10px] px-2 py-1 rounded-sm mb-1 font-bold">$122k</div>
                             <div class="w-2 h-2 bg-secondary rounded-full border-2 border-white"></div>
@@ -277,13 +202,110 @@
                             </div>
                         </div>
                     </div>
+                    <button class="mt-8 text-xs font-bold font-inter text-primary flex items-center justify-center space-x-2 hover:opacity-70 transition-all">
+                        <span>View Detailed Report</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Top Selling Products Table -->
+            <div class="bg-surface-container-low rounded-xl overflow-hidden">
+                <div class="px-8 py-6 border-b border-outline-variant/10 flex items-center justify-between bg-[#fcf8f5]">
+                    <h4 class="font-serif text-xl font-bold">Top Performing Collections</h4>
+                    <button class="text-xs font-inter font-semibold bg-white border border-outline-variant/30 px-4 py-2 rounded-lg hover:bg-surface-container-high transition-all">Export CSV</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-surface-container-low/50">
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Product Details</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Category</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Units Sold</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Revenue</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Status</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-outline-variant/10">
+                            <tr class="hover:bg-white/40 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="flex items-center space-x-4">
+                                        <img alt="Wool Overcoat" class="w-12 h-14 object-cover rounded-sm" data-alt="high-fashion wool overcoat on a mannequin, soft studio lighting, beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs59EcguW7xaGcw3JGEkiV_OGPlZluI20p4Xjfe4xNkAsZYJZ58psrIpNAvOmUva5Tf7SuWhFslSF-Ew4RlUDIJsiGRkWumslfa-xHX89I9Aem3c0vIT0mlSLnCkmNM1QmuXE-MFu9JPF-iFH3nJCFt63QP-VWi9XEaAFKZl-k5adYx6c2riRh4ZhqNmGPl5SU7zUxvI_XfjycU4MYEppGTxVTrR32tqn1ZrxvLhTtg1ywLx3doRN1oE9js97sv-72OeItZK08jIFD"/>
+                                        <div>
+                                            <p class="text-sm font-bold text-primary font-body">Atelier Wool Overcoat</p>
+                                            <p class="text-[10px] text-outline font-inter">SKU: AT-1092-W</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-6 text-sm font-inter text-on-surface-variant">Outerwear</td>
+                                <td class="px-8 py-6 text-sm font-bold font-inter">1,240</td>
+                                <td class="px-8 py-6 text-sm font-bold font-serif">$357,120</td>
+                                <td class="px-8 py-6">
+                                    <span class="text-[10px] font-bold font-inter uppercase bg-secondary-fixed/50 text-on-secondary-fixed-variant px-2 py-1 rounded">High Demand</span>
+                                </td>
+                                <td class="px-8 py-6">
+                                    <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-white/40 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="flex items-center space-x-4">
+                                        <img alt="Silk Shirt" class="w-12 h-14 object-cover rounded-sm" data-alt="luxurious cream silk button-down shirt folded neatly, elegant minimal studio shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw99J77AXCThOmLTj3Zi0lKtWyZjn9Mscjf9iQbKVkeQM-8-2JQ_woGr5mKXuJiIBbmarraTnmOSzL7-VNGatcWYQun86bgLctm0ijFEI_EHsXn8YmvJFkq0-BHaGI-2fQbI8sMMN6kc6lv4IFjZe_QDz8bOZoGiHMKY6Y5skzYW3SV6Is-rDf_YOM4pFPRBdRYb6K4K90sEYx1Zs5vwEJtzj2hV2q1wsPY2PqSV0EfcAIw6zisO4JJrs_5mJ_qZLVwWiO17uCdsKP"/>
+                                        <div>
+                                            <p class="text-sm font-bold text-primary font-body">Signature Silk Blouse</p>
+                                            <p class="text-[10px] text-outline font-inter">SKU: AT-2241-S</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-6 text-sm font-inter text-on-surface-variant">Essentials</td>
+                                <td class="px-8 py-6 text-sm font-bold font-inter">982</td>
+                                <td class="px-8 py-6 text-sm font-bold font-serif">$216,040</td>
+                                <td class="px-8 py-6">
+                                    <span class="text-[10px] font-bold font-inter uppercase bg-surface-container-highest text-primary px-2 py-1 rounded">Stable</span>
+                                </td>
+                                <td class="px-8 py-6">
+                                    <span class="material-symbols-outlined text-outline">horizontal_rule</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-white/40 transition-colors group">
+                                <td class="px-8 py-6">
+                                    <div class="flex items-center space-x-4">
+                                        <img alt="Leather Loafers" class="w-12 h-14 object-cover rounded-sm" data-alt="premium dark brown leather loafers on a marble surface with soft atmospheric light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6ReGA7QdMmQ18y0DhvlXNQjkWELt4kPpdzjh1q0LvqYOu4Wv6qn0TK0hJK8_jhyv9awDP3g8R0dYLBwVNggkUh1pTwybLH_TD-4j3vGMzFV4WFW3PEaWQyZ4HSKS5qmu6OTmfMN-j-15RMi-QIOomtM1rK5ZZeu3h0357cQWCBtE7Qzm5WjV-Mt3G0lMz1JLbwpDk4pWYYCoFhPfh_weRDg3ZwZejvUgjIpWvAlM7gbtncaI-oiKWTkpb6mZsGPlVUjEpKnLz8bBi"/>
+                                        <div>
+                                            <p class="text-sm font-bold text-primary font-body">Burnished Loafers</p>
+                                            <p class="text-[10px] text-outline font-inter">SKU: AT-8830-L</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-8 py-6 text-sm font-inter text-on-surface-variant">Footwear</td>
+                                <td class="px-8 py-6 text-sm font-bold font-inter">744</td>
+                                <td class="px-8 py-6 text-sm font-bold font-serif">$186,000</td>
+                                <td class="px-8 py-6">
+                                    <span class="text-[10px] font-bold font-inter uppercase bg-error-container text-on-error-container px-2 py-1 rounded">Low Stock</span>
+                                </td>
+                                <td class="px-8 py-6">
+                                    <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
+        <!-- Footer Decoration -->
+        <footer class="p-12 border-t border-outline-variant/10 text-center opacity-30">
+            <p class="font-serif italic text-sm">Finely crafted analytics for the discerning administrator.</p>
+        </footer>
     </main>
+    
+    <!-- Contextual FAB -->
+    <button class="fixed bottom-8 right-8 bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-transform z-50">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+    </button>
 
-    <script src="components/admin-sidebar.js"></script>
-    <script src="components/admin-header.js"></script>
+    <script src="/components/admin-sidebar.js"></script>
+    <script src="/components/admin-header.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             loadAdminSidebar();

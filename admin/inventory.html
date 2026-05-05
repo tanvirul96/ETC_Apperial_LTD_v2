@@ -7,87 +7,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Manrope:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-container": "#f2ede9",
-                    "secondary": "#885203",
-                    "on-secondary": "#ffffff",
-                    "inverse-primary": "#c0c7d6",
-                    "tertiary": "#3c0e00",
-                    "primary-fixed-dim": "#c0c7d6",
-                    "outline": "#75777c",
-                    "error": "#ba1a1a",
-                    "surface-tint": "#585f6c",
-                    "surface-container-low": "#f8f3ef",
-                    "primary-fixed": "#dce3f2",
-                    "inverse-on-surface": "#f5f0ec",
-                    "on-primary-fixed": "#151c27",
-                    "on-tertiary-fixed-variant": "#822700",
-                    "on-surface": "#1d1b19",
-                    "on-primary-container": "#949baa",
-                    "surface-variant": "#e6e2de",
-                    "secondary-fixed-dim": "#ffb86b",
-                    "on-surface-variant": "#45474c",
-                    "surface-container-highest": "#e6e2de",
-                    "on-tertiary-container": "#f97241",
-                    "on-primary-fixed-variant": "#404754",
-                    "on-error-container": "#93000a",
-                    "tertiary-fixed-dim": "#ffb59c",
-                    "tertiary-container": "#601b00",
-                    "primary-container": "#2c333f",
-                    "on-tertiary-fixed": "#390c00",
-                    "secondary-fixed": "#ffdcbc",
-                    "primary": "#171e29",
-                    "outline-variant": "#c5c6cc",
-                    "on-background": "#1d1b19",
-                    "tertiary-fixed": "#ffdbcf",
-                    "on-secondary-container": "#764500",
-                    "error-container": "#ffdad6",
-                    "on-secondary-fixed": "#2c1700",
-                    "on-error": "#ffffff",
-                    "background": "#fef8f4",
-                    "surface-container-lowest": "#ffffff",
-                    "surface-container-high": "#ece7e3",
-                    "secondary-container": "#feb564",
-                    "on-tertiary": "#ffffff",
-                    "surface": "#fef8f4",
-                    "on-primary": "#ffffff",
-                    "on-secondary-fixed-variant": "#683d00",
-                    "surface-bright": "#fef8f4",
-                    "inverse-surface": "#32302e",
-                    "surface-dim": "#ded9d5"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "fontFamily": {
-                    "headline": ["Noto Serif"],
-                    "body": ["Manrope"],
-                    "label": ["Inter"]
-            }
-          },
-        },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .silk-finish-button {
-            background: linear-gradient(135deg, #171e29 0%, #2c333f 100%);
-        }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-    </style>
+
+
+
+<link rel="stylesheet" href="/css/global.css">
+<script src="/js/tailwind-theme.js"></script>
 </head>
 <body class="bg-background text-on-surface font-body min-h-screen">
     
@@ -335,8 +259,8 @@
             </div>
         </div>
     </main>
-    <script src="components/admin-sidebar.js"></script>
-    <script src="components/admin-header.js"></script>
+    <script src="/components/admin-sidebar.js"></script>
+    <script src="/components/admin-header.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             loadAdminSidebar();

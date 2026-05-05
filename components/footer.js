@@ -3,7 +3,7 @@ function loadFooter() {
 <footer class="w-full mt-24 bg-[#171e29] text-slate-100 border-t border-[#171e29]/5">
 <div class="flex flex-col md:flex-row justify-between items-start w-full px-8 md:px-16 py-20 gap-16 mx-auto container">
 <div class="max-w-xs">
-<a class="font-headline text-3xl font-bold text-white mb-8 block tracking-tighter" href="index.html">ETC Apparel</a>
+<a class="font-headline text-3xl font-bold text-white mb-8 block tracking-tighter" href="/index.html">ETC Apparel</a>
 <p class="font-body text-sm tracking-wide text-slate-400 leading-relaxed mb-8">
                     Handcrafted for the modern curator. We bridge the gap between architectural precision and artisanal warmth.
                 </p>
@@ -23,10 +23,10 @@ function loadFooter() {
 <div>
 <h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Collections</h4>
 <ul class="space-y-4">
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Menswear</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Womenswear</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Accessories</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="about-us.html">Sustainability</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/shop/all-products.html">Menswear</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/shop/all-products.html">Womenswear</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/shop/all-products.html">Accessories</a></li>
+<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/company/about-us.html">Sustainability</a></li>
 </ul>
 </div>
 <div>
