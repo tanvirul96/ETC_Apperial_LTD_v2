@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atelier Admin | News &amp; Events</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;600;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#feb564",
+                    "on-background": "#1d1b19",
+                    "inverse-primary": "#c0c7d6",
+                    "on-primary-fixed-variant": "#404754",
+                    "on-tertiary-container": "#f97241",
+                    "on-surface": "#1d1b19",
+                    "tertiary-fixed-dim": "#ffb59c",
+                    "surface-tint": "#585f6c",
+                    "surface-container-low": "#f8f3ef",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#390c00",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#764500",
+                    "surface-bright": "#fef8f4",
+                    "surface-container-highest": "#e6e2de",
+                    "on-secondary-fixed-variant": "#683d00",
+                    "surface": "#fef8f4",
+                    "surface-container-high": "#ece7e3",
+                    "primary-container": "#2c333f",
+                    "tertiary-fixed": "#ffdbcf",
+                    "secondary-fixed": "#ffdcbc",
+                    "outline-variant": "#c5c6cc",
+                    "inverse-on-surface": "#f5f0ec",
+                    "on-primary-fixed": "#151c27",
+                    "on-primary-container": "#949baa",
+                    "on-secondary-fixed": "#2c1700",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#601b00",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#3c0e00",
+                    "surface-container": "#f2ede9",
+                    "outline": "#75777c",
+                    "on-tertiary-fixed-variant": "#822700",
+                    "on-surface-variant": "#45474c",
+                    "primary": "#171e29",
+                    "primary-fixed-dim": "#c0c7d6",
+                    "secondary": "#885203",
+                    "primary-fixed": "#dce3f2",
+                    "background": "#fef8f4",
+                    "surface-variant": "#e6e2de",
+                    "inverse-surface": "#32302e",
+                    "secondary-fixed-dim": "#ffb86b",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#ded9d5",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    vertical-align: middle
+    }
+.editorial-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem
+    }
+.no-border {
+    border: none !important
+    }
+.custom-noise {
+    position: relative
+    }
+.custom-noise::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none
+    }</style>
+</head>
+<body class="bg-background text-on-background font-body custom-noise">
+    <div id="admin-sidebar-placeholder"></div>
+    <div id="admin-header-placeholder"></div>
+
+    <main class="ml-64 p-12 max-w-[1440px]">
+        <!-- Hero Section -->
+        <header class="mb-16 flex justify-between items-end relative z-10">
+            <div>
+                <h1 class="font-headline text-5xl font-bold text-primary tracking-tight mb-4">News &amp; Events</h1>
+                <p class="text-on-surface-variant max-w-xl font-body leading-relaxed">
+                    Manage the editorial voice and public engagements of ETC Apparel. Curate stories that define our heritage and schedule upcoming showcase events.
+                </p>
+            </div>
+            <button class="flex items-center space-x-3 bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded shadow-lg hover:opacity-90 transition-all active:scale-95">
+                <span class="material-symbols-outlined">add</span>
+                <span class="font-label font-bold tracking-widest uppercase text-xs">New Entry</span>
+            </button>
+        </header>
+        
+        <!-- Filter Bar -->
+        <section class="mb-12 flex items-center space-x-4 relative z-10">
+            <span class="text-xs font-label font-semibold text-outline uppercase tracking-widest mr-4">Filter by:</span>
+            <button class="px-6 py-2 rounded-full bg-secondary text-on-secondary text-xs font-label font-medium shadow-sm">All Stories</button>
+            <button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high text-xs font-label font-medium transition-colors">Corporate</button>
+            <button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high text-xs font-label font-medium transition-colors">Collection Launch</button>
+            <button class="px-6 py-2 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high text-xs font-label font-medium transition-colors">Press</button>
+        </section>
+        
+        <!-- Editorial Grid Layout -->
+        <div class="editorial-grid relative z-10">
+            <!-- Left Column: News & Events List -->
+            <div class="space-y-8">
+                <!-- Entry 1: Published -->
+                <div class="bg-surface-container-low p-1 rounded-lg group transition-all">
+                    <div class="bg-surface-container-lowest p-6 rounded flex items-center space-x-6">
+                        <div class="w-32 h-32 flex-shrink-0 overflow-hidden rounded">
+                            <img alt="Fashion" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgnLIu-Tfma2sFK0GR6ekiSs4ziJGHmTLt-1guXIpKsHfXMZNevkrmYgawfFj2rSwkg7cMOwfWeflpKLT6qFxzsv8gKCAYdYgpQ6HrfMRw40lxA81DFL5Tv405XyWbzyerYMMxk6anBOasTiK9_gOS4sgG3MHsiFD1hBaakEGIGT70MnykMyoycQyedTe_ZDT5SFaOk9iXycZiBKaCyJfZKVRwxD3z6LLxwElxo8Jk-GwUQIIv2kYNcSeyYWDdalTDouZ3Uw4D04gK"/>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-secondary-fixed text-on-secondary-fixed text-[10px] font-label font-bold px-2 py-1 rounded-full uppercase">Collection Launch</span>
+                                <span class="flex items-center text-[10px] font-label text-green-600 font-bold uppercase">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span> Published
+                                </span>
+                            </div>
+                            <h3 class="font-headline text-xl font-bold text-primary mb-2">The Autumn Heritage: Silk &amp; Wool 2024</h3>
+                            <p class="text-on-surface-variant text-sm line-clamp-2 font-body mb-4">A deep dive into our latest collaboration with Tuscan weavers, showcasing sustainable craftsmanship.</p>
+                            <div class="flex items-center text-[10px] text-outline font-label uppercase tracking-widest space-x-4">
+                                <span>Updated: Oct 24, 2023</span>
+                                <span>Author: Julian Vane</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Entry 2: Scheduled -->
+                <div class="bg-surface-container-low p-1 rounded-lg group transition-all">
+                    <div class="bg-surface-container-lowest p-6 rounded flex items-center space-x-6">
+                        <div class="w-32 h-32 flex-shrink-0 overflow-hidden rounded">
+                            <img alt="Event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1mJyM-EQFIFLRKsxxupbViqElilkyWz9K29K3tLOGvgYx9iE_RhUczDtNRCjrMgrwm8SoPdzxx83tetwOrkW0SdBUGqJZJU2ALg2G2piZ2Q1Coj2ONvPBjHp8_KdiTA6sFH9Uf3UaU09lcJJ-Qc8GtAoAA7L8ryAuYSZ9TXH4cV9ue1IOaN3CJgno74s34DINFMOlS25yIW02Tk6scUYK_bpaIq5N9fIoLy9hH5Tz1adktBCVMv5zNczrbqfzeH8gryANkN594PD6"/>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-primary-fixed text-on-primary-fixed text-[10px] font-label font-bold px-2 py-1 rounded-full uppercase">Corporate</span>
+                                <span class="flex items-center text-[10px] font-label text-secondary font-bold uppercase">
+                                    <span class="w-2 h-2 bg-secondary rounded-full mr-2"></span> Scheduled
+                                </span>
+                            </div>
+                            <h3 class="font-headline text-xl font-bold text-primary mb-2">Milan Fashion Week: Opening Gala</h3>
+                            <p class="text-on-surface-variant text-sm line-clamp-2 font-body mb-4">ETC Apparel to host the opening night reception at Palazzo Reale.</p>
+                            <div class="flex items-center text-[10px] text-outline font-label uppercase tracking-widest space-x-4">
+                                <span>Goes Live: Nov 12, 2023</span>
+                                <span>Author: PR Team</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">schedule</span></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Entry 3: Draft -->
+                <div class="bg-surface-container-low p-1 rounded-lg group transition-all">
+                    <div class="bg-surface-container-lowest p-6 rounded flex items-center space-x-6">
+                        <div class="w-32 h-32 flex-shrink-0 overflow-hidden rounded">
+                            <img alt="Press" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYWQpXMbXyIs2BiXGs2sIkBNeBtemi16xNTH3vl2z126IxIrYpR2Z2DbgKT2zF2Xmeu8DZ9M1ATnxmAlUoZ6tirK4D6IA2DI222M0dtlyaAycmedGk0CH3mg_aLN_Y3b2ToyaR_n8igS2zq8L7jqzvBjGs9kVWxfG-1PexeeJkNxGvF7zeUbLAqD9bn8gOYx2935pFnT3W19Bkh9fhEi-nVv6WF_Wbo8DTTgMAbUSh4zCW8nOsKYYiE-pUB3cMYrYzgJqVw-mb9o8f"/>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-label font-bold px-2 py-1 rounded-full uppercase">Press</span>
+                                <span class="flex items-center text-[10px] font-label text-outline font-bold uppercase">
+                                    <span class="w-2 h-2 bg-outline rounded-full mr-2"></span> Draft
+                                </span>
+                            </div>
+                            <h3 class="font-headline text-xl font-bold text-primary mb-2">Sustainable Cotton Initiative</h3>
+                            <p class="text-on-surface-variant text-sm line-clamp-2 font-body mb-4">Announcement of our 5-year plan to transition to 100% regenerative cotton sourcing.</p>
+                            <div class="flex items-center text-[10px] text-outline font-label uppercase tracking-widest space-x-4">
+                                <span>Started: Oct 28, 2023</span>
+                                <span>Author: Julian Vane</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+                            <button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">delete</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Media Management & Quick Stats -->
+            <aside class="space-y-8">
+                <!-- Media Section -->
+                <div class="bg-surface-container-low p-8 rounded-lg">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="font-headline text-lg font-bold text-primary">Media Library</h2>
+                        <button class="text-[10px] font-label font-bold text-secondary uppercase tracking-widest border-b border-secondary/30">View All</button>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="aspect-square bg-surface-container-highest rounded overflow-hidden relative group cursor-pointer">
+                            <img alt="Media" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC_R4R6MkMEH-Wk376FX7Sr8haDU9I0rO31TTdaYGqwFCQOZY7VI6kjFa22nYISGsKWwGzi1Op_jcHGXZutZBkXnTe_tB2oRk_hIOsDwRlZW47ZBDKSyTxLEGzF5k4ftYmEaRUrHUPFeJ1Cg42iSpFhhdRMqWx068oG8z1dbvKO4igf8lWbA47ZzJmhenrK2rNkr81SbJ7NyJl4qxsejkXZH3n_rD7yzEU_ysDT7NAnxLTHPYbQNeKUQWjZei2r7CR4bk0bOg205Tu"/>
+                            <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <span class="material-symbols-outlined text-white">play_circle</span>
+                            </div>
+                        </div>
+                        <div class="aspect-square bg-surface-container-highest rounded overflow-hidden relative group cursor-pointer">
+                            <img alt="Media" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAhpDZqrrdqdWXYtJCPgGHJFdsin28BNLynPuD1Ppp0WHCXka7cjOTxjjrgO3V3PzMGa6LzqlkZwI2n7_jUMqm1yTKdjZk_ZhuWkVTRHEL1gVw2YGKXl61QjvxQdCdYAYLvmYsPajQRdLkifP2L49LgaYQR8_aj9UvjyBc7G51mSUL2B7-vSfge5qWJ94NcqXJ0Jjyhs8YtAEuF7gI-5AI6ePKRQ_dmw3DjIJ0bpM0RWpWX61a2FJhTu2viICLswV_DecaoTm43sJD"/>
+                        </div>
+                    </div>
+                    <div class="border-2 border-dashed border-outline-variant/30 rounded p-8 text-center hover:bg-surface-container-high transition-colors cursor-pointer">
+                        <span class="material-symbols-outlined text-outline text-3xl mb-2">upload_file</span>
+                        <p class="text-xs font-label text-on-surface-variant font-medium">Drop photos or videos to upload</p>
+                        <p class="text-[10px] text-outline mt-1 italic">Max 50MB per file</p>
+                    </div>
+                </div>
+                
+                <!-- Event Calendar / Stats -->
+                <div class="bg-primary text-on-primary p-8 rounded-lg">
+                    <h2 class="font-headline text-lg font-bold mb-6">Upcoming Milestones</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4 border-l-2 border-secondary pl-4 py-1">
+                            <div>
+                                <p class="text-xs font-label font-bold tracking-widest uppercase text-on-primary-container">Nov 12, 2023</p>
+                                <p class="font-body font-semibold">Milan Opening Reception</p>
+                                <p class="text-[10px] text-on-primary-container">Invite-only • 250 confirmed</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 border-l-2 border-white/20 pl-4 py-1">
+                            <div>
+                                <p class="text-xs font-label font-bold tracking-widest uppercase text-on-primary-container">Dec 05, 2023</p>
+                                <p class="font-body font-semibold">Paris Flagship Unveiling</p>
+                                <p class="text-[10px] text-on-primary-container">Press Conference • 10:00 AM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 border-l-2 border-white/20 pl-4 py-1">
+                            <div>
+                                <p class="text-xs font-label font-bold tracking-widest uppercase text-on-primary-container">Jan 18, 2024</p>
+                                <p class="font-body font-semibold">Heritage Series Launch</p>
+                                <p class="text-[10px] text-on-primary-container">Digital Premiere • Global</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Success Message Toast (Visual only) -->
+    <div class="fixed bottom-8 right-8 bg-surface-container-lowest text-primary px-6 py-4 rounded shadow-2xl border-l-4 border-secondary flex items-center space-x-4 z-50">
+        <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+        <div>
+            <p class="text-sm font-bold">Autosave active</p>
+            <p class="text-[10px] text-outline font-label uppercase">Last entry: Heritage Series (12:44 PM)</p>
+        </div>
+    </div>
+
+    <script src="components/admin-sidebar.js"></script>
+    <script src="components/admin-header.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAdminSidebar();
+            loadAdminHeader();
+        });
+    </script>
+</body>
+</html>

@@ -107,54 +107,11 @@
             flex: 0 0 100%;
         }
     </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
 <!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-[#fef8f4]/95 backdrop-blur-xl border-b border-surface-variant/30">
-<nav class="flex justify-between items-center w-full px-8 md:px-16 py-4 mx-auto">
-<div class="flex items-center gap-12">
-<a class="text-2xl font-black text-[#171e29] tracking-tighter font-headline" href="#">ETC Apparel</a>
-<div class="hidden md:flex items-center gap-8 font-body font-medium tracking-tight text-sm">
-<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="index.html">Home</a>
-<a class="text-[#885203]" href="about-us.html">About Us</a>
-<div class="relative group">
-<button class="flex items-center gap-1 text-[#171e29] hover:text-[#885203] transition-colors">
-                            Products
-                            <span class="material-symbols-outlined text-sm">expand_more</span>
-</button>
-<!-- Dropdown Menu styled after Image 2 -->
-<div class="dropdown-menu absolute left-0 top-full pt-4 w-56 animate-in fade-in slide-in-from-top-2 duration-200">
-<div class="bg-surface-container-lowest border border-surface-variant/20 rounded-lg overflow-hidden py-2">
-<a class="block px-6 py-3 text-[#171e29] hover:bg-surface-container-low transition-colors" href="all-products.html">Kids</a>
-<a class="block px-6 py-3 text-[#171e29] hover:bg-surface-container-low transition-colors" href="all-products.html">Mens</a>
-<a class="block px-6 py-3 text-[#171e29] hover:bg-surface-container-low transition-colors" href="all-products.html">Womens</a>
-<div class="h-px bg-surface-variant/20 my-1"></div>
-<a class="block px-6 py-3 text-[#171e29] font-semibold hover:bg-surface-container-low transition-colors" href="all-products.html">View All Categories</a>
-</div>
-</div>
-</div>
-<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="management.html">Management</a>
-<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="#">Contact Us</a>
-<a class="text-[#171e29] hover:text-[#885203] transition-colors" href="#">News &amp; Events</a>
-</div>
-</div>
-<div class="flex items-center gap-6">
-<div class="relative hidden lg:block">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
-<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none focus:ring-1 focus:ring-secondary rounded-lg text-xs w-56 transition-all" placeholder="Search curated collections..." type="text"/>
-</div>
-<div class="flex items-center gap-4">
-<a href="sign-in.html" class="text-[#171e29] hover:text-[#885203] transition-colors">
-<span class="material-symbols-outlined text-xl">person</span>
-</a>
-<button class="text-[#171e29] hover:text-[#885203] transition-colors relative">
-<span class="material-symbols-outlined text-xl">shopping_cart</span>
-<span class="absolute -top-1 -right-1 bg-secondary text-[10px] text-white w-4 h-4 flex items-center justify-center rounded-full">2</span>
-</button>
-</div>
-</div>
-</nav>
-</header>
+<div id="header-placeholder"></div>
 <main class="relative">
 <!-- Hero Section -->
 <section class="h-screen w-full relative overflow-hidden bg-primary" id="hero-carousel">
@@ -423,68 +380,9 @@
 <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
 </section>
 </main>
-<footer class="w-full mt-24 bg-[#171e29] text-slate-100 border-t border-[#171e29]/5">
-<div class="flex flex-col md:flex-row justify-between items-start w-full px-8 md:px-16 py-20 gap-16 mx-auto container">
-<div class="max-w-xs">
-<a class="font-headline text-3xl font-bold text-white mb-8 block tracking-tighter" href="#">ETC Apparel</a>
-<p class="font-body text-sm tracking-wide text-slate-400 leading-relaxed mb-8">
-                    Handcrafted for the modern curator. We bridge the gap between architectural precision and artisanal warmth.
-                </p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
-<span class="material-symbols-outlined text-sm">public</span>
-</a>
-<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
-<span class="material-symbols-outlined text-sm">share</span>
-</a>
-<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
-<span class="material-symbols-outlined text-sm">mail</span>
-</a>
-</div>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-12 flex-grow">
-<div>
-<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Collections</h4>
-<ul class="space-y-4">
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Menswear</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Womenswear</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="all-products.html">Accessories</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="about-us.html">Sustainability</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Support</h4>
-<ul class="space-y-4 font-body text-sm tracking-wide">
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Shipping</a></li>
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Returns</a></li>
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Privacy Policy</a></li>
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Store Locator</a></li>
-</ul>
-</div>
-<div class="col-span-2 md:col-span-1">
-<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Offices</h4>
-<div class="space-y-6">
-<div>
-<p class="text-white font-bold text-sm mb-1">UK Studio</p>
-<p class="text-slate-400 text-xs leading-relaxed">24 Savile Row, Mayfair<br/>London, W1S 3PR</p>
-</div>
-<div>
-<p class="text-white font-bold text-sm mb-1">Bangladesh Atelier</p>
-<p class="text-slate-400 text-xs leading-relaxed">Gulshan 2, Road 90<br/>Dhaka, 1212</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full px-8 md:px-16 py-8 border-t border-white/5 bg-slate-950/50">
-<div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-slate-600 font-label">
-<p>© 2024 ETC Apparel. Handcrafted for the modern curator.</p>
-<div class="flex gap-8">
-<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
-<a class="hover:text-white transition-colors" href="#">Accessibility</a>
-<a class="hover:text-white transition-colors" href="#">Cookie Settings</a>
-</div>
-</div>
-</div>
-</footer>
+<div id="footer-placeholder"></div>
+
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="js/animations.js"></script>
 </body></html>

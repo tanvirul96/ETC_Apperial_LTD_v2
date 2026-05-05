@@ -88,6 +88,7 @@
             pointer-events: none;
         }
     </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="bg-surface text-on-surface font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed min-h-screen flex flex-col">
 <!-- TopNavBar: Suppressed per shell visibility rules (Linear/Transactional Page) -->
@@ -166,17 +167,9 @@
 </div>
 </main>
 <!-- Footer: Shared Component -->
-<footer class="bg-[#f8f3ef] dark:bg-[#2c333f] text-[#171e29] dark:text-[#fef8f4] w-full mt-auto">
-<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-10 border-t border-[#c5c6cc]/15">
-<div class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 mb-6 md:mb-0">
-                © 2024 CURATOR EDITORIAL. ALL RIGHTS RESERVED.
-            </div>
-<nav class="flex gap-8">
-<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Privacy</a>
-<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Terms</a>
-<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Sustainability</a>
-<a class="font-sans text-[10px] tracking-widest uppercase text-[#171e29]/50 dark:text-[#fef8f4]/50 hover:text-[#171e29] dark:hover:text-[#fef8f4] transition-opacity" href="#">Contact</a>
-</nav>
-</div>
-</footer>
+<div id="footer-placeholder"></div>
+
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="js/animations.js"></script>
 </body></html>

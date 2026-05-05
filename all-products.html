@@ -86,56 +86,13 @@
             display: block;
         }
     </style>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="bg-surface font-body text-on-surface selection:bg-secondary/30 selection:text-on-secondary-container">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-[#fef8f4]/80 backdrop-blur-xl dark:bg-slate-950/80 border-b border-outline-variant/10">
-<div class="flex justify-between items-center w-full px-8 md:px-16 py-6 mx-auto">
-<a href="index.html" class="text-2xl font-black text-[#171e29] dark:text-white tracking-tighter font-headline">
-                ETC Apparel
-            </a>
-<div class="hidden md:flex gap-8 font-['Noto_Serif'] font-medium tracking-tight">
-<a class="text-[#171e29] dark:text-slate-400 hover:text-[#885203] dark:hover:text-[#885203] transition-all duration-300" href="index.html">Home</a>
-<a class="text-[#171e29] dark:text-slate-400 hover:text-[#885203] dark:hover:text-[#885203] transition-all duration-300" href="about-us.html">About</a>
-<div class="relative group nav-dropdown-trigger">
-<button class="flex items-center gap-1 text-[#885203] dark:text-[#885203] hover:text-[#885203] transition-all duration-300">
-                    Products
-                    <span class="material-symbols-outlined text-sm" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
-</button>
-<!-- Dropdown Menu -->
-<div class="nav-dropdown hidden absolute top-full -left-4 pt-4 w-48 animate-in fade-in slide-in-from-top-2 duration-200">
-<div class="bg-surface-container-lowest shadow-xl border border-outline-variant/10 rounded-lg overflow-hidden py-2">
-<a class="block px-6 py-3 text-sm font-label text-on-surface hover:bg-surface-container-low hover:text-secondary transition-colors" href="#">Kids</a>
-<a class="block px-6 py-3 text-sm font-label text-on-surface hover:bg-surface-container-low hover:text-secondary transition-colors" href="#">Mens</a>
-<a class="block px-6 py-3 text-sm font-label text-on-surface hover:bg-surface-container-low hover:text-secondary transition-colors" href="#">Womens</a>
-<div class="h-px bg-outline-variant/10 my-2 mx-4"></div>
-<a class="block px-6 py-3 text-sm font-label font-bold text-secondary hover:bg-surface-container-low transition-colors" href="#">View All Categories</a>
-</div>
-</div>
-</div>
-<a class="text-[#171e29] dark:text-slate-400 hover:text-[#885203] dark:hover:text-[#885203] transition-all duration-300" href="#">Contact</a>
-</div>
-<div class="flex items-center gap-6">
-<div class="hidden lg:flex items-center bg-surface-container-low px-4 py-2 rounded-lg">
-<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-sm font-label w-48" placeholder="Search curated style..." type="text"/>
-</div>
-<div class="flex gap-4">
-<a href="sign-in.html" class="hover:text-[#885203] transition-all"><span class="material-symbols-outlined" data-icon="person">person</span></a>
-<button class="hover:text-[#885203] transition-all"><span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span></button>
-</div>
-</div>
-</div>
-</nav>
+<div id="header-placeholder"></div>
 <main class="pt-32 pb-24 px-8 md:px-16">
 <!-- Breadcrumbs -->
-<nav class="flex items-center gap-2 text-xs font-label uppercase tracking-widest text-on-surface-variant/60 mb-8">
-<a class="hover:text-secondary transition-colors" href="index.html">Home</a>
-<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
-<a class="hover:text-secondary transition-colors" href="#">Shop</a>
-<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
-<span class="text-secondary font-semibold">New Arrivals</span>
-</nav>
+<div id="header-placeholder"></div>
 <header class="mb-16">
 <h1 class="font-headline text-5xl md:text-7xl font-black text-primary tracking-tighter mb-4">
                 The Seasonal <span class="text-secondary">Edit</span>
@@ -347,23 +304,9 @@
 </div>
 </div>
 </main>
-<!-- Footer -->
-<footer class="w-full mt-24 bg-[#f8f3ef] dark:bg-slate-900 border-t border-[#171e29]/5 dark:border-white/5">
-<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 md:px-16 py-12 gap-8">
-<div class="font-['Noto_Serif'] text-xl font-bold text-[#171e29] dark:text-white">
-                ETC Apparel
-                <p class="font-body text-xs font-normal mt-2 opacity-60 tracking-wider">EST. 2024</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8 font-['Manrope'] text-sm tracking-wide">
-<a class="text-[#171e29]/70 dark:text-slate-500 hover:text-[#171e29] dark:hover:text-white underline decoration-[#885203] decoration-2 underline-offset-4 transition-all duration-500" href="#">Shipping</a>
-<a class="text-[#171e29]/70 dark:text-slate-500 hover:text-[#171e29] dark:hover:text-white underline decoration-[#885203] decoration-2 underline-offset-4 transition-all duration-500" href="#">Returns</a>
-<a class="text-[#171e29]/70 dark:text-slate-500 hover:text-[#171e29] dark:hover:text-white underline decoration-[#885203] decoration-2 underline-offset-4 transition-all duration-500" href="#">Privacy Policy</a>
-<a class="text-[#171e29]/70 dark:text-slate-500 hover:text-[#171e29] dark:hover:text-white underline decoration-[#885203] decoration-2 underline-offset-4 transition-all duration-500" href="about-us.html">Sustainability</a>
-<a class="text-[#171e29]/70 dark:text-slate-500 hover:text-[#171e29] dark:hover:text-white underline decoration-[#885203] decoration-2 underline-offset-4 transition-all duration-500" href="#">Store Locator</a>
-</div>
-<div class="font-['Manrope'] text-sm tracking-wide text-[#171e29]/70 dark:text-slate-500 text-center md:text-right">
-                © 2024 ETC Apparel. Handcrafted for the modern curator.
-            </div>
-</div>
-</footer>
+<div id="footer-placeholder"></div>
+
+    <script src="components/header.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="js/animations.js"></script>
 </body></html>
