@@ -39,7 +39,7 @@
 <h2 class="text-[0.65rem] tracking-[0.3em] uppercase font-label text-secondary mb-4">ETC Apparel</h2>
 <h3 class="font-headline text-3xl text-primary">Welcome back</h3>
 </div>
-<form class="space-y-8">
+<form id="login-form" class="space-y-8">
 <!-- Email Field -->
 <div class="relative">
 <label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2" for="email">Email Address</label>
@@ -94,5 +94,21 @@
 
     <script src="/components/header.js"></script>
     <script src="/components/footer.js"></script>
-    <script src="js/animations.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHeader();
+            loadFooter();
+            
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    loginUser(email, password);
+                });
+            }
+        });
+    </script>
 </body></html>

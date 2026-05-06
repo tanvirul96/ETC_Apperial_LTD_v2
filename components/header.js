@@ -23,7 +23,7 @@ function loadHeader() {
 </div>
 </div>
 </div>
-<a class="nav-link text-[#171e29] hover:text-[#885203] transition-colors" href="/admin/dashboard.html">Management</a>
+<a class="nav-link text-[#171e29] hover:text-[#885203] transition-colors" href="/company/management.html">Management</a>
 <a class="nav-link text-[#171e29] hover:text-[#885203] transition-colors" href="/company/contact-us.html">Contact Us</a>
 <a class="nav-link text-[#171e29] hover:text-[#885203] transition-colors" href="/company/news-and-events.html">News &amp; Events</a>
 </div>

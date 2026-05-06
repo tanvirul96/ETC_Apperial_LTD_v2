@@ -29,7 +29,7 @@
 <h1 class="text-2xl font-serif tracking-[0.2em] uppercase text-primary mb-2">CURATOR</h1>
 <p class="text-on-surface-variant font-label text-sm tracking-widest uppercase">Editorial Registration</p>
 </div>
-<form class="space-y-8">
+<form id="register-form" class="space-y-8">
 <div class="space-y-6">
 <div class="relative">
 <label class="block text-xs font-label uppercase tracking-widest text-on-surface-variant mb-2" for="full-name">Full Name</label>
@@ -85,7 +85,7 @@
 <div class="mt-12 text-center">
 <p class="text-sm text-on-surface-variant">
                         Already have an account? 
-                        <a class="text-primary font-semibold hover:text-secondary underline underline-offset-4 transition-colors" href="#">Sign In</a>
+                        <a class="text-primary font-semibold hover:text-secondary underline underline-offset-4 transition-colors" href="/account/sign-in.html">Sign In</a>
 </p>
 </div>
 </div>
@@ -95,5 +95,28 @@
 
     <script src="/components/header.js"></script>
     <script src="/components/footer.js"></script>
-    <script src="js/animations.js"></script>
+    <script src="/js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHeader();
+            loadFooter();
+            
+            const registerForm = document.getElementById('register-form');
+            if (registerForm) {
+                registerForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('full-name').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    
+                    if (password !== confirmPassword) {
+                        alert("Passwords do not match");
+                        return;
+                    }
+                    registerUser(name, email, password);
+                });
+            }
+        });
+    </script>
 </body></html>
