@@ -10,8 +10,8 @@
 
 
 
-<link rel="stylesheet" href="/css/global.css">
-<script src="/js/tailwind-theme.js"></script>
+<link rel="stylesheet" href="/frontend/css/global.css">
+<script src="/frontend/js/tailwind-theme.js"></script>
 </head>
 <body class="bg-surface text-on-surface flex min-h-screen">
     <div id="admin-sidebar-placeholder"></div>
@@ -304,13 +304,15 @@
         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
     </button>
 
-    <script src="/components/admin-sidebar.js"></script>
-    <script src="/components/admin-header.js"></script>
+    <script src="/frontend/components/admin-sidebar.js"></script>
+    <script src="/frontend/components/admin-header.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            protectAdminRoute();
             loadAdminSidebar();
             loadAdminHeader();
         });
     </script>
+
 </body>
 </html>

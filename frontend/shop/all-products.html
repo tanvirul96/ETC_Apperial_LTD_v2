@@ -10,8 +10,8 @@
 
     <link rel="stylesheet" href="css/main.css">
 
-<link rel="stylesheet" href="/css/global.css">
-<script src="/js/tailwind-theme.js"></script>
+<link rel="stylesheet" href="/frontend/css/global.css">
+<script src="/frontend/js/tailwind-theme.js"></script>
 </head>
 <body class="bg-surface font-body text-on-surface selection:bg-secondary/30 selection:text-on-secondary-container">
 <div id="header-placeholder"></div>
@@ -231,7 +231,14 @@
 </main>
 <div id="footer-placeholder"></div>
 
-    <script src="/components/header.js"></script>
-    <script src="/components/footer.js"></script>
+    <script src="/frontend/components/header.js"></script>
+    <script src="/frontend/components/footer.js"></script>
     <script src="js/animations.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof loadHeader === 'function') loadHeader();
+            if (typeof loadFooter === 'function') loadFooter();
+        });
+    </script>
 </body></html>

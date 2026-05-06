@@ -10,8 +10,8 @@
 
 
 
-<link rel="stylesheet" href="/css/global.css">
-<script src="/js/tailwind-theme.js"></script>
+<link rel="stylesheet" href="/frontend/css/global.css">
+<script src="/frontend/js/tailwind-theme.js"></script>
 </head>
 <body class="bg-surface text-on-surface">
     <div id="admin-sidebar-placeholder"></div>
@@ -168,9 +168,9 @@
         </div>
     </main>
 
-    <script src="/components/admin-sidebar.js"></script>
-    <script src="/components/admin-header.js"></script>
-    <script src="/js/auth.js"></script>
+    <script src="/frontend/components/admin-sidebar.js"></script>
+    <script src="/frontend/components/admin-header.js"></script>
+    <script src="/frontend/js/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             protectAdminRoute();
@@ -178,5 +178,6 @@
             loadAdminHeader();
         });
     </script>
+
 </body>
 </html>
