@@ -135,14 +135,16 @@
         </div>
     </main>
 
+    <script src="/frontend/components/admin-sidebar.js"></script>
+    <script src="/frontend/components/admin-header.js"></script>
     <script src="/frontend/js/auth.js"></script>
     <script src="/frontend/js/api.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            protectAdminRoute();
-            loadAdminSidebar();
-            loadAdminHeader();
+        protectAdminRoute();
+        loadAdminSidebar();
+        loadAdminHeader();
 
+        document.addEventListener('DOMContentLoaded', async () => {
             const orders = await fetchOrders();
             const container = document.getElementById('orders-container');
             

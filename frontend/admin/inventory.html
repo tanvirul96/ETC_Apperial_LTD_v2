@@ -248,16 +248,59 @@
             </div>
         </div>
     </main>
+
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-primary/40 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden')"></div>
+        <div class="relative bg-surface w-full max-w-xl p-12 rounded-xl shadow-2xl overflow-y-auto max-h-[90vh]">
+            <h2 class="text-4xl serif-text font-black text-primary mb-8 tracking-tight">New Curated Item.</h2>
+            <form id="add-product-form" class="space-y-8">
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="relative">
+                        <label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2">SKU / Identifier</label>
+                        <input name="sku" required class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-3 px-0 text-on-surface font-body" placeholder="ETC-2024-X">
+                    </div>
+                    <div class="relative">
+                        <label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2">Category</label>
+                        <select name="category" class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-3 px-0 text-on-surface font-body">
+                            <option>Signature Knits</option>
+                            <option>Outerwear</option>
+                            <option>Essentials</option>
+                            <option>Accessories</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="relative">
+                    <label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2">Product Name</label>
+                    <input name="name" required class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-3 px-0 text-on-surface font-body" placeholder="Sculptural Linen Tunic">
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="relative">
+                        <label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2">Investment / Price</label>
+                        <input name="price" type="number" step="0.01" required class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-3 px-0 text-on-surface font-body" placeholder="0.00">
+                    </div>
+                    <div class="relative">
+                        <label class="block text-[10px] font-label uppercase tracking-widest text-on-surface-variant mb-2">Inventory / Stock</label>
+                        <input name="stock" type="number" required class="w-full bg-surface-container-lowest border-none border-b border-outline-variant focus:border-primary focus:ring-0 transition-all py-3 px-0 text-on-surface font-body" placeholder="0">
+                    </div>
+                </div>
+                <div class="pt-8 flex gap-4">
+                    <button type="submit" class="flex-grow editorial-gradient text-on-primary py-4 px-8 font-label text-xs uppercase tracking-widest hover:opacity-90 active:scale-95 transition-all">Publish Item</button>
+                    <button type="button" onclick="document.getElementById('add-product-modal').classList.add('hidden')" class="px-8 py-4 font-label text-xs uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="/frontend/components/admin-sidebar.js"></script>
     <script src="/frontend/components/admin-header.js"></script>
     <script src="/frontend/js/auth.js"></script>
     <script src="/frontend/js/api.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            protectAdminRoute();
-            loadAdminSidebar();
-            loadAdminHeader();
+        protectAdminRoute();
+        loadAdminSidebar();
+        loadAdminHeader();
 
+        document.addEventListener('DOMContentLoaded', async () => {
             const products = await fetchProducts();
             const tableBody = document.getElementById('inventory-table-body');
             
@@ -299,6 +342,29 @@
                     </tr>
                 `).join('');
             }
+
+            // Handle Add Product
+            const addForm = document.getElementById('add-product-form');
+            addForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(addForm);
+                const productData = {
+                    sku: formData.get('sku'),
+                    name: formData.get('name'),
+                    category: formData.get('category'),
+                    price: parseFloat(formData.get('price')),
+                    stock: parseInt(formData.get('stock')),
+                    status: parseInt(formData.get('stock')) > 0 ? 'Active' : 'Out of Stock'
+                };
+
+                const result = await createProduct(productData);
+                if (result) {
+                    alert('Item published to collection successfully.');
+                    window.location.reload();
+                } else {
+                    alert('Failed to publish item.');
+                }
+            });
         });
     </script>
 

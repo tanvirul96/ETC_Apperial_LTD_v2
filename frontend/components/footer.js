@@ -1,73 +1,58 @@
 function loadFooter() {
-  const footerHtml = `
-<footer class="w-full mt-24 bg-[#171e29] text-slate-100 border-t border-[#171e29]/5">
-<div class="flex flex-col md:flex-row justify-between items-start w-full px-8 md:px-16 py-20 gap-16 mx-auto container">
-<div class="max-w-xs">
-<a class="font-headline text-3xl font-bold text-white mb-8 block tracking-tighter" href="/frontend/index.html">ETC Apparel</a>
-<p class="font-body text-sm tracking-wide text-slate-400 leading-relaxed mb-8">
-                    Handcrafted for the modern curator. We bridge the gap between architectural precision and artisanal warmth.
-                </p>
-<div class="flex gap-4">
-<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
-<span class="material-symbols-outlined text-sm">public</span>
-</a>
-<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
-<span class="material-symbols-outlined text-sm">share</span>
-</a>
-<a class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-secondary transition-all" href="#">
-<span class="material-symbols-outlined text-sm">mail</span>
-</a>
-</div>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-12 flex-grow">
-<div>
-<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Collections</h4>
-<ul class="space-y-4">
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/frontend/shop/all-products.html">Menswear</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/frontend/shop/all-products.html">Womenswear</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/frontend/shop/all-products.html">Accessories</a></li>
-<li><a class="font-body text-sm tracking-wide text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="/frontend/company/about-us.html">Sustainability</a></li>
-</ul>
-</div>
-<div>
-<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Support</h4>
-<ul class="space-y-4 font-body text-sm tracking-wide">
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Shipping</a></li>
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Returns</a></li>
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Privacy Policy</a></li>
-<li><a class="text-slate-400 hover:text-white transition-all underline-offset-4 hover:underline decoration-secondary" href="#">Store Locator</a></li>
-</ul>
-</div>
-<div class="col-span-2 md:col-span-1">
-<h4 class="font-label text-xs tracking-[0.2em] uppercase text-slate-500 mb-6">Offices</h4>
-<div class="space-y-6">
-<div>
-<p class="text-white font-bold text-sm mb-1">UK Studio</p>
-<p class="text-slate-400 text-xs leading-relaxed">24 Savile Row, Mayfair<br/>London, W1S 3PR</p>
-</div>
-<div>
-<p class="text-white font-bold text-sm mb-1">Bangladesh Atelier</p>
-<p class="text-slate-400 text-xs leading-relaxed">Gulshan 2, Road 90<br/>Dhaka, 1212</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full px-8 md:px-16 py-8 border-t border-white/5 bg-slate-950/50">
-<div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.3em] text-slate-600 font-label">
-<p>© 2024 ETC Apparel. Handcrafted for the modern curator.</p>
-<div class="flex gap-8">
-<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
-<a class="hover:text-white transition-colors" href="#">Accessibility</a>
-<a class="hover:text-white transition-colors" href="#">Cookie Settings</a>
-</div>
-</div>
-</div>
+    const footerHtml = `
+<footer class="bg-[#171e29] text-white py-24 px-8 md:px-16 overflow-hidden relative">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 relative z-10">
+        <div class="md:col-span-4">
+            <h2 class="font-headline text-4xl font-bold mb-8 tracking-tighter">ETC.</h2>
+            <p class="text-on-primary-container/60 font-body leading-relaxed mb-12 max-w-sm">
+                Curating the silent evolution of modern heritage. A collective dedicated to the pursuit of architectural precision and tactile warmth.
+            </p>
+            <div class="flex gap-6">
+                <a href="#" class="text-on-primary-container/40 hover:text-secondary transition-colors"><span class="material-symbols-outlined">alternate_email</span></a>
+                <a href="#" class="text-on-primary-container/40 hover:text-secondary transition-colors"><span class="material-symbols-outlined">public</span></a>
+                <a href="#" class="text-on-primary-container/40 hover:text-secondary transition-colors"><span class="material-symbols-outlined">camera_indoor</span></a>
+            </div>
+        </div>
+        <div class="md:col-span-2 space-y-6">
+            <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">Atelier</h4>
+            <ul class="space-y-4 font-label text-xs uppercase tracking-widest text-on-primary-container/60">
+                <li><a href="/frontend/shop/all-products.html" class="hover:text-white transition-colors">Collections</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Journal</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Archive</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Stockists</a></li>
+            </ul>
+        </div>
+        <div class="md:col-span-2 space-y-6">
+            <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">Curator</h4>
+            <ul class="space-y-4 font-label text-xs uppercase tracking-widest text-on-primary-container/60">
+                <li><a href="#" class="hover:text-white transition-colors">Our Story</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Craftsmanship</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Sustainability</a></li>
+                <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+        </div>
+        <div class="md:col-span-4 space-y-8">
+            <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">Journal Subscription</h4>
+            <p class="text-xs text-on-primary-container/60 leading-relaxed font-body">Receive curated updates on collection cycles and editorial insights.</p>
+            <div class="flex border-b border-white/10 pb-2">
+                <input type="email" placeholder="email@address.com" class="bg-transparent border-none focus:ring-0 text-sm font-label flex-grow">
+                <button class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold">Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-[-10%] right-[-10%] opacity-5 select-none pointer-events-none">
+        <span class="font-headline text-[300px] font-black tracking-tighter italic">Apparel</span>
+    </div>
 </footer>
-  `;
+    `;
 
-  const placeholder = document.getElementById('footer-placeholder');
-  if (placeholder) {
-    placeholder.innerHTML = footerHtml;
-  }
+    const placeholder = document.getElementById('footer-placeholder');
+    if (placeholder) {
+        placeholder.innerHTML = footerHtml;
+    }
+}
+
+// Auto-load
+if (document.getElementById('footer-placeholder')) {
+    loadFooter();
 }

@@ -81,3 +81,27 @@ h1, h2, h3, .font-serif, .serif-text {
 .no-border {
     border: none !important;
 }
+
+/* Editorial Components */
+.editorial-gradient {
+    background: linear-gradient(135deg, #171e29 0%, #2c333f 100%);
+}
+
+.editorial-shadow {
+    box-shadow: 0 25px 50px -12px rgba(23, 30, 41, 0.15);
+}
+
+.grainy-surface {
+    position: relative;
+}
+
+.grainy-surface::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1;
+}
+

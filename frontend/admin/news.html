@@ -193,12 +193,11 @@
 
     <script src="/frontend/components/admin-sidebar.js"></script>
     <script src="/frontend/components/admin-header.js"></script>
+    <script src="/frontend/js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            protectAdminRoute();
-            loadAdminSidebar();
-            loadAdminHeader();
-        });
+        protectAdminRoute();
+        loadAdminSidebar();
+        loadAdminHeader();
     </script>
 
 </body>

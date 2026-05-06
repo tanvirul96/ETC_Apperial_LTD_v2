@@ -1,6 +1,6 @@
 function loadAdminSidebar() {
     const sidebarHtml = `
-<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-[#f8f3ef] dark:bg-slate-900 shadow-[40px_0_60px_-15px_rgba(23,30,41,0.06)] flex flex-col p-6 space-y-8">
+<aside class="h-screen w-64 fixed left-0 top-0 z-[100] bg-[#f8f3ef] dark:bg-slate-900 shadow-[40px_0_60px_-15px_rgba(23,30,41,0.06)] flex flex-col p-6 space-y-8 overflow-y-auto no-scrollbar">
     <div class="mb-4 flex items-center justify-between">
         <div>
             <span class="font-serif text-xl font-bold uppercase tracking-widest text-[#171e29] dark:text-white">Atelier Admin</span>
@@ -47,17 +47,20 @@ function loadAdminSidebar() {
         placeholder.innerHTML = sidebarHtml;
 
         // Highlight active link
-        const currentPath = window.location.pathname.split('/').pop() || 'admin-dashboard.html';
+        const currentPath = window.location.pathname.split('/').pop() || 'dashboard.html';
         const links = placeholder.querySelectorAll('.admin-nav-link');
         
         links.forEach(link => {
             const href = link.getAttribute('href');
             if (href && (href.endsWith(currentPath) || href === '/' + currentPath) && href !== '#') {
-                // Remove inactive styles
                 link.classList.remove('text-slate-500', 'dark:text-slate-400');
-                // Add active styles
                 link.classList.add('text-[#171e29]', 'dark:text-white', 'font-semibold', 'bg-[#e6e2de]', 'dark:bg-slate-800');
             }
         });
     }
+}
+
+// Auto-load
+if (document.getElementById('admin-sidebar-placeholder')) {
+    loadAdminSidebar();
 }

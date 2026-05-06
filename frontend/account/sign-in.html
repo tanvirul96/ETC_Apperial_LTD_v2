@@ -93,19 +93,17 @@
     <script src="/frontend/components/footer.js"></script>
     <script src="/frontend/js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHeader();
-            loadFooter();
-            
-            const loginForm = document.getElementById('login-form');
-            if (loginForm) {
-                loginForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    loginUser(email, password);
-                });
-            }
-        });
+        loadHeader();
+        loadFooter();
+        
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                loginUser(email, password);
+            });
+        }
     </script>
 </body></html>

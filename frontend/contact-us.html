@@ -133,12 +133,10 @@
 
     <script src="/frontend/components/header.js"></script>
     <script src="/frontend/components/footer.js"></script>
-    <script src="js/animations.js"></script>
+    <script src="/frontend/js/animations.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof loadHeader === 'function') loadHeader();
-            if (typeof loadFooter === 'function') loadFooter();
-        });
+        loadHeader();
+        loadFooter();
     </script>
 </body></html>

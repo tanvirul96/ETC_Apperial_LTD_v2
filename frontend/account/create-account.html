@@ -95,26 +95,24 @@
     <script src="/frontend/components/footer.js"></script>
     <script src="/frontend/js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHeader();
-            loadFooter();
-            
-            const registerForm = document.getElementById('register-form');
-            if (registerForm) {
-                registerForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('full-name').value;
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    const confirmPassword = document.getElementById('confirm-password').value;
-                    
-                    if (password !== confirmPassword) {
-                        alert("Passwords do not match");
-                        return;
-                    }
-                    registerUser(name, email, password);
-                });
-            }
-        });
+        loadHeader();
+        loadFooter();
+        
+        const registerForm = document.getElementById('register-form');
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('full-name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match");
+                    return;
+                }
+                registerUser(name, email, password);
+            });
+        }
     </script>
 </body></html>

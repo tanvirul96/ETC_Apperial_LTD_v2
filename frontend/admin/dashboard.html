@@ -173,11 +173,12 @@
     <script src="/frontend/js/auth.js"></script>
     <script src="/frontend/js/api.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            protectAdminRoute();
-            loadAdminSidebar();
-            loadAdminHeader();
+        // Immediate protection and component loading
+        protectAdminRoute();
+        loadAdminSidebar();
+        loadAdminHeader();
 
+        document.addEventListener('DOMContentLoaded', async () => {
             // Fetch and populate stats
             const stats = await fetchDashboardStats();
             if (stats) {

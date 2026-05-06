@@ -45,6 +45,41 @@ async function fetchProducts() {
         return [];
     }
 }
+/**
+ * Create a new product
+ */
+async function createProduct(productData) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/products`, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: JSON.stringify(productData)
+        });
+        if (!response.ok) throw new Error('Failed to create product');
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating product:', error);
+        return null;
+    }
+}
+
+/**
+ * Create a new order
+ */
+async function createOrder(orderData) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: JSON.stringify(orderData)
+        });
+        if (!response.ok) throw new Error('Failed to create order');
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating order:', error);
+        return null;
+    }
+}
 
 /**
  * Fetch all orders
