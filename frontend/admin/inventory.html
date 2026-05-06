@@ -59,29 +59,18 @@
             
             <!-- Bento Inventory Table Layout -->
             <div class="bg-surface-container-lowest rounded-xl overflow-hidden ring-1 ring-outline-variant/10">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-surface-container-low/50">
-                            <th class="px-8 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Product Details</th>
-                            <th class="px-6 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">SKU</th>
-                            <th class="px-6 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Category</th>
-                            <th class="px-6 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Stock Level</th>
-                            <th class="px-6 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Price</th>
-                            <th class="px-6 py-5 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-semibold">Status</th>
+                <table class="w-full text-left">
+                    <thead class="bg-surface-container-low/50 border-b border-outline-variant/10">
+                        <tr>
+                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Product Details</th>
+                            <th class="px-6 py-5 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">SKU</th>
+                            <th class="px-6 py-5 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Category</th>
+                            <th class="px-6 py-5 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Stock Level</th>
+                            <th class="px-6 py-5 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Price</th>
+                            <th class="px-6 py-5 text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Status</th>
                             <th class="px-8 py-5"></th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-outline-variant/10">
-                        <!-- Product Row 1 -->
-                        <tr class="group hover:bg-surface-container-low/30 transition-colors">
-                            <td class="px-8 py-6">
-                                <div class="flex items-center space-x-4">
-                                    <img alt="Cashmere Sweater" class="w-14 h-18 object-cover rounded shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj9ZLymOwc1sIiY30DLnw9i8rSjAMJJBtG9CLDOm1KzFx6bodoJzlyifCxz6rSvLGcefEd1o3P8MaiYMJfkKjJp2EvdUZO_TQ1VzP8zznKDWFuK_tHRlqMMxHx5DQqYbz2ubR2RpDaYLtHddpahrzhMz8Ikgf-RAIWzIWTgmZZhUbyDm4g2okNuWZuBuHYH_aWhqYdUBOfnxYm307oKT1jkTr08gwY0JkcwvM6wNV9YqyvGpV-xl7k_zwQe8txg9pkhaRrVk-ex6BA"/>
-                                    <div class="flex flex-col">
-                                        <span class="font-body font-bold text-primary">Signature Cashmere Crewneck</span>
-                                        <span class="text-xs text-on-surface-variant/60 font-label">Heathered Sand</span>
-                                    </div>
-                                </div>
                             </td>
                             <td class="px-6 py-6 font-label text-sm text-on-surface-variant">ETC-CS-204-SND</td>
                             <td class="px-6 py-6 font-label text-sm text-on-surface-variant">Signature Knits</td>
@@ -261,11 +250,55 @@
     </main>
     <script src="/frontend/components/admin-sidebar.js"></script>
     <script src="/frontend/components/admin-header.js"></script>
+    <script src="/frontend/js/auth.js"></script>
+    <script src="/frontend/js/api.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             protectAdminRoute();
             loadAdminSidebar();
             loadAdminHeader();
+
+            const products = await fetchProducts();
+            const tableBody = document.getElementById('inventory-table-body');
+            
+            if (products && products.length > 0) {
+                tableBody.innerHTML = products.map(product => `
+                    <tr class="group hover:bg-surface-container-low/30 transition-colors">
+                        <td class="px-8 py-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-14 h-18 bg-surface-container-high rounded shadow-sm flex items-center justify-center text-xs text-on-surface-variant font-bold">
+                                    ${product.category.substring(0, 2).toUpperCase()}
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="font-body font-bold text-primary">${product.name}</span>
+                                    <span class="text-xs text-on-surface-variant/60 font-label">${product.category}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-6 font-label text-sm text-on-surface-variant">${product.sku}</td>
+                        <td class="px-6 py-6 font-label text-sm text-on-surface-variant">${product.category}</td>
+                        <td class="px-6 py-6">
+                            <div class="flex flex-col space-y-1">
+                                <span class="font-body font-bold text-sm">${product.stock} units</span>
+                                <div class="w-24 h-1 bg-surface-variant rounded-full overflow-hidden">
+                                    <div class="bg-primary h-full" style="width: ${Math.min(product.stock, 100)}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-6 font-body font-bold text-secondary">$${product.price}</td>
+                        <td class="px-6 py-6">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter ${product.stock > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-surface-variant text-on-surface-variant'}">
+                                ${product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                            </span>
+                        </td>
+                        <td class="px-8 py-6 text-right">
+                            <button class="text-on-surface-variant/40 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">more_horiz</span>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
         });
     </script>
 

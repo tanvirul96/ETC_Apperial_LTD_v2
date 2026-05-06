@@ -28,9 +28,9 @@ async function loginUser(email, password) {
 
             // Redirect based on role
             if (data.user.role === 'admin') {
-                window.location.href = '/admin/dashboard.html';
+                window.location.href = '/frontend/admin/dashboard.html';
             } else {
-                window.location.href = '/index.html'; // Or account page
+                window.location.href = '/frontend/index.html'; // Or account page
             }
         } else {
             alert(data.message || 'Login failed');
@@ -61,7 +61,7 @@ async function registerUser(name, email, password) {
 
         if (response.ok) {
             alert('Registration successful! Please sign in.');
-            window.location.href = '/account/sign-in.html';
+            window.location.href = '/frontend/account/sign-in.html';
         } else {
             alert(data.message || 'Registration failed');
         }
@@ -80,7 +80,7 @@ function protectAdminRoute() {
     const role = localStorage.getItem('role');
 
     if (!token || role !== 'admin') {
-        window.location.href = '/account/sign-in.html';
+        window.location.href = '/frontend/account/sign-in.html';
     }
 }
 
@@ -91,5 +91,5 @@ function logoutUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('user');
-    window.location.href = '/index.html';
+    window.location.href = '/frontend/index.html';
 }
