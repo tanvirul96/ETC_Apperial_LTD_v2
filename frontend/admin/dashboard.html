@@ -186,6 +186,42 @@
                 document.getElementById('new-orders').textContent = stats.newOrders.toLocaleString();
                 document.getElementById('active-users').textContent = stats.activeUsers.toLocaleString();
             }
+
+            // Fetch and populate recent orders
+            const orders = await fetchOrders();
+            const tableBody = document.querySelector('tbody');
+            if (orders && orders.length > 0) {
+                // Show only first 5 for dashboard
+                const recentOrders = orders.slice(0, 5);
+                tableBody.innerHTML = recentOrders.map(order => {
+                    let statusClass = 'bg-secondary-container/30 text-on-secondary-container';
+                    if (order.status === 'Shipped') statusClass = 'bg-blue-100 text-blue-800';
+                    if (order.status === 'Delivered') statusClass = 'bg-green-100 text-green-800';
+
+                    return `
+                        <tr class="hover:bg-surface-container-low/40 transition-colors">
+                            <td class="px-6 py-4 text-sm font-medium text-primary">${order.order_number}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full editorial-gradient flex items-center justify-center text-[8px] font-bold text-white">
+                                        ${order.customer.split(' ').map(n => n[0]).join('')}
+                                    </div>
+                                    <span class="text-sm font-semibold text-on-surface">${order.customer}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-bold text-secondary">$${parseFloat(order.amount).toFixed(2)}</td>
+                            <td class="px-6 py-4">
+                                <span class="px-2 py-1 rounded-full text-[10px] font-bold ${statusClass} uppercase">${order.status}</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">visibility</button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                tableBody.innerHTML = '<tr><td colspan="5" class="px-6 py-10 text-center text-on-surface-variant font-serif italic">No recent orders found.</td></tr>';
+            }
         });
     </script>
 

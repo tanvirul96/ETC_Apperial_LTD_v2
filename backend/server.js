@@ -14,6 +14,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/stats', require('./routes/statsRoutes'));
+app.use('/api/news', require('./routes/newsRoutes'));
 
 app.get('/api/health', (req, res) => {
     res.json({ status: 'API is running' });

@@ -96,3 +96,37 @@ async function fetchOrders() {
         return [];
     }
 }
+
+/**
+ * Fetch all news entries
+ */
+async function fetchNews() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/news`, {
+            headers: getHeaders()
+        });
+        if (!response.ok) throw new Error('Failed to fetch news');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        return [];
+    }
+}
+
+/**
+ * Create a new news entry
+ */
+async function createNews(newsData) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/news`, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: JSON.stringify(newsData)
+        });
+        if (!response.ok) throw new Error('Failed to create news');
+        return await response.json();
+    } catch (error) {
+        console.error('Error creating news:', error);
+        return null;
+    }
+}

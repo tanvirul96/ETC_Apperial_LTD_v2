@@ -23,7 +23,8 @@ async function createTables() {
       status VARCHAR(50) DEFAULT 'Active',
       image_url TEXT,
       description TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;
 
@@ -33,6 +34,7 @@ async function createTables() {
       order_number VARCHAR(50) UNIQUE NOT NULL,
       user_id INT REFERENCES users(id),
       customer_name VARCHAR(200) NOT NULL,
+      customer_email VARCHAR(100),
       total_amount DECIMAL(10, 2) NOT NULL,
       status VARCHAR(50) DEFAULT 'Pending',
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -44,9 +46,13 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       title VARCHAR(255) NOT NULL,
       excerpt TEXT,
+      content TEXT,
+      author VARCHAR(100),
       category VARCHAR(50),
       image_url TEXT,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      status VARCHAR(20) DEFAULT 'Published',
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;
 
