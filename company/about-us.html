@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>About Us | ETC Apparel</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;600;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/global.css">
+    <script src="/js/tailwind-theme.js"></script>
+    <style>
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+    <div id="header-placeholder"></div>
+
+    <main class="pt-24">
+        <!-- Hero Section: Editorial Header -->
+        <section class="px-8 md:px-20 py-16 md:py-32 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row items-end gap-8 mb-12">
+                    <h1 class="text-6xl md:text-8xl font-headline font-bold text-primary leading-tight tracking-tighter max-w-3xl">
+                        The Architecture <br/> of Apparel.
+                    </h1>
+                    <p class="text-secondary font-label font-medium uppercase tracking-[0.2em] pb-4">Est. 1994</p>
+                </div>
+                <div class="w-full h-[614px] overflow-hidden rounded-lg">
+                    <img class="w-full h-full object-cover grayscale brightness-90 hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUWBt71vKdAo9_UlMTNhEwOWS139SyVFE65p_TdIIKPaY_5VgmNKUdrWa57vXP8nc9U4iIsB1iFqvvkfufMDWM7TsoKE8NF0bs61it_3s2KIDsrnnFPDKHP4dQOuXaCDug1OvMxPRMBz9R9t8Us_135qZsHGeOdkVPzz3yTlnXy8Qvhq5cUgkLrQ-egSGTNwMB_oW9rFGcq2GtpGlXs-cMHS3t3A1rYhFXVHw8VbKTKMVL17u97Dt5a7aq8C6E9EHOXs5MYu0RbStL"/>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story: Asymmetric Layout -->
+        <section class="px-8 md:px-20 py-24 bg-surface-container-low">
+            <div class="max-w-7xl mx-auto editorial-grid">
+                <div class="col-span-12 md:col-span-5 flex flex-col justify-center">
+                    <span class="text-secondary font-label font-bold tracking-widest uppercase text-xs mb-6">Heritage</span>
+                    <h2 class="text-4xl md:text-5xl font-headline text-primary mb-8">Our Story</h2>
+                    <div class="space-y-6 text-on-surface-variant font-body leading-relaxed text-lg">
+                        <p>Founded in a small workshop in the heart of the historic garment district, ETC Apparel began with a singular focus: the pursuit of the perfect seam. What started as a bespoke tailoring service for local artists has evolved into a global symbol of understated luxury.</p>
+                        <p>We believe that clothing is an extension of the self—a quiet but powerful statement of intent. Our journey has been one of continuous refinement, where heritage techniques meet modern silhouettes to create garments that transcend seasons.</p>
+                    </div>
+                </div>
+                <div class="col-span-12 md:col-start-7 md:col-span-6 relative">
+                    <div class="aspect-[4/5] bg-surface-container-highest rounded-lg overflow-hidden translate-y-12">
+                        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-9peUtI8GtBiYJS3Saa4zUNKqQP00cUi6epOVxkLfDx8WSKyvLv1CyEh7WjD1nqHcKhxNRtoV9kXWcH_MO-l-LFeA88ONFyAxZt_ZORQ4SGKZ9_bxkoz47wACLJDJCQDKkyJlGc04IcwOqtZKLL6VQwxlOhKtGOFV73-L3j3Ta4mQc8WjMqbsPQDaPl42T-GkfcvcE6vY9h-IjdsOa17qhzaDFcQg7skkntT-OZQTT1f9QJ-5fqN2j-NafQZgbXcwBpAwp3zk_j4b"/>
+                    </div>
+                    <div class="absolute -top-12 -left-12 w-48 h-48 bg-secondary/10 backdrop-blur-xl rounded-full hidden md:block"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Craftsmanship: Bento Grid / Tonal Layering -->
+        <section class="px-8 md:px-20 py-32 bg-surface">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-headline text-primary mb-4">Craftsmanship</h2>
+                    <div class="w-24 h-px bg-secondary mx-auto"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Material -->
+                    <div class="p-8 bg-surface-container-low border border-outline-variant/15 group hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-4xl text-secondary mb-6">architecture</span>
+                        <h3 class="text-2xl font-headline text-primary mb-4">Material Integrity</h3>
+                        <p class="text-on-surface-variant font-body leading-relaxed">We source only the finest natural fibers, from long-staple Egyptian cotton to ethically harvested Mongolian cashmere.</p>
+                    </div>
+                    <!-- Process -->
+                    <div class="p-8 bg-surface-container-low border border-outline-variant/15 group hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-4xl text-secondary mb-6">precision_manufacturing</span>
+                        <h3 class="text-2xl font-headline text-primary mb-4">Precision Tailoring</h3>
+                        <p class="text-on-surface-variant font-body leading-relaxed">Every garment undergoes a 12-point inspection process, ensuring that every stitch serves both form and function.</p>
+                    </div>
+                    <!-- Design -->
+                    <div class="p-8 bg-surface-container-low border border-outline-variant/15 group hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-4xl text-secondary mb-6">draw</span>
+                        <h3 class="text-2xl font-headline text-primary mb-4">Editorial Vision</h3>
+                        <p class="text-on-surface-variant font-body leading-relaxed">Our designs are born from a dialogue between architectural structure and the fluidity of movement.</p>
+                    </div>
+                </div>
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <img class="rounded-lg shadow-sm w-full grayscale opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz7zDB36-gR1hETPvx-Xz-CdyZeyti1iPpa3Glffkqwet6HGEUZgi_zXIMHPE5-sCuL1hGsxliY9ovAdq00AFiMQ57R_Ym_19s2st7B48ofzy0-WRuNZxZotL2EFxizvBRxCSloeiC88RywEVdN__Jc9N4GBGka7PiZ8Vk8mq3rDPuutdFf6dthPgSiNN08At29kjWoHcU4AO7sFmNwasGkSvI70qOs06ySOPN8JHvRsDghaK_eDwx-QQtvNxM-SVZcMKIrQkL94Tx"/>
+                    <div class="pl-0 md:pl-12">
+                        <blockquote class="text-3xl font-headline italic text-primary leading-snug">
+                            "Quality is not an act, it is a habit. It resides in the things you cannot see."
+                        </blockquote>
+                        <cite class="block mt-6 font-label text-secondary tracking-widest uppercase text-sm">— The Master Tailor</cite>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Mission: Dark Texture Contrast -->
+        <section class="px-8 md:px-20 py-32 bg-primary text-on-primary relative overflow-hidden">
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <span class="text-secondary font-label font-bold tracking-[0.3em] uppercase text-xs mb-8 block">Our Mission</span>
+                <h2 class="text-5xl md:text-6xl font-headline mb-10 leading-tight">To dress the modern curator in garments that endure.</h2>
+                <p class="text-on-primary-container text-xl font-body leading-relaxed max-w-2xl mx-auto mb-12">
+                    We reject the cycle of fast fashion. Our mission is to create a wardrobe of permanence, built on the foundations of sustainability, ethical labor, and timeless aesthetic value.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-6">
+                    <button class="px-10 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-label font-semibold tracking-wide border border-outline-variant/20 hover:scale-105 transition-transform">
+                        Explore Sustainability
+                    </button>
+                    <button class="px-10 py-4 bg-transparent text-on-primary font-label font-semibold tracking-wide border border-on-primary/20 hover:bg-white/5 transition-colors">
+                        View Ethics Report
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/components/header.js"></script>
+    <script src="/components/footer.js"></script>
+    <script>
+        loadHeader();
+        loadFooter();
+    </script>
+</body>
+</html>

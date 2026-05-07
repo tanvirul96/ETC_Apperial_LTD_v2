@@ -3,19 +3,20 @@ function loadHeader() {
 <header class="fixed top-0 left-0 w-full z-50 transition-all duration-500 bg-white/80 backdrop-blur-md border-b border-outline-variant/10">
     <nav class="container mx-auto px-8 md:px-16 h-24 flex items-center justify-between">
         <div class="flex items-center gap-12">
-            <a href="/frontend/index.html" class="font-headline text-3xl font-black text-primary tracking-tighter">ETC.</a>
+            <a href="/index.html" class="font-headline text-3xl font-black text-primary tracking-tighter">ETC.</a>
             <div class="hidden lg:flex items-center gap-8">
-                <a href="/frontend/index.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Home</a>
-                <a href="/frontend/all-products.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Collections</a>
-                <a href="/frontend/about-us.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Our Story</a>
-                <a href="/frontend/management.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Management</a>
-                <a href="/frontend/contact-us.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Contact</a>
+                <a href="/index.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Home</a>
+                <a href="/shop/all-products.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Collections</a>
+                <a href="/company/about-us.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Our Story</a>
+                <a href="/company/management.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Management</a>
+                <a href="/company/contact-us.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Contact</a>
+                <a href="/company/news-and-events.html" class="nav-link font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">News</a>
             </div>
         </div>
         <div class="flex items-center gap-8">
             <div class="hidden md:flex items-center gap-6">
-                <a href="/frontend/account/sign-in.html" class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Sign In</a>
-                <a href="/frontend/account/create-account.html" class="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">Join Atelier</a>
+                <a href="/account/sign-in.html" class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Sign In</a>
+                <a href="/account/create-account.html" class="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">Join Atelier</a>
             </div>
             <button class="relative group">
                 <span class="material-symbols-outlined text-primary" data-icon="shopping_bag">shopping_bag</span>

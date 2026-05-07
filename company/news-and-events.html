@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>News &amp; Events | ETC Apparel</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@300;400;500;600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/global.css">
+    <script src="/js/tailwind-theme.js"></script>
+    <style>
+        .editorial-shadow {
+            box-shadow: 0 40px 60px -20px rgba(23, 30, 41, 0.06)
+        }
+        .noise-bg {
+            position: relative
+        }
+        .noise-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDO7Foy3izZSE51mQjlwGDu6-Mw-U7U3iKCtLwlGUjY6N2U-HBfcI9eXSGAErjbc2IIXybWM7cf6VUg4-_WF1ul1djdH_rbWBj9BlSaHnmpf-eTWEWlyaD2YxHW6amhb1O-VsUFrQUYkoMAOqNnVPmPuV93ROtO5bhhD0dOfQZpxDxqY76hHGUL7RPG4Ua8SJuljbNMW-hQGDEIkzQFIrnjty5EmdLobt3V8NvOC9m4kVZkm_JoeNGO2YKAEgJaInCGMoYW6gJn2y7a);
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+    <div id="header-placeholder"></div>
+
+    <main class="pt-24 pb-20 noise-bg">
+        <!-- Hero Section -->
+        <header class="max-w-7xl mx-auto px-8 mb-16 text-center md:text-left">
+            <div class="inline-block mb-4">
+                <span class="text-secondary font-label text-xs tracking-[0.2em] uppercase">The Editorial Archive</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-primary mb-6">News &amp; Events</h1>
+            <p class="max-w-2xl text-on-surface-variant text-lg leading-relaxed font-body">
+                Curated stories from the heart of ETC Apparel. Discover our latest collections, corporate milestones, and exclusive global events.
+            </p>
+        </header>
+
+        <!-- Filters Section -->
+        <section class="max-w-7xl mx-auto px-8 mb-12">
+            <div class="flex flex-wrap items-center gap-4 py-6 border-y border-outline-variant/15">
+                <span class="text-on-surface-variant font-label text-sm mr-4">Filter By:</span>
+                <button class="px-6 py-2 rounded-full bg-primary text-on-primary text-sm font-medium tracking-wide transition-all">All Stories</button>
+                <button class="px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-secondary-fixed-dim hover:text-on-secondary-fixed transition-all text-sm font-medium tracking-wide">Collection Launch</button>
+                <button class="px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-secondary-fixed-dim hover:text-on-secondary-fixed transition-all text-sm font-medium tracking-wide">Corporate</button>
+                <button class="px-6 py-2 rounded-full bg-surface-container text-on-surface hover:bg-secondary-fixed-dim hover:text-on-secondary-fixed transition-all text-sm font-medium tracking-wide">Press</button>
+            </div>
+        </section>
+
+        <!-- Editorial Feed Grid -->
+        <section class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Featured Article (Lrg) -->
+                <article class="lg:col-span-8 flex flex-col group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg aspect-[16/9] mb-8">
+                        <img alt="Collection Launch" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd7NDkdNFUIKhQ9qUJMEigC6dofJMh__SIBmCJuNS00krTWjPCZrhbJ8jlaEkA2Wz0t6EgsDXAQWsqUXct0UuoGB3qzJTCKcAb2Dukc7ldsPgDpwSlq2Afd8tr2XWpMGuwj1KMU3k6ozWfnLrMsuv4xL18-nuzKEc9bqflQE41NYM7YAh4LHmI_Dc02BbH29g7Wx8FeF6fnyVkSwBPGegulkJc12b3yBQwDQ_LxviStgoNVXC3032OE0saBkuseuvf9d7e89IlQrKu"/>
+                        <div class="absolute top-6 left-6">
+                            <span class="bg-secondary-fixed-dim text-on-secondary-fixed px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase">Collection Launch</span>
+                        </div>
+                    </div>
+                    <div class="max-w-3xl">
+                        <span class="text-on-surface-variant font-label text-sm mb-3 block italic">September 12, 2024</span>
+                        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 leading-tight group-hover:text-secondary transition-colors">The Autumn '24 Minimalist Series: A Dialogue Between Form and Fabric</h2>
+                        <p class="text-on-surface-variant leading-relaxed text-lg mb-6">Our latest collection redefines the essence of the modern wardrobe, focusing on architectural silhouettes and ethically sourced silk-blends that move with the human form.</p>
+                        <a class="inline-flex items-center text-primary font-bold tracking-tighter group-hover:underline underline-offset-8 transition-all" href="#">
+                            READ FULL STORY
+                            <span class="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Side Feed (Small) -->
+                <div class="lg:col-span-4 space-y-12">
+                    <article class="group cursor-pointer">
+                        <div class="aspect-[4/3] overflow-hidden rounded-lg mb-4">
+                            <img alt="Corporate Milestone" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQxK86SZyWwaahW9eyTzcNwUZX5vEGp8mY78V4lfI6IaGZdpMO2kD1suo3PECpOHcM-XaNHnvj43m-6fmIb5STmm7n4JElIe3gHtIftVASaJJ0NaNlj_1cOdEvXrPgse_cw96H8bvydCa6eDp97DNwxC8oVUzmJ9DTkpgbfo3q1-vXG0Wy5vkNqCMKF-rnn-0HU5r-SUQZivSvj92t_UT-erT_BUCmN5s1NE-vo4kvYMZ9RR2RD8z2yneGomx9l3xxSVS9MD44otGt"/>
+                        </div>
+                        <span class="text-secondary font-label text-xs tracking-widest uppercase mb-2 block">Corporate</span>
+                        <h3 class="text-xl font-bold text-primary mb-2 leading-snug group-hover:text-secondary transition-colors">ETC Apparel Announces Expansion into Nordic Markets</h3>
+                        <p class="text-on-surface-variant text-sm line-clamp-2">New flagship locations in Stockholm and Copenhagen set to open late 2024, emphasizing our commitment to Scandinavian design heritage.</p>
+                    </article>
+                    <article class="group cursor-pointer">
+                        <div class="aspect-[4/3] overflow-hidden rounded-lg mb-4">
+                            <img alt="Press Release" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4qboDv1GYaNS3ZUX7Qa-7Ge-DwNC7bAeXHMRfvbIsbYWKJfiwXcWt_ylR3L40QTU0VzHOdMuc2F_cR07_kTpOcjJQG7_IZEbBQ27iBxDRgTe5kmaZh9BLSLI0bLkH3dr9tmBp1svRciOXRcpU05hA25T5nWjVEfmJ47OVRclIHsn47XqBpl-aZmyBy8abP0mymx2xs5EsGgpsoGRLpvAzaeSScTaUfo2R5LhoxUsydngUBTegdQ2v9nvPuh2uFtgeNvYnp-TXv99R"/>
+                        </div>
+                        <span class="text-secondary font-label text-xs tracking-widest uppercase mb-2 block">Press</span>
+                        <h3 class="text-xl font-bold text-primary mb-2 leading-snug group-hover:text-secondary transition-colors">Featured: The New York Times Style Magazine</h3>
+                        <p class="text-on-surface-variant text-sm line-clamp-2">An in-depth look at our sustainable supply chain and the master weavers behind our signature 'Cloud-Spun' wool.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horizontal News Strip (Asymmetric Layout) -->
+        <div class="mt-24 bg-surface-container-low p-12 rounded-lg grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+            <div class="md:col-span-1">
+                <span class="text-secondary font-label text-xs tracking-widest uppercase mb-2 block">Global Press</span>
+                <h2 class="text-2xl font-bold text-primary italic">"ETC Apparel is the quiet revolution the industry needed."</h2>
+                <p class="mt-4 text-on-surface-variant text-sm">— Vogue Business</p>
+            </div>
+            <div class="md:col-span-2 grid grid-cols-2 gap-8 border-l border-outline-variant/30 pl-12">
+                <div>
+                    <h4 class="font-bold text-primary mb-2">Upcoming Event</h4>
+                    <p class="text-sm text-on-surface-variant">Milan Fashion Week Preview<br/>September 28, 2024</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-primary mb-2">Podcast Release</h4>
+                    <p class="text-sm text-on-surface-variant">The Art of Curated Living<br/>Now Streaming</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Masonry Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-24">
+            <article class="bg-surface-container-lowest p-8 rounded-lg editorial-shadow border border-outline-variant/10">
+                <span class="text-secondary font-label text-xs tracking-widest mb-4 block">Archive 01 / Press</span>
+                <h3 class="text-xl font-bold text-primary mb-4 leading-tight">Sustainability Report 2024: Achieving 100% Carbon Neutral Logistics</h3>
+                <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Detailed metrics on our progress toward circularity and the implementation of our plastic-free packaging initiative.</p>
+                <button class="text-primary font-bold text-xs tracking-widest border-b border-primary pb-1 hover:text-secondary hover:border-secondary transition-all">DOWNLOAD REPORT</button>
+            </article>
+            <article class="bg-surface-container-lowest p-8 rounded-lg editorial-shadow border border-outline-variant/10">
+                <span class="text-secondary font-label text-xs tracking-widest mb-4 block">Archive 02 / Event</span>
+                <h3 class="text-xl font-bold text-primary mb-4 leading-tight">Paris Pop-Up: The Atelier Experience Recap</h3>
+                <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Reflecting on our three-day immersive experience in the Marais, where visitors engaged with our master tailors.</p>
+                <button class="text-primary font-bold text-xs tracking-widest border-b border-primary pb-1 hover:text-secondary hover:border-secondary transition-all">VIEW GALLERY</button>
+            </article>
+            <article class="bg-surface-container-lowest p-8 rounded-lg editorial-shadow border border-outline-variant/10">
+                <span class="text-secondary font-label text-xs tracking-widest mb-4 block">Archive 03 / Press</span>
+                <h3 class="text-xl font-bold text-primary mb-4 leading-tight">ETC Apparel CEO on the Future of Digital-Physical Luxury</h3>
+                <p class="text-on-surface-variant text-sm mb-6 leading-relaxed">A conversation with James Ellison about bridging the gap between bespoke craftsmanship and global e-commerce.</p>
+                <button class="text-primary font-bold text-xs tracking-widest border-b border-primary pb-1 hover:text-secondary hover:border-secondary transition-all">LISTEN NOW</button>
+            </article>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/components/header.js"></script>
+    <script src="/components/footer.js"></script>
+    <script>
+        loadHeader();
+        loadFooter();
+    </script>
+</body>
+</html>

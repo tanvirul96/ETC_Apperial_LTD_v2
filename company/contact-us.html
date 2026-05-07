@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Contact Us | ETC Apparel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;600&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="/css/global.css">
+    <script src="/js/tailwind-theme.js"></script>
+    <style>
+        .editorial-gradient {
+            background: linear-gradient(135deg, #171e29 0%, #2c333f 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+    <div id="header-placeholder"></div>
+
+    <main class="pt-24 pb-20">
+        <!-- Hero Section -->
+        <header class="px-8 md:px-20 py-16 md:py-24">
+            <div class="max-w-4xl">
+                <span class="font-label text-secondary uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Editorial Precision</span>
+                <h1 class="font-headline text-5xl md:text-7xl text-primary leading-tight tracking-tight mb-8">Connect with our <br/><span class="italic font-normal">Global Atelier.</span></h1>
+                <p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Whether you are an artisan, a global retailer, or a creative mind, we invite you to start a dialogue. Our headquarters in London and hubs in Bangladesh are ready to assist.
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <section class="px-8 md:px-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Contact Form Column -->
+            <div class="lg:col-span-7 bg-surface-container-low p-8 md:p-12 rounded-lg">
+                <h2 class="font-headline text-3xl text-primary mb-10">Send an Inquiry</h2>
+                <form class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="relative">
+                            <label class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-2 block">Full Name</label>
+                            <input class="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all" placeholder="E.g. Alexander Reed" type="text"/>
+                        </div>
+                        <div class="relative">
+                            <label class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-2 block">Email Address</label>
+                            <input class="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all" placeholder="alexander@editorial.com" type="email"/>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <label class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-2 block">Inquiry Type</label>
+                        <select class="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body transition-all">
+                            <option>Wholesale Partnerships</option>
+                            <option>Sourcing &amp; Production</option>
+                            <option>Press &amp; Media</option>
+                            <option>General Support</option>
+                        </select>
+                    </div>
+                    <div class="relative">
+                        <label class="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-2 block">Message</label>
+                        <textarea class="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all resize-none" placeholder="How can our editorial team assist you?" rows="4"></textarea>
+                    </div>
+                    <div class="pt-4">
+                        <button class="editorial-gradient text-on-primary px-10 py-4 rounded-lg font-label font-bold uppercase tracking-widest text-sm hover:opacity-90 transition-all flex items-center gap-3" type="submit">
+                            Submit Inquiry
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Address & Info Column -->
+            <div class="lg:col-span-5 space-y-12">
+                <!-- London Office -->
+                <div class="bg-surface p-8 border border-outline-variant/15 transition-all hover:bg-surface-container-low group">
+                    <span class="font-label text-secondary text-xs font-bold tracking-[0.2em] mb-4 block">HEADQUARTERS</span>
+                    <h3 class="font-headline text-2xl text-primary mb-4">London Office</h3>
+                    <p class="font-body text-on-surface-variant leading-relaxed mb-6">
+                        24 Savile Row, Mayfair<br/>
+                        London W1S 3PR, United Kingdom
+                    </p>
+                    <div class="flex flex-col gap-3 font-body text-on-surface">
+                        <a class="flex items-center gap-3 hover:text-secondary transition-colors" href="tel:+442071234567">
+                            <span class="material-symbols-outlined text-secondary">call</span>
+                            +44 (0) 20 7123 4567
+                        </a>
+                        <a class="flex items-center gap-3 hover:text-secondary transition-colors" href="mailto:london@etcapparel.com">
+                            <span class="material-symbols-outlined text-secondary">mail</span>
+                            london@etcapparel.com
+                        </a>
+                    </div>
+                </div>
+                <!-- Bangladesh Office -->
+                <div class="bg-surface p-8 border border-outline-variant/15 transition-all hover:bg-surface-container-low group">
+                    <span class="font-label text-secondary text-xs font-bold tracking-[0.2em] mb-4 block">PRODUCTION HUB</span>
+                    <h3 class="font-headline text-2xl text-primary mb-4">Bangladesh Atelier</h3>
+                    <p class="font-body text-on-surface-variant leading-relaxed mb-6">
+                        Level 12, Crystal Palace, Gulshan-2<br/>
+                        Dhaka 1212, Bangladesh
+                    </p>
+                    <div class="flex flex-col gap-3 font-body text-on-surface">
+                        <a class="flex items-center gap-3 hover:text-secondary transition-colors" href="tel:+88029876543">
+                            <span class="material-symbols-outlined text-secondary">call</span>
+                            +880 2 987 6543
+                        </a>
+                        <a class="flex items-center gap-3 hover:text-secondary transition-colors" href="mailto:dhaka@etcapparel.com">
+                            <span class="material-symbols-outlined text-secondary">mail</span>
+                            dhaka@etcapparel.com
+                        </a>
+                    </div>
+                </div>
+                <!-- Map Placeholder -->
+                <div class="relative h-64 w-full rounded-lg overflow-hidden grayscale contrast-125 hover:grayscale-0 transition-all duration-700">
+                    <img alt="Stylized map of London Mayfair" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuy0YDmtFKcxYKnSJqfVlDhau1pe_c0WDwtYW8xbtOaODsmV0ADDBZVB5Tcwv4QNwVf_W71n2dEUb5zIfDHNUaYRmcbPUQFSivV4A6M-MYVfCW5DcP47x6Y4YeA8iEbo5biRDa5cNlTjM-mM5AxgCiyUOfbbyS2s_i9KVj2aTXGBkF7l1dmnRpBEYoBLucFVZCWnYOyRZHFAMlUKU8Vx3Q2HnFnjAT0zn-fm8KoWAJ5mR627D3lCLJ3BSpyVldMuhKImYRPab40Ql6"/>
+                    <div class="absolute inset-0 bg-primary/20 flex items-center justify-center">
+                        <div class="bg-surface px-6 py-3 rounded-full flex items-center gap-2 shadow-xl">
+                            <span class="material-symbols-outlined text-secondary">location_on</span>
+                            <span class="font-label text-xs font-bold tracking-widest uppercase">View Locations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/components/header.js"></script>
+    <script src="/components/footer.js"></script>
+    <script>
+        loadHeader();
+        loadFooter();
+    </script>
+</body>
+</html>
