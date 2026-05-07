@@ -53,6 +53,12 @@ h1, h2, h3, .font-serif, .serif-text {
     grid-template-columns: repeat(12, 1fr);
 }
 
+@media (max-width: 768px) {
+    .editorial-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .editorial-grid-2-1 {
     display: grid;
     grid-template-columns: 2fr 1fr;

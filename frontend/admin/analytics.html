@@ -7,49 +7,34 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&amp;family=Manrope:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-
-
-
 <link rel="stylesheet" href="/frontend/css/global.css">
 <script src="/frontend/js/tailwind-theme.js"></script>
 </head>
-<body class="bg-surface text-on-surface flex min-h-screen">
+<body class="bg-surface text-on-surface min-h-screen">
     <div id="admin-sidebar-placeholder"></div>
     <div id="admin-header-placeholder"></div>
     
-    <main class="ml-64 flex-1">
+    <main class="lg:ml-64 flex-1">
         <!-- Canvas -->
-        <section class="p-12 max-w-7xl mx-auto space-y-12">
+        <section class="p-4 sm:p-6 lg:p-12 max-w-none space-y-12">
             <!-- Page Header & Filters -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mt-4 md:mt-8">
                 <div>
-                    <p class="font-inter text-secondary text-xs font-bold uppercase tracking-[0.2em] mb-2">Performance Dashboard</p>
-                    <h2 class="font-serif text-4xl font-bold text-primary">Enterprise Insights</h2>
+                    <h2 class="text-3xl md:text-5xl font-black text-primary serif-text tracking-tighter">Enterprise <br/>Insights.</h2>
+                    <p class="text-on-surface-variant font-medium mt-2 text-sm md:text-base">A holistic view of your editorial performance metrics.</p>
                 </div>
-                <div class="flex flex-wrap items-center gap-3">
-                    <!-- Custom Date Filter -->
+                <div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
                     <div class="flex bg-surface-container-low p-1 rounded-lg">
-                        <button class="px-4 py-2 text-xs font-inter font-semibold rounded-md bg-white shadow-sm text-primary transition-all">This Week</button>
-                        <button class="px-4 py-2 text-xs font-inter text-on-surface-variant hover:text-primary transition-all">Last Month</button>
-                        <button class="px-4 py-2 text-xs font-inter text-on-surface-variant hover:text-primary transition-all">Year to Date</button>
+                        <button class="flex-1 sm:flex-none px-4 py-2 text-[10px] uppercase tracking-widest font-inter font-bold rounded-md bg-white shadow-sm text-primary transition-all">Weekly</button>
+                        <button class="flex-1 sm:flex-none px-4 py-2 text-[10px] uppercase tracking-widest font-inter text-on-surface-variant hover:text-primary transition-all">Monthly</button>
+                        <button class="flex-1 sm:flex-none px-4 py-2 text-[10px] uppercase tracking-widest font-inter text-on-surface-variant hover:text-primary transition-all">Yearly</button>
                     </div>
-                    <!-- Dropdown Selectors -->
                     <div class="flex gap-2">
-                        <div class="relative">
-                            <select class="appearance-none bg-surface-container-lowest border-none rounded-lg text-xs font-inter pr-10 pl-4 py-3 focus:ring-1 focus:ring-secondary/30">
+                        <div class="relative flex-1 sm:flex-none">
+                            <select class="w-full appearance-none bg-surface-container-low border border-outline-variant/10 rounded-lg text-[10px] uppercase tracking-widest font-bold font-inter pr-10 pl-4 py-3 focus:ring-1 focus:ring-secondary/30">
                                 <option>All Categories</option>
                                 <option>Menswear</option>
                                 <option>Womenswear</option>
-                                <option>Accessories</option>
-                            </select>
-                            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-base">expand_more</span>
-                        </div>
-                        <div class="relative">
-                            <select class="appearance-none bg-surface-container-lowest border-none rounded-lg text-xs font-inter pr-10 pl-4 py-3 focus:ring-1 focus:ring-secondary/30">
-                                <option>Global Region</option>
-                                <option>North America</option>
-                                <option>Europe</option>
-                                <option>Asia Pacific</option>
                             </select>
                             <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-base">expand_more</span>
                         </div>
@@ -58,15 +43,15 @@
             </div>
             
             <!-- KPI Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
                 <!-- KPI 1 -->
-                <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+                <div class="bg-surface-container-low p-6 md:p-8 rounded-xl relative overflow-hidden group">
                     <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                        <span class="material-symbols-outlined text-8xl text-primary">payments</span>
+                        <span class="material-symbols-outlined text-7xl md:text-8xl text-primary">payments</span>
                     </div>
-                    <p class="text-xs font-inter text-on-surface-variant uppercase tracking-widest font-semibold">Total Revenue</p>
+                    <p class="text-[10px] font-inter text-on-surface-variant uppercase tracking-widest font-bold">Total Revenue</p>
                     <div class="flex items-baseline space-x-2 mt-4">
-                        <h3 class="text-3xl font-bold font-serif">$1,284,500</h3>
+                        <h3 class="text-2xl md:text-3xl font-bold font-serif">$1,284,500</h3>
                         <span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-bold">+12.4%</span>
                     </div>
                     <div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
@@ -74,13 +59,13 @@
                     </div>
                 </div>
                 <!-- KPI 2 -->
-                <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+                <div class="bg-surface-container-low p-6 md:p-8 rounded-xl relative overflow-hidden group">
                     <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                        <span class="material-symbols-outlined text-8xl text-primary">trending_up</span>
+                        <span class="material-symbols-outlined text-7xl md:text-8xl text-primary">trending_up</span>
                     </div>
-                    <p class="text-xs font-inter text-on-surface-variant uppercase tracking-widest font-semibold">Conversion Rate</p>
+                    <p class="text-[10px] font-inter text-on-surface-variant uppercase tracking-widest font-bold">Conversion Rate</p>
                     <div class="flex items-baseline space-x-2 mt-4">
-                        <h3 class="text-3xl font-bold font-serif">4.82%</h3>
+                        <h3 class="text-2xl md:text-3xl font-bold font-serif">4.82%</h3>
                         <span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-bold">+0.6%</span>
                     </div>
                     <div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
@@ -88,27 +73,27 @@
                     </div>
                 </div>
                 <!-- KPI 3 -->
-                <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+                <div class="bg-surface-container-low p-6 md:p-8 rounded-xl relative overflow-hidden group">
                     <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                        <span class="material-symbols-outlined text-8xl text-primary">group_add</span>
+                        <span class="material-symbols-outlined text-7xl md:text-8xl text-primary">group_add</span>
                     </div>
-                    <p class="text-xs font-inter text-on-surface-variant uppercase tracking-widest font-semibold">Customer Acquisition</p>
+                    <p class="text-[10px] font-inter text-on-surface-variant uppercase tracking-widest font-bold">New Customers</p>
                     <div class="flex items-baseline space-x-2 mt-4">
-                        <h3 class="text-3xl font-bold font-serif">$42.10</h3>
-                        <span class="text-[10px] bg-error-container text-on-error-container px-2 py-0.5 rounded-full font-bold">-2.1%</span>
+                        <h3 class="text-2xl md:text-3xl font-bold font-serif">14,204</h3>
+                        <span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-bold">+8.2%</span>
                     </div>
                     <div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
                         <div class="h-full bg-primary w-2/3 rounded-full"></div>
                     </div>
                 </div>
                 <!-- KPI 4 -->
-                <div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden group">
+                <div class="bg-surface-container-low p-6 md:p-8 rounded-xl relative overflow-hidden group">
                     <div class="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                        <span class="material-symbols-outlined text-8xl text-primary">shopping_cart</span>
+                        <span class="material-symbols-outlined text-7xl md:text-8xl text-primary">shopping_bag</span>
                     </div>
-                    <p class="text-xs font-inter text-on-surface-variant uppercase tracking-widest font-semibold">Avg Order Value</p>
+                    <p class="text-[10px] font-inter text-on-surface-variant uppercase tracking-widest font-bold">Avg Order Value</p>
                     <div class="flex items-baseline space-x-2 mt-4">
-                        <h3 class="text-3xl font-bold font-serif">$288.00</h3>
+                        <h3 class="text-2xl md:text-3xl font-bold font-serif">$288.00</h3>
                         <span class="text-[10px] bg-secondary-fixed text-on-secondary-fixed-variant px-2 py-0.5 rounded-full font-bold">+18.2%</span>
                     </div>
                     <div class="mt-6 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
@@ -120,8 +105,8 @@
             <!-- Performance Overview (Charts Bento Grid) -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <!-- Revenue Trend -->
-                <div class="lg:col-span-2 bg-surface-container-low p-8 rounded-xl">
-                    <div class="flex items-center justify-between mb-10">
+                <div class="lg:col-span-2 bg-surface-container-low p-6 md:p-8 rounded-xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
                         <h4 class="font-serif text-xl font-bold">Revenue Growth</h4>
                         <div class="flex items-center space-x-4">
                             <div class="flex items-center space-x-2">
@@ -135,7 +120,7 @@
                         </div>
                     </div>
                     <!-- Mock Chart -->
-                    <div class="h-64 w-full flex items-end gap-1 relative overflow-hidden">
+                    <div class="aspect-[2/1] md:h-64 w-full flex items-end gap-1 relative overflow-hidden">
                         <div class="absolute inset-0 flex flex-col justify-between opacity-10 pointer-events-none">
                             <div class="h-px w-full bg-outline"></div>
                             <div class="h-px w-full bg-outline"></div>
@@ -155,14 +140,12 @@
                         <span class="text-[10px] font-inter text-outline">MON</span>
                         <span class="text-[10px] font-inter text-outline">TUE</span>
                         <span class="text-[10px] font-inter text-outline">WED</span>
-                        <span class="text-[10px] font-inter text-outline">THU</span>
+                        <span class="text-[10px] font-inter text-outline flex md:hidden lg:flex">THU</span>
                         <span class="text-[10px] font-inter text-outline">FRI</span>
-                        <span class="text-[10px] font-inter text-outline">SAT</span>
-                        <span class="text-[10px] font-inter text-outline">SUN</span>
                     </div>
                 </div>
                 <!-- Category Breakdown -->
-                <div class="bg-surface-container-low p-8 rounded-xl flex flex-col">
+                <div class="bg-surface-container-low p-6 md:p-8 rounded-xl flex flex-col">
                     <h4 class="font-serif text-xl font-bold mb-8">Category Growth</h4>
                     <div class="flex-1 space-y-8">
                         <div class="space-y-2">
@@ -192,18 +175,9 @@
                                 <div class="h-full bg-primary w-4/12 rounded-full"></div>
                             </div>
                         </div>
-                        <div class="space-y-2">
-                            <div class="flex justify-between text-[10px] font-inter uppercase tracking-widest font-bold">
-                                <span>Limited Drops</span>
-                                <span class="text-secondary">+62%</span>
-                            </div>
-                            <div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
-                                <div class="h-full bg-secondary w-11/12 rounded-full"></div>
-                            </div>
-                        </div>
                     </div>
-                    <button class="mt-8 text-xs font-bold font-inter text-primary flex items-center justify-center space-x-2 hover:opacity-70 transition-all">
-                        <span>View Detailed Report</span>
+                    <button class="mt-8 py-4 border border-outline-variant/20 text-[10px] font-bold font-inter text-primary uppercase tracking-[0.2em] flex items-center justify-center space-x-2 hover:bg-white transition-all">
+                        <span>Detailed Report</span>
                         <span class="material-symbols-outlined text-sm">arrow_forward</span>
                     </button>
                 </div>
@@ -211,27 +185,26 @@
             
             <!-- Top Selling Products Table -->
             <div class="bg-surface-container-low rounded-xl overflow-hidden">
-                <div class="px-8 py-6 border-b border-outline-variant/10 flex items-center justify-between bg-[#fcf8f5]">
+                <div class="px-6 md:px-8 py-6 border-b border-outline-variant/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-surface-container-lowest/30">
                     <h4 class="font-serif text-xl font-bold">Top Performing Collections</h4>
-                    <button class="text-xs font-inter font-semibold bg-white border border-outline-variant/30 px-4 py-2 rounded-lg hover:bg-surface-container-high transition-all">Export CSV</button>
+                    <button class="w-full sm:w-auto text-[10px] font-inter font-bold uppercase tracking-widest bg-white border border-outline-variant/30 px-6 py-3 rounded-lg hover:bg-surface-container-high transition-all">Export CSV</button>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
                         <thead>
                             <tr class="bg-surface-container-low/50">
                                 <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Product Details</th>
                                 <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Category</th>
-                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Units Sold</th>
-                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Revenue</th>
-                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Status</th>
-                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant">Trend</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant text-right">Revenue</th>
+                                <th class="px-8 py-4 text-[10px] font-inter uppercase tracking-widest font-bold text-on-surface-variant text-center">Status</th>
+                                <th class="px-8 py-4"></th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-outline-variant/10">
                             <tr class="hover:bg-white/40 transition-colors group">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center space-x-4">
-                                        <img alt="Wool Overcoat" class="w-12 h-14 object-cover rounded-sm" data-alt="high-fashion wool overcoat on a mannequin, soft studio lighting, beige background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs59EcguW7xaGcw3JGEkiV_OGPlZluI20p4Xjfe4xNkAsZYJZ58psrIpNAvOmUva5Tf7SuWhFslSF-Ew4RlUDIJsiGRkWumslfa-xHX89I9Aem3c0vIT0mlSLnCkmNM1QmuXE-MFu9JPF-iFH3nJCFt63QP-VWi9XEaAFKZl-k5adYx6c2riRh4ZhqNmGPl5SU7zUxvI_XfjycU4MYEppGTxVTrR32tqn1ZrxvLhTtg1ywLx3doRN1oE9js97sv-72OeItZK08jIFD"/>
+                                        <div class="w-12 h-14 bg-surface-container-high rounded-sm"></div>
                                         <div>
                                             <p class="text-sm font-bold text-primary font-body">Atelier Wool Overcoat</p>
                                             <p class="text-[10px] text-outline font-inter">SKU: AT-1092-W</p>
@@ -239,19 +212,18 @@
                                     </div>
                                 </td>
                                 <td class="px-8 py-6 text-sm font-inter text-on-surface-variant">Outerwear</td>
-                                <td class="px-8 py-6 text-sm font-bold font-inter">1,240</td>
-                                <td class="px-8 py-6 text-sm font-bold font-serif">$357,120</td>
-                                <td class="px-8 py-6">
+                                <td class="px-8 py-6 text-sm font-bold font-serif text-right">$357,120</td>
+                                <td class="px-8 py-6 text-center">
                                     <span class="text-[10px] font-bold font-inter uppercase bg-secondary-fixed/50 text-on-secondary-fixed-variant px-2 py-1 rounded">High Demand</span>
                                 </td>
-                                <td class="px-8 py-6">
+                                <td class="px-8 py-6 text-right">
                                     <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
                                 </td>
                             </tr>
                             <tr class="hover:bg-white/40 transition-colors group">
                                 <td class="px-8 py-6">
                                     <div class="flex items-center space-x-4">
-                                        <img alt="Silk Shirt" class="w-12 h-14 object-cover rounded-sm" data-alt="luxurious cream silk button-down shirt folded neatly, elegant minimal studio shot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBw99J77AXCThOmLTj3Zi0lKtWyZjn9Mscjf9iQbKVkeQM-8-2JQ_woGr5mKXuJiIBbmarraTnmOSzL7-VNGatcWYQun86bgLctm0ijFEI_EHsXn8YmvJFkq0-BHaGI-2fQbI8sMMN6kc6lv4IFjZe_QDz8bOZoGiHMKY6Y5skzYW3SV6Is-rDf_YOM4pFPRBdRYb6K4K90sEYx1Zs5vwEJtzj2hV2q1wsPY2PqSV0EfcAIw6zisO4JJrs_5mJ_qZLVwWiO17uCdsKP"/>
+                                        <div class="w-12 h-14 bg-surface-container-high rounded-sm"></div>
                                         <div>
                                             <p class="text-sm font-bold text-primary font-body">Signature Silk Blouse</p>
                                             <p class="text-[10px] text-outline font-inter">SKU: AT-2241-S</p>
@@ -259,33 +231,12 @@
                                     </div>
                                 </td>
                                 <td class="px-8 py-6 text-sm font-inter text-on-surface-variant">Essentials</td>
-                                <td class="px-8 py-6 text-sm font-bold font-inter">982</td>
-                                <td class="px-8 py-6 text-sm font-bold font-serif">$216,040</td>
-                                <td class="px-8 py-6">
-                                    <span class="text-[10px] font-bold font-inter uppercase bg-surface-container-highest text-primary px-2 py-1 rounded">Stable</span>
+                                <td class="px-8 py-6 text-sm font-bold font-serif text-right">$242,100</td>
+                                <td class="px-8 py-6 text-center">
+                                    <span class="text-[10px] font-bold font-inter uppercase bg-emerald-100 text-emerald-800 px-2 py-1 rounded">Steady</span>
                                 </td>
-                                <td class="px-8 py-6">
-                                    <span class="material-symbols-outlined text-outline">horizontal_rule</span>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-white/40 transition-colors group">
-                                <td class="px-8 py-6">
-                                    <div class="flex items-center space-x-4">
-                                        <img alt="Leather Loafers" class="w-12 h-14 object-cover rounded-sm" data-alt="premium dark brown leather loafers on a marble surface with soft atmospheric light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6ReGA7QdMmQ18y0DhvlXNQjkWELt4kPpdzjh1q0LvqYOu4Wv6qn0TK0hJK8_jhyv9awDP3g8R0dYLBwVNggkUh1pTwybLH_TD-4j3vGMzFV4WFW3PEaWQyZ4HSKS5qmu6OTmfMN-j-15RMi-QIOomtM1rK5ZZeu3h0357cQWCBtE7Qzm5WjV-Mt3G0lMz1JLbwpDk4pWYYCoFhPfh_weRDg3ZwZejvUgjIpWvAlM7gbtncaI-oiKWTkpb6mZsGPlVUjEpKnLz8bBi"/>
-                                        <div>
-                                            <p class="text-sm font-bold text-primary font-body">Burnished Loafers</p>
-                                            <p class="text-[10px] text-outline font-inter">SKU: AT-8830-L</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-8 py-6 text-sm font-inter text-on-surface-variant">Footwear</td>
-                                <td class="px-8 py-6 text-sm font-bold font-inter">744</td>
-                                <td class="px-8 py-6 text-sm font-bold font-serif">$186,000</td>
-                                <td class="px-8 py-6">
-                                    <span class="text-[10px] font-bold font-inter uppercase bg-error-container text-on-error-container px-2 py-1 rounded">Low Stock</span>
-                                </td>
-                                <td class="px-8 py-6">
-                                    <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+                                <td class="px-8 py-6 text-right">
+                                    <span class="material-symbols-outlined text-emerald-600" style="font-variation-settings: 'FILL' 1;">trending_up</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -293,16 +244,12 @@
                 </div>
             </div>
         </section>
+        
         <!-- Footer Decoration -->
-        <footer class="p-12 border-t border-outline-variant/10 text-center opacity-30">
-            <p class="font-serif italic text-sm">Finely crafted analytics for the discerning administrator.</p>
+        <footer class="p-6 lg:p-12 border-t border-outline-variant/10 text-center opacity-30">
+            <p class="font-serif italic text-xs md:text-sm">Finely crafted analytics for the discerning administrator.</p>
         </footer>
     </main>
-    
-    <!-- Contextual FAB -->
-    <button class="fixed bottom-8 right-8 bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-transform z-50">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
-    </button>
 
     <script src="/frontend/components/admin-sidebar.js"></script>
     <script src="/frontend/components/admin-header.js"></script>
@@ -312,7 +259,5 @@
         loadAdminSidebar();
         loadAdminHeader();
     </script>
-
 </body>
 </html>
-

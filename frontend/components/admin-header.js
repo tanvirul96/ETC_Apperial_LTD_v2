@@ -1,11 +1,11 @@
 function loadAdminHeader() {
     const adminHeaderHtml = `
-<header class="ml-64 h-24 flex items-center justify-between px-8 bg-surface border-b border-outline-variant/10 z-40">
+<header class="lg:ml-64 h-24 flex items-center justify-between px-4 lg:px-8 bg-surface border-b border-outline-variant/10 z-40 sticky top-0">
     <div class="flex items-center space-x-4">
-        <button class="p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+        <button onclick="toggleAdminSidebar(true)" class="lg:hidden p-2 hover:bg-surface-container-low rounded-lg transition-colors">
             <span class="material-symbols-outlined">menu</span>
         </button>
-        <div class="flex items-center space-x-2 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/10 w-96">
+        <div class="hidden md:flex items-center space-x-2 bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/10 w-96">
             <span class="material-symbols-outlined text-outline-variant text-sm">search</span>
             <input type="text" placeholder="Search curated data..." class="bg-transparent border-none focus:ring-0 text-sm font-label w-full">
         </div>
@@ -19,7 +19,7 @@ function loadAdminHeader() {
         </div>
         <div class="h-10 w-[1px] bg-outline-variant/20"></div>
         <div class="flex items-center space-x-3">
-            <div class="text-right">
+            <div class="hidden sm:block text-right">
                 <p class="text-xs font-bold font-label text-primary">Admin User</p>
                 <p class="text-[10px] font-label text-outline-variant uppercase tracking-widest">Master Curator</p>
             </div>
