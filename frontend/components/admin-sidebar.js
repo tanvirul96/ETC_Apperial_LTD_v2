@@ -8,29 +8,29 @@ function loadAdminSidebar() {
         </div>
     </div>
     <nav class="flex-1 space-y-2">
-        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/admin/dashboard.html">
+        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/frontend/admin/dashboard.html">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="font-label text-sm">Dashboard</span>
         </a>
-        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/admin/inventory.html">
+        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/frontend/admin/inventory.html">
             <span class="material-symbols-outlined">inventory_2</span>
             <span class="font-label text-sm">Inventory</span>
         </a>
-        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/admin/orders.html">
+        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/frontend/admin/orders.html">
             <span class="material-symbols-outlined">shopping_bag</span>
             <span class="font-label text-sm">Orders</span>
         </a>
-        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/admin/news.html">
+        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/frontend/admin/news.html">
             <span class="material-symbols-outlined">newspaper</span>
             <span class="font-label text-sm">News & Events</span>
         </a>
-        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/admin/analytics.html">
+        <a class="admin-nav-link flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all hover:bg-[#e6e2de] dark:hover:bg-slate-800 rounded-lg scale-[0.99] active:scale-95" href="/frontend/admin/analytics.html">
             <span class="material-symbols-outlined">insights</span>
             <span class="font-label text-sm">Analytics</span>
         </a>
     </nav>
     <div class="pt-6 mt-6 border-t border-outline-variant/15 space-y-2">
-        <a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all" href="/index.html">
+        <a class="flex items-center space-x-3 text-slate-500 dark:text-slate-400 hover:text-[#171e29] px-4 py-3 transition-all" href="/frontend/index.html">
             <span class="material-symbols-outlined">exit_to_app</span>
             <span class="font-label text-sm">Back to Store</span>
         </a>

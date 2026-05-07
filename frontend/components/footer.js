@@ -16,7 +16,7 @@ function loadFooter() {
         <div class="md:col-span-2 space-y-6">
             <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">Atelier</h4>
             <ul class="space-y-4 font-label text-xs uppercase tracking-widest text-on-primary-container/60">
-                <li><a href="/shop/all-products.html" class="hover:text-white transition-colors">Collections</a></li>
+                <li><a href="/frontend/shop/all-products.html" class="hover:text-white transition-colors">Collections</a></li>
                 <li><a href="#" class="hover:text-white transition-colors">Journal</a></li>
                 <li><a href="#" class="hover:text-white transition-colors">Archive</a></li>
                 <li><a href="#" class="hover:text-white transition-colors">Stockists</a></li>
@@ -25,10 +25,10 @@ function loadFooter() {
         <div class="md:col-span-2 space-y-6">
             <h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-secondary font-bold">Curator</h4>
             <ul class="space-y-4 font-label text-xs uppercase tracking-widest text-on-primary-container/60">
-                <li><a href="/company/about-us.html" class="hover:text-white transition-colors">Our Story</a></li>
-                <li><a href="/company/management.html" class="hover:text-white transition-colors">Management</a></li>
-                <li><a href="/company/news-and-events.html" class="hover:text-white transition-colors">Sustainability</a></li>
-                <li><a href="/company/contact-us.html" class="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="/frontend/company/about-us.html" class="hover:text-white transition-colors">Our Story</a></li>
+                <li><a href="/frontend/company/management.html" class="hover:text-white transition-colors">Management</a></li>
+                <li><a href="/frontend/company/news-and-events.html" class="hover:text-white transition-colors">Sustainability</a></li>
+                <li><a href="/frontend/company/contact-us.html" class="hover:text-white transition-colors">Contact</a></li>
             </ul>
         </div>
         <div class="md:col-span-4 space-y-8">
