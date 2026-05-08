@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import api from '../utils/api';
 
@@ -95,12 +96,12 @@ const Home = () => {
               transition={{ delay: 0.6 }}
               className="flex flex-wrap gap-6"
             >
-              <button className="editorial-gradient text-on-primary px-10 py-5 rounded-DEFAULT font-label font-bold uppercase tracking-widest text-xs flex items-center gap-3 hover:opacity-90 transition-all shadow-2xl">
+              <Link to="/shop" className="editorial-gradient text-on-primary px-10 py-5 rounded-DEFAULT font-label font-bold uppercase tracking-widest text-xs flex items-center gap-3 hover:opacity-90 transition-all shadow-2xl">
                 Explore Collection <ArrowRight className="w-4 h-4" />
-              </button>
-              <button className="border border-white/20 text-white backdrop-blur-md px-10 py-5 rounded-DEFAULT font-label font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-primary transition-all">
+              </Link>
+              <Link to="/about" className="border border-white/20 text-white backdrop-blur-md px-10 py-5 rounded-DEFAULT font-label font-bold uppercase tracking-widest text-xs hover:bg-white hover:text-primary transition-all">
                 The Narrative
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -114,7 +115,7 @@ const Home = () => {
               <span className="text-secondary font-label text-xs tracking-widest uppercase mb-4 block">The Studio Journal</span>
               <h2 className="text-4xl md:text-6xl font-bold text-primary tracking-tighter font-headline">Studio <span className="italic font-normal">Narratives.</span></h2>
             </div>
-            <button className="text-primary font-bold text-xs tracking-widest uppercase border-b-2 border-primary pb-2 hover:text-secondary hover:border-secondary transition-all">View All Entries</button>
+            <Link to="/news" className="text-primary font-bold text-xs tracking-widest uppercase border-b-2 border-primary pb-2 hover:text-secondary hover:border-secondary transition-all">View All Entries</Link>
           </div>
 
           <div className="grid grid-cols-12 gap-8">
@@ -132,11 +133,13 @@ const Home = () => {
                   </div>
                   <div className={`px-4 -mt-20 relative z-20 bg-white/90 backdrop-blur-sm p-8 ${index === 0 ? 'md:w-4/5' : 'w-full'} shadow-2xl shadow-primary/5 rounded-lg ${index === 0 ? 'md:ml-12' : ''} border border-surface-container`}>
                     <span className="text-secondary font-label text-[10px] tracking-widest uppercase mb-4 block">{entry.category}</span>
-                    <h3 className={`font-headline ${index === 0 ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} font-bold mb-4 leading-tight text-primary hover:text-secondary transition-colors cursor-pointer`}>
-                      {entry.title}
-                    </h3>
+                    <Link to="/news">
+                      <h3 className={`font-headline ${index === 0 ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} font-bold mb-4 leading-tight text-primary hover:text-secondary transition-colors cursor-pointer`}>
+                        {entry.title}
+                      </h3>
+                    </Link>
                     <p className="text-on-surface-variant font-body mb-8 leading-relaxed line-clamp-3">{entry.excerpt}</p>
-                    <button className="font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary">Read Narrative</button>
+                    <Link to="/news" className="font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary">Read Narrative</Link>
                   </div>
                 </motion.article>
               ))

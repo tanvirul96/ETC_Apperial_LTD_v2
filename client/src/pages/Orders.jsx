@@ -30,7 +30,7 @@ const Orders = () => {
   const handleUpdateStatus = async (status) => {
     setUpdating(true);
     try {
-      await api.put(`/orders/${selectedOrder.id}`, { status });
+      await api.patch(`/orders/${selectedOrder.id}/status`, { status });
       setIsStatusModalOpen(false);
       fetchOrders();
     } catch (err) {

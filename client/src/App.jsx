@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,6 +8,11 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import About from './pages/About';
+import Management from './pages/Management';
+import Contact from './pages/Contact';
+import Journal from './pages/Journal';
+import MyAccount from './pages/MyAccount';
 import AdminDashboard from './pages/AdminDashboard';
 import Inventory from './pages/Inventory';
 import Orders from './pages/Orders';
@@ -30,48 +36,136 @@ const App = () => {
 
   return (
     <Routes>
-      {/* Admin Layout */}
+      {/* Admin Routes */}
+      <Route path="/admin" element={
+        <ProtectedRoute requireAdmin={true}>
+          <div className="flex bg-surface min-h-screen">
+            <AdminSidebar />
+            <div className="flex-grow lg:ml-64">
+              <Routes>
+                <Route index element={<AdminDashboard />} />
+                <Route path="inventory" element={<Inventory />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="news" element={<NewsFeed />} />
+                <Route path="analytics" element={<AdminDashboard />} />
+              </Routes>
+            </div>
+          </div>
+        </ProtectedRoute>
+      } />
+      
+      {/* Nested Admin Routes for deep links */}
       <Route path="/admin/*" element={
         <ProtectedRoute requireAdmin={true}>
           <div className="flex bg-surface min-h-screen">
             <AdminSidebar />
             <div className="flex-grow lg:ml-64">
               <Routes>
-                <Route path="/" element={<AdminDashboard />} />
-                <Route path="/inventory" element={<Inventory />} />
-                <Route path="/orders" element={<Orders />} />
-                <Route path="/news" element={<NewsFeed />} />
-                <Route path="/analytics" element={<AdminDashboard />} />
+                <Route path="inventory" element={<Inventory />} />
+                <Route path="orders" element={<Orders />} />
+                <Route path="news" element={<NewsFeed />} />
+                <Route path="analytics" element={<AdminDashboard />} />
               </Routes>
             </div>
           </div>
         </ProtectedRoute>
       } />
 
-      {/* Main Layout */}
-      <Route path="*" element={
+      {/* Main Layout Routes */}
+      <Route path="/" element={
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/about" element={<div className="pt-40 pb-20 text-center font-headline text-4xl font-bold">Our Story. <p className="text-sm font-label mt-4 text-on-surface-variant font-normal">Coming Soon</p></div>} />
-              <Route path="/management" element={<div className="pt-40 pb-20 text-center font-headline text-4xl font-bold">Management. <p className="text-sm font-label mt-4 text-on-surface-variant font-normal">Coming Soon</p></div>} />
-              <Route path="/contact" element={<div className="pt-40 pb-20 text-center font-headline text-4xl font-bold">Contact Us. <p className="text-sm font-label mt-4 text-on-surface-variant font-normal">Coming Soon</p></div>} />
-              <Route path="/news" element={<div className="pt-40 pb-20 text-center font-headline text-4xl font-bold">Journal. <p className="text-sm font-label mt-4 text-on-surface-variant font-normal">Coming Soon</p></div>} />
-              <Route path="/account" element={
-                <ProtectedRoute>
-                  <div className="pt-40 pb-20 text-center font-headline text-4xl font-bold">My Account. <p className="text-sm font-label mt-4 text-on-surface-variant font-normal">Coming Soon</p></div>
-                </ProtectedRoute>
-              } />
-            </Routes>
+            <Home />
           </div>
           <Footer />
         </div>
       } />
+
+      <Route path="/shop" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Shop />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/login" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Login />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/register" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Register />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/about" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <About />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/management" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Management />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/contact" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Contact />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/news" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Journal />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/account" element={
+        <ProtectedRoute>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <div className="flex-grow">
+              <MyAccount />
+            </div>
+            <Footer />
+          </div>
+        </ProtectedRoute>
+      } />
+
+      {/* Catch-all redirect to Home */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 };

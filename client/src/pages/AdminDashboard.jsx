@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, Package, Users, TrendingUp, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import api from '../utils/api';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
+  const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchData = async () => {
       try {
-        const response = await api.get('/stats');
-        setStats(response.data);
+        const [statsRes, ordersRes] = await Promise.all([
+          api.get('/stats'),
+          api.get('/orders')
+        ]);
+        setStats(statsRes.data);
+        setRecentOrders(ordersRes.data.slice(0, 5));
       } catch (err) {
-        console.error('Error fetching stats:', err);
+        console.error('Error fetching dashboard data:', err);
       } finally {
         setLoading(false);
       }
     };
-    fetchStats();
+    fetchData();
   }, []);
 
   const statCards = [
-    { name: 'Total Revenue', value: `$${stats?.total_revenue?.toLocaleString() || '0'}`, icon: TrendingUp, change: '+12.5%', up: true },
-    { name: 'Active Orders', value: stats?.total_orders || '0', icon: ShoppingCart, change: '+4.2%', up: true },
-    { name: 'Inventory Count', value: stats?.total_products || '0', icon: Package, change: '-1.4%', up: false },
-    { name: 'Total Customers', value: stats?.total_users || '0', icon: Users, change: '+8.1%', up: true },
+    { name: 'Total Revenue', value: `$${stats?.totalSales?.toLocaleString() || '0'}`, icon: TrendingUp, change: stats?.salesGrowth || '+0%', up: true },
+    { name: 'Active Orders', value: stats?.newOrders || '0', icon: ShoppingCart, change: '+4.2%', up: true },
+    { name: 'Inventory Pieces', value: stats?.totalProducts || '0', icon: Package, change: '-1.4%', up: false },
+    { name: 'Atelier Members', value: stats?.activeUsers || '0', icon: Users, change: '+8.1%', up: true },
   ];
 
   return (
@@ -63,7 +69,7 @@ const AdminDashboard = () => {
         <div className="lg:col-span-8 bg-white rounded-xl border border-outline-variant/10 p-8">
           <div className="flex justify-between items-center mb-8">
             <h3 className="font-headline text-xl font-bold text-primary">Recent Manifests</h3>
-            <button className="text-[10px] font-label font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">View All Orders</button>
+            <Link to="/admin/orders" className="text-[10px] font-label font-bold uppercase tracking-widest text-secondary hover:text-primary transition-colors">View All Orders</Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-left">
@@ -71,19 +77,28 @@ const AdminDashboard = () => {
                 <tr className="border-b border-outline-variant/10">
                   <th className="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Order ID</th>
                   <th className="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Customer</th>
-                  <th className="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Amount</th>
-                  <th className="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Status</th>
+                  <th className="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant text-right">Amount</th>
+                  <th className="pb-4 font-label text-[10px] uppercase tracking-widest text-on-surface-variant text-center">Status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-outline-variant/5">
-                {/* Simplified placeholder for table rows */}
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <tr key={i} className="group">
-                    <td className="py-4 font-label text-xs text-primary font-bold">#ETC-2024-{i}</td>
-                    <td className="py-4 font-body text-sm text-on-surface-variant">Customer {i}</td>
-                    <td className="py-4 font-headline text-sm font-bold text-secondary">$1,240.00</td>
-                    <td className="py-4">
-                      <span className="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-bold uppercase tracking-widest">Delivered</span>
+                {loading ? (
+                  <tr><td colSpan="4" className="py-8 text-center italic text-on-surface-variant">Accessing archive...</td></tr>
+                ) : recentOrders.length === 0 ? (
+                  <tr><td colSpan="4" className="py-8 text-center italic text-on-surface-variant">No orders recorded yet.</td></tr>
+                ) : recentOrders.map((order) => (
+                  <tr key={order.id} className="group">
+                    <td className="py-4 font-label text-xs text-primary font-bold">{order.order_number}</td>
+                    <td className="py-4 font-body text-sm text-on-surface-variant">{order.customer}</td>
+                    <td className="py-4 font-headline text-sm font-bold text-secondary text-right">${parseFloat(order.amount).toFixed(2)}</td>
+                    <td className="py-4 text-center">
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                        order.status === 'Delivered' ? 'bg-emerald-50 text-emerald-700' :
+                        order.status === 'Cancelled' ? 'bg-red-50 text-red-700' :
+                        'bg-amber-50 text-amber-700'
+                      }`}>
+                        {order.status}
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -92,15 +107,15 @@ const AdminDashboard = () => {
           </div>
         </div>
         
-        <div className="lg:col-span-4 bg-primary text-white rounded-xl p-10 relative overflow-hidden">
+        <div className="lg:col-span-4 bg-primary text-white rounded-xl p-10 relative overflow-hidden flex flex-col justify-between">
           <div className="relative z-10">
             <span className="text-secondary font-label text-[10px] uppercase tracking-widest mb-4 block">Strategic Goal</span>
             <h3 className="text-2xl font-headline font-bold mb-6 leading-tight">Projecting 25% Growth for Q3 Collection cycle.</h3>
             <p className="text-white/60 text-sm font-body leading-relaxed mb-8">The atelier is currently operating at 92% efficiency. We recommend increasing sourcing for raw silk materials by 15% to meet upcoming demands.</p>
-            <button className="w-full bg-white text-primary py-4 rounded-lg font-label font-bold uppercase tracking-widest text-[10px] hover:bg-secondary hover:text-white transition-all shadow-xl">Detailed Analysis</button>
           </div>
-          <div className="absolute bottom-[-20%] right-[-20%] opacity-10 pointer-events-none">
-            <TrendIcon className="w-64 h-64 text-white" />
+          <button className="relative z-10 w-full bg-white text-primary py-4 rounded-lg font-label font-bold uppercase tracking-widest text-[10px] hover:bg-secondary hover:text-white transition-all shadow-xl">Detailed Analysis</button>
+          <div className="absolute bottom-[-10%] right-[-10%] opacity-10 pointer-events-none">
+            <TrendIcon className="w-48 h-48 text-white" />
           </div>
         </div>
       </div>
