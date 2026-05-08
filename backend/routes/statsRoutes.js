@@ -1,37 +1,50 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
 
 // Get dashboard stats (Admin only)
 router.get('/', [verifyToken, verifyAdmin], async (req, res) => {
     try {
-        const totalSalesResult = await db.query(
-            `SELECT COALESCE(SUM(total_amount), 0) as total FROM orders WHERE status != 'Cancelled'`
-        );
-        const newOrdersResult = await db.query(
-            `SELECT COUNT(*) as count FROM orders WHERE status = 'Pending'`
-        );
-        const totalOrdersResult = await db.query(
-            `SELECT COUNT(*) as count FROM orders`
-        );
-        const totalProductsResult = await db.query(
-            `SELECT COUNT(*) as count FROM products`
-        );
-        const totalUsersResult = await db.query(
-            `SELECT COUNT(*) as count FROM users WHERE role = 'customer'`
-        );
+        // We use .select('*', { count: 'exact', head: true }) for counts
+        // For sum, we use a rpc or just select and sum (simpler for now if records are few, or use raw sql if needed)
+        // Since Supabase JS doesn't have a direct .sum(), we use .select('total_amount')
+        
+        const { data: salesData, error: salesError } = await supabase
+            .from('orders')
+            .select('total_amount')
+            .neq('status', 'Cancelled');
+
+        const { count: newOrders, error: newOrdersError } = await supabase
+            .from('orders')
+            .select('*', { count: 'exact', head: true })
+            .eq('status', 'Pending');
+
+        const { count: totalOrders, error: totalOrdersError } = await supabase
+            .from('orders')
+            .select('*', { count: 'exact', head: true });
+
+        const { count: totalProducts, error: totalProductsError } = await supabase
+            .from('products')
+            .select('*', { count: 'exact', head: true });
+
+        const { count: totalUsers, error: totalUsersError } = await supabase
+            .from('users')
+            .select('*', { count: 'exact', head: true })
+            .eq('role', 'customer');
+
+        const totalSales = salesData ? salesData.reduce((acc, curr) => acc + (parseFloat(curr.total_amount) || 0), 0) : 0;
 
         res.json({
-            totalSales: parseFloat(totalSalesResult.rows[0].total),
-            newOrders: parseInt(newOrdersResult.rows[0].count),
-            totalOrders: parseInt(totalOrdersResult.rows[0].count),
-            totalProducts: parseInt(totalProductsResult.rows[0].count),
-            activeUsers: parseInt(totalUsersResult.rows[0].count),
+            totalSales,
+            newOrders: newOrders || 0,
+            totalOrders: totalOrders || 0,
+            totalProducts: totalProducts || 0,
+            activeUsers: totalUsers || 0,
             salesGrowth: '+12.5%'
         });
     } catch (err) {
-        console.error(err.message);
+        console.error('Stats Error:', err.message);
         res.status(500).send('Server error');
     }
 });

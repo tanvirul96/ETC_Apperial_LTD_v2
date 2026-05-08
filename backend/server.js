@@ -37,6 +37,5 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`✅ ETC Apparel server running on http://localhost:${PORT}`);
-    const dbHost = process.env.DATABASE_URL ? new URL(process.env.DATABASE_URL).hostname : 'unknown';
-    console.log(`📦 Database Host: ${dbHost}`);
+    console.log(`🚀 Connection Mode: Supabase HTTPS API (Stable)`);
 });

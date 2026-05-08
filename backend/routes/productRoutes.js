@@ -1,15 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
 
 // Get all products (Public)
 router.get('/', async (req, res) => {
     try {
-        const result = await db.query('SELECT * FROM products ORDER BY created_at DESC');
-        res.json(result.rows);
+        const { data: products, error } = await supabase
+            .from('products')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        res.json(products);
     } catch (err) {
-        console.error(err.message);
+        console.error('Fetch Products Error:', err.message);
         res.status(500).send('Server error');
     }
 });
@@ -18,13 +23,33 @@ router.get('/', async (req, res) => {
 router.post('/', [verifyToken, verifyAdmin], async (req, res) => {
     try {
         const { sku, name, category, price, stock, status, image_url, description } = req.body;
-        const newProduct = await db.query(
-            'INSERT INTO products (sku, name, category, price, stock, status, image_url, description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-            [sku, name, category, price, stock, status || 'Active', image_url || null, description || null]
-        );
-        res.json(newProduct.rows[0]);
+        
+        // Ensure numeric types
+        const priceNum = parseFloat(price);
+        const stockNum = parseInt(stock);
+
+        const { data: newProduct, error } = await supabase
+            .from('products')
+            .insert([{ 
+                sku: sku || `ETC-${Date.now()}`, 
+                name, 
+                category, 
+                price: priceNum, 
+                stock: stockNum, 
+                status: status || 'Active', 
+                image_url: image_url || null, 
+                description: description || null 
+            }])
+            .select()
+            .single();
+
+        if (error) {
+            console.error('Supabase Insert Error:', error);
+            throw error;
+        }
+        res.json(newProduct);
     } catch (err) {
-        console.error(err.message);
+        console.error('Create Product Error:', err.message);
         res.status(500).send('Server error');
     }
 });
@@ -36,16 +61,29 @@ router.put('/:id', [verifyToken, verifyAdmin], async (req, res) => {
         const stockNum = parseInt(stock);
         const autoStatus = status || (stockNum > 0 ? 'Active' : 'Out of Stock');
 
-        const updated = await db.query(
-            `UPDATE products 
-             SET name=$1, category=$2, price=$3, stock=$4, status=$5, image_url=$6, description=$7, updated_at=CURRENT_TIMESTAMP
-             WHERE id=$8 RETURNING *`,
-            [name, category, price, stockNum, autoStatus, image_url || null, description || null, req.params.id]
-        );
-        if (updated.rows.length === 0) return res.status(404).json({ message: 'Product not found' });
-        res.json(updated.rows[0]);
+        const { data: updatedProduct, error } = await supabase
+            .from('products')
+            .update({ 
+                name, 
+                category, 
+                price, 
+                stock: stockNum, 
+                status: autoStatus, 
+                image_url: image_url || null, 
+                description: description || null, 
+                updated_at: new Date().toISOString()
+            })
+            .eq('id', req.params.id)
+            .select()
+            .single();
+
+        if (error) {
+            if (error.code === 'PGRST116') return res.status(404).json({ message: 'Product not found' });
+            throw error;
+        }
+        res.json(updatedProduct);
     } catch (err) {
-        console.error(err.message);
+        console.error('Update Product Error:', err.message);
         res.status(500).send('Server error');
     }
 });
@@ -53,11 +91,20 @@ router.put('/:id', [verifyToken, verifyAdmin], async (req, res) => {
 // Delete a product (Admin only)
 router.delete('/:id', [verifyToken, verifyAdmin], async (req, res) => {
     try {
-        const result = await db.query('DELETE FROM products WHERE id=$1 RETURNING id', [req.params.id]);
-        if (result.rows.length === 0) return res.status(404).json({ message: 'Product not found' });
+        const { data, error } = await supabase
+            .from('products')
+            .delete()
+            .eq('id', req.params.id)
+            .select('id')
+            .single();
+
+        if (error) {
+            if (error.code === 'PGRST116') return res.status(404).json({ message: 'Product not found' });
+            throw error;
+        }
         res.json({ message: 'Product deleted successfully' });
     } catch (err) {
-        console.error(err.message);
+        console.error('Delete Product Error:', err.message);
         res.status(500).send('Server error');
     }
 });

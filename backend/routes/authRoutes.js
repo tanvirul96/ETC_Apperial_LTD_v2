@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const db = require('../db');
+const supabase = require('../db');
 
 // Register
 router.post('/register', async (req, res) => {
@@ -10,8 +10,13 @@ router.post('/register', async (req, res) => {
         const { name, email, password } = req.body;
         
         // Check if user exists
-        const userExists = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-        if (userExists.rows.length > 0) {
+        const { data: existingUser, error: checkError } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .single();
+
+        if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
 
@@ -19,18 +24,21 @@ router.post('/register', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Determine role (for demo purposes, if email is admin@etc.com, make them admin)
+        // Determine role
         const role = email === 'admin@etc.com' ? 'admin' : 'customer';
 
         // Insert user
-        const newUser = await db.query(
-            'INSERT INTO users (name, email, password_hash, role) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role',
-            [name, email, hashedPassword, role]
-        );
+        const { data: newUser, error: insertError } = await supabase
+            .from('users')
+            .insert([{ name, email, password_hash: hashedPassword, role }])
+            .select()
+            .single();
 
-        res.status(201).json({ message: 'User registered successfully', user: newUser.rows[0] });
+        if (insertError) throw insertError;
+
+        res.status(201).json({ message: 'User registered successfully', user: newUser });
     } catch (err) {
-        console.error(err.message);
+        console.error('Registration Error:', err.message);
         res.status(500).json({ message: 'Server error' });
     }
 });
@@ -41,12 +49,15 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body;
 
         // Check if user exists
-        const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-        if (result.rows.length === 0) {
+        const { data: user, error: fetchError } = await supabase
+            .from('users')
+            .select('*')
+            .eq('email', email)
+            .single();
+
+        if (fetchError || !user) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-
-        const user = result.rows[0];
 
         // Check password
         const isMatch = await bcrypt.compare(password, user.password_hash);
@@ -67,7 +78,7 @@ router.post('/login', async (req, res) => {
             user: { id: user.id, name: user.name, email: user.email, role: user.role }
         });
     } catch (err) {
-        console.error(err.message);
+        console.error('Login Error:', err.message);
         res.status(500).json({ message: 'Server error' });
     }
 });

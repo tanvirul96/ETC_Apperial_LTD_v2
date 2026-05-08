@@ -1,33 +1,15 @@
-const { Pool } = require('pg');
+const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config();
 
-console.log('🔌 Initializing database connection pool...');
-console.log('📍 Target Host:', process.env.DATABASE_URL ? new URL(process.env.DATABASE_URL).hostname : 'NOT SET');
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { 
-    rejectUnauthorized: false
-  },
-  connectionTimeoutMillis: 10000, // 10 seconds timeout
-});
+if (!supabaseUrl || !supabaseKey) {
+  console.error('❌ Missing Supabase environment variables');
+}
 
-// Test the connection immediately
-pool.query('SELECT NOW()', (err, res) => {
-  if (err) {
-    console.error('❌ Database connection failed:', err.message);
-    if (err.message.includes('ENOTFOUND')) {
-      console.error('👉 Suggestion: Your environment might not support IPv6. The current DATABASE_URL is set to a pooler host which should support IPv4.');
-    }
-  } else {
-    console.log('✅ Database connected successfully at:', res.rows[0].now);
-  }
-});
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-pool.on('error', (err) => {
-  console.error('⚠️ Unexpected error on idle database client:', err.message);
-});
+console.log('🚀 Backend connected via Supabase HTTPS API');
 
-module.exports = {
-  query: (text, params) => pool.query(text, params),
-};
+module.exports = supabase;
