@@ -37,5 +37,6 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`✅ ETC Apparel server running on http://localhost:${PORT}`);
-    console.log(`📦 Database: Supabase (wcbuhijjpljnrphhoyny.supabase.co)`);
+    const dbHost = process.env.DATABASE_URL ? new URL(process.env.DATABASE_URL).hostname : 'unknown';
+    console.log(`📦 Database Host: ${dbHost}`);
 });
