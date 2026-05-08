@@ -6,12 +6,29 @@ const { verifyToken, verifyAdmin } = require('../middleware/auth');
 // Get dashboard stats (Admin only)
 router.get('/', [verifyToken, verifyAdmin], async (req, res) => {
     try {
-        // Mock data for the dashboard UI
+        const totalSalesResult = await db.query(
+            `SELECT COALESCE(SUM(total_amount), 0) as total FROM orders WHERE status != 'Cancelled'`
+        );
+        const newOrdersResult = await db.query(
+            `SELECT COUNT(*) as count FROM orders WHERE status = 'Pending'`
+        );
+        const totalOrdersResult = await db.query(
+            `SELECT COUNT(*) as count FROM orders`
+        );
+        const totalProductsResult = await db.query(
+            `SELECT COUNT(*) as count FROM products`
+        );
+        const totalUsersResult = await db.query(
+            `SELECT COUNT(*) as count FROM users WHERE role = 'customer'`
+        );
+
         res.json({
-            totalSales: 142890.00,
-            salesGrowth: '+12.5%',
-            newOrders: 248,
-            activeUsers: 1204
+            totalSales: parseFloat(totalSalesResult.rows[0].total),
+            newOrders: parseInt(newOrdersResult.rows[0].count),
+            totalOrders: parseInt(totalOrdersResult.rows[0].count),
+            totalProducts: parseInt(totalProductsResult.rows[0].count),
+            activeUsers: parseInt(totalUsersResult.rows[0].count),
+            salesGrowth: '+12.5%'
         });
     } catch (err) {
         console.error(err.message);
