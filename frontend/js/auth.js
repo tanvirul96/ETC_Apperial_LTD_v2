@@ -21,23 +21,23 @@ async function loginUser(email, password) {
         const data = await response.json();
 
         if (response.ok) {
-            // Save token and role
+            // Save token and user info
             localStorage.setItem('token', data.token);
             localStorage.setItem('role', data.user.role);
             localStorage.setItem('user', JSON.stringify(data.user));
 
-            // Redirect based on role
-            if (data.user.role === 'admin') {
-                window.location.href = '/frontend/admin/dashboard.html';
-            } else {
-                window.location.href = '/frontend/index.html'; // Or account page
-            }
+            showToast('Welcome back, ' + data.user.name.split(' ')[0] + '!', 'success');
+            
+            // Redirect to homepage
+            setTimeout(() => {
+                window.location.href = '/frontend/index.html';
+            }, 1000);
         } else {
-            alert(data.message || 'Login failed');
+            showToast(data.message || 'Login failed. Please check your credentials.', 'error');
         }
     } catch (error) {
         console.error('Login error:', error);
-        alert('An error occurred during login. Make sure the backend server is running.');
+        showToast('Unable to connect to server. Is the backend running?', 'error');
     }
 }
 
@@ -60,14 +60,16 @@ async function registerUser(name, email, password) {
         const data = await response.json();
 
         if (response.ok) {
-            alert('Registration successful! Please sign in.');
-            window.location.href = '/frontend/account/sign-in.html';
+            showToast('Registration successful! Redirecting to sign in...', 'success');
+            setTimeout(() => {
+                window.location.href = '/frontend/account/sign-in.html';
+            }, 2000);
         } else {
-            alert(data.message || 'Registration failed');
+            showToast(data.message || 'Registration failed', 'error');
         }
     } catch (error) {
         console.error('Registration error:', error);
-        alert('An error occurred during registration.');
+        showToast('An error occurred during registration.', 'error');
     }
 }
 
@@ -91,5 +93,8 @@ function logoutUser() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('user');
-    window.location.href = '/frontend/index.html';
+    showToast('Signed out successfully.', 'info');
+    setTimeout(() => {
+        window.location.href = '/frontend/index.html';
+    }, 800);
 }

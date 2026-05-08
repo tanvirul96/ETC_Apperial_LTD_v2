@@ -1,0 +1,200 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ShoppingBag, Menu, X, User, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useCart } from '../context/CartContext';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const Header = () => {
+  const { user, logout, isAdmin } = useAuth();
+  const { cart, cartCount, cartTotal, removeFromCart } = useCart();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Collections', path: '/shop' },
+    { name: 'Our Story', path: '/about' },
+    { name: 'Management', path: '/management' },
+    { name: 'Contact', path: '/contact' },
+    { name: 'News', path: '/news' },
+  ];
+
+  return (
+    <>
+      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-outline-variant/10 h-20' : 'bg-transparent h-24'}`}>
+        <nav className="container mx-auto px-6 md:px-16 h-full flex items-center justify-between">
+          <div className="flex items-center gap-12">
+            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter">ETC.</Link>
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`font-label text-[10px] uppercase tracking-[0.3em] transition-all hover:text-secondary ${location.pathname === link.path ? 'text-secondary font-bold' : 'text-on-surface-variant'}`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 md:gap-8">
+            <div className="hidden md:flex items-center gap-6">
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Link to="/admin" className="font-label text-[10px] uppercase tracking-[0.3em] text-secondary hover:text-primary transition-all font-bold">Admin Panel</Link>
+                  )}
+                  <Link to="/account" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">
+                    {user.name.split(' ')[0]}
+                  </Link>
+                  <button onClick={logout} className="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Sign In</Link>
+                  <Link to="/register" className="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">Join Atelier</Link>
+                </>
+              )}
+            </div>
+
+            <button onClick={() => setIsCartOpen(true)} className="relative group">
+              <ShoppingBag className="text-primary w-6 h-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 w-4 h-4 bg-secondary text-on-secondary text-[8px] flex items-center justify-center rounded-full font-bold">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+
+            <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2 text-primary">
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.4 }}
+            className="fixed inset-0 bg-white z-[60] flex flex-col p-8 lg:hidden"
+          >
+            <div className="flex justify-between items-center mb-12">
+              <span className="font-headline text-2xl font-black text-primary tracking-tighter">ETC.</span>
+              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-primary">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <nav className="flex flex-col gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-headline text-3xl font-bold text-primary"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+            <div className="mt-auto flex flex-col gap-4">
+              {user ? (
+                <>
+                  <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">My Account</Link>
+                  <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="w-full py-4 text-center bg-primary text-white font-label text-xs uppercase tracking-widest font-bold">Sign Out</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">Sign In</Link>
+                  <Link to="/register" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center bg-primary text-white font-label text-xs uppercase tracking-widest font-bold">Join Atelier</Link>
+                </>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Cart Drawer */}
+      <AnimatePresence>
+        {isCartOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsCartOpen(false)}
+              className="fixed inset-0 bg-black/40 z-[65]"
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.4 }}
+              className="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl z-[70] flex flex-col"
+            >
+              <div className="p-8 border-b border-outline-variant/10 flex justify-between items-center">
+                <h3 className="font-headline text-xl font-bold text-primary">Your Bag</h3>
+                <button onClick={() => setIsCartOpen(false)} className="text-on-surface-variant hover:text-primary transition-colors">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="flex-grow overflow-y-auto p-8 space-y-6">
+                {cart.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center h-full text-center py-12">
+                    <ShoppingBag className="w-12 h-12 text-outline-variant mb-4" />
+                    <p className="font-headline text-lg text-on-surface-variant">Your bag is empty.</p>
+                    <Link to="/shop" onClick={() => setIsCartOpen(false)} className="mt-6 text-secondary font-label text-xs uppercase tracking-widest hover:underline">Browse Collections</Link>
+                  </div>
+                ) : (
+                  cart.map((item) => (
+                    <div key={item.id} className="flex gap-4 items-center group">
+                      <div className="w-16 h-20 bg-surface-container-low rounded overflow-hidden flex-shrink-0">
+                        <img src={item.image_url || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80'} alt={item.name} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="flex-grow">
+                        <p className="font-bold text-sm text-primary leading-tight">{item.name}</p>
+                        <p className="text-xs text-on-surface-variant font-label mt-1">{item.category}</p>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="font-headline font-bold text-secondary">${parseFloat(item.price).toFixed(2)}</span>
+                          <span className="font-label text-xs text-on-surface-variant">x{item.qty}</span>
+                        </div>
+                      </div>
+                      <button onClick={() => removeFromCart(item.id)} className="text-outline-variant hover:text-red-600 transition-colors flex-shrink-0">
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+              <div className="p-8 border-t border-outline-variant/10">
+                <div className="flex justify-between items-center mb-6">
+                  <span className="font-label text-xs uppercase tracking-widest text-on-surface-variant">Subtotal</span>
+                  <span className="font-headline text-xl font-bold text-primary">${cartTotal.toFixed(2)}</span>
+                </div>
+                <Link to="/shop" onClick={() => setIsCartOpen(false)} className="block w-full editorial-gradient text-on-primary py-4 text-center font-label text-xs uppercase tracking-widest font-bold hover:opacity-90 transition-opacity rounded-lg">View All Collections</Link>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+};
+
+export default Header;

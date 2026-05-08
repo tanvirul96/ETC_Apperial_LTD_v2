@@ -25,6 +25,9 @@ function loadAdminHeader() {
             </div>
             <div class="w-10 h-10 rounded-full editorial-gradient flex items-center justify-center text-white font-bold text-sm">A</div>
         </div>
+        <button onclick="logoutUser()" class="p-2 text-outline-variant hover:text-secondary transition-colors" title="Sign Out">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
     </div>
 </header>
     `;
