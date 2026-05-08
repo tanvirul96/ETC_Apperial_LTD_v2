@@ -22,16 +22,20 @@ router.get('/', async (req, res) => {
 // Create a product (Admin only)
 router.post('/', [verifyToken, verifyAdmin], async (req, res) => {
     try {
+        console.log('📦 Create Product Request:', req.body);
         const { sku, name, category, price, stock, status, image_url, description } = req.body;
         
+        // Robust SKU generation
+        const finalSku = (sku && sku.trim() !== '') ? sku : `ETC-${Date.now().toString().slice(-6)}`;
+        
         // Ensure numeric types
-        const priceNum = parseFloat(price);
-        const stockNum = parseInt(stock);
+        const priceNum = parseFloat(price) || 0;
+        const stockNum = parseInt(stock) || 0;
 
         const { data: newProduct, error } = await supabase
             .from('products')
             .insert([{ 
-                sku: sku || `ETC-${Date.now()}`, 
+                sku: finalSku, 
                 name, 
                 category, 
                 price: priceNum, 
@@ -44,12 +48,12 @@ router.post('/', [verifyToken, verifyAdmin], async (req, res) => {
             .single();
 
         if (error) {
-            console.error('Supabase Insert Error:', error);
-            throw error;
+            console.error('❌ Supabase Insert Error:', error);
+            return res.status(400).json({ message: error.message, details: error.details });
         }
         res.json(newProduct);
     } catch (err) {
-        console.error('Create Product Error:', err.message);
+        console.error('❌ Create Product Exception:', err.message);
         res.status(500).send('Server error');
     }
 });

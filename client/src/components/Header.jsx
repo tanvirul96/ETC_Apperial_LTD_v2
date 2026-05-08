@@ -187,7 +187,8 @@ const Header = () => {
                   <span className="font-label text-xs uppercase tracking-widest text-on-surface-variant">Subtotal</span>
                   <span className="font-headline text-xl font-bold text-primary">${cartTotal.toFixed(2)}</span>
                 </div>
-                <Link to="/shop" onClick={() => setIsCartOpen(false)} className="block w-full editorial-gradient text-on-primary py-4 text-center font-label text-xs uppercase tracking-widest font-bold hover:opacity-90 transition-opacity rounded-lg">View All Collections</Link>
+                <Link to="/checkout" onClick={() => setIsCartOpen(false)} className="block w-full editorial-gradient text-on-primary py-4 text-center font-label text-xs uppercase tracking-widest font-bold hover:opacity-90 transition-opacity rounded-lg shadow-lg">Finalize Atelier Order</Link>
+                <Link to="/shop" onClick={() => setIsCartOpen(false)} className="block w-full mt-4 text-center font-label text-[9px] uppercase tracking-widest text-on-surface-variant hover:text-primary transition-all">Continue Exploring</Link>
               </div>
             </motion.div>
           </>

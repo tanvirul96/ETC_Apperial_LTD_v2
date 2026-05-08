@@ -12,8 +12,11 @@ import About from './pages/About';
 import Management from './pages/Management';
 import Contact from './pages/Contact';
 import Journal from './pages/Journal';
+import NewsDetail from './pages/NewsDetail';
+import Checkout from './pages/Checkout';
 import MyAccount from './pages/MyAccount';
 import AdminDashboard from './pages/AdminDashboard';
+import Analytics from './pages/Analytics';
 import Inventory from './pages/Inventory';
 import Orders from './pages/Orders';
 import NewsFeed from './pages/NewsFeed';
@@ -47,7 +50,7 @@ const App = () => {
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="news" element={<NewsFeed />} />
-                <Route path="analytics" element={<AdminDashboard />} />
+                <Route path="analytics" element={<Analytics />} />
               </Routes>
             </div>
           </div>
@@ -64,7 +67,7 @@ const App = () => {
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="orders" element={<Orders />} />
                 <Route path="news" element={<NewsFeed />} />
-                <Route path="analytics" element={<AdminDashboard />} />
+                <Route path="analytics" element={<Analytics />} />
               </Routes>
             </div>
           </div>
@@ -142,11 +145,31 @@ const App = () => {
         </div>
       } />
 
+      <Route path="/checkout" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <Checkout />
+          </div>
+          <Footer />
+        </div>
+      } />
+
       <Route path="/news" element={
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
             <Journal />
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/news/:id" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <NewsDetail />
           </div>
           <Footer />
         </div>

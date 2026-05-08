@@ -274,19 +274,19 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 className={`${index === 0 ? 'col-span-12 md:col-span-7' : 'col-span-12 md:col-span-5 md:pt-32'} flex flex-col group`}
               >
-                <div className="relative mb-10 overflow-hidden rounded-lg aspect-[16/10] shadow-xl">
-                  <img src={entry.image_url} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt={entry.title} />
-                </div>
-                <div className={`px-4 -mt-20 relative z-20 bg-white/90 backdrop-blur-sm p-8 ${index === 0 ? 'md:w-4/5' : 'w-full'} shadow-2xl shadow-primary/5 rounded-lg ${index === 0 ? 'md:ml-12' : ''} border border-surface-container`}>
-                  <span className="text-secondary font-label text-[10px] tracking-widest uppercase mb-4 block">{entry.category}</span>
-                  <Link to="/news">
+                <Link to={`/news/${entry.id}`} className="contents">
+                  <div className="relative mb-10 overflow-hidden rounded-lg aspect-[16/10] shadow-xl">
+                    <img src={entry.image_url} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt={entry.title} />
+                  </div>
+                  <div className={`px-4 -mt-20 relative z-20 bg-white/90 backdrop-blur-sm p-8 ${index === 0 ? 'md:w-4/5' : 'w-full'} shadow-2xl shadow-primary/5 rounded-lg ${index === 0 ? 'md:ml-12' : ''} border border-surface-container`}>
+                    <span className="text-secondary font-label text-[10px] tracking-widest uppercase mb-4 block">{entry.category}</span>
                     <h3 className={`font-headline ${index === 0 ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'} font-bold mb-4 leading-tight text-primary hover:text-secondary transition-colors cursor-pointer`}>
                       {entry.title}
                     </h3>
-                  </Link>
-                  <p className="text-on-surface-variant font-body mb-8 leading-relaxed line-clamp-3">{entry.excerpt}</p>
-                  <Link to="/news" className="font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary">Read Narrative</Link>
-                </div>
+                    <p className="text-on-surface-variant font-body mb-8 leading-relaxed line-clamp-3">{entry.excerpt}</p>
+                    <div className="inline-block font-bold text-xs tracking-widest uppercase border-b-2 border-secondary pb-2 transition-all hover:border-primary">Read Narrative</div>
+                  </div>
+                </Link>
               </motion.article>
             ))}
           </div>

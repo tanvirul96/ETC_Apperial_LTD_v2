@@ -18,6 +18,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get a single news entry (Public)
+router.get('/:id', async (req, res) => {
+  try {
+    const { data: entry, error } = await supabase
+      .from('news')
+      .select('*')
+      .eq('id', req.params.id)
+      .single();
+
+    if (error) {
+      if (error.code === 'PGRST116') return res.status(404).json({ message: 'Narrative not found' });
+      throw error;
+    }
+    res.json(entry);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // Create a news entry (Admin only)
 router.post('/', [verifyToken, verifyAdmin], async (req, res) => {
   const { title, excerpt, content, author, category, image_url, status } = req.body;

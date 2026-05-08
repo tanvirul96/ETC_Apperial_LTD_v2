@@ -9,14 +9,15 @@ function verifyToken(req, res, next) {
     jwt.verify(bearerToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) return res.status(401).json({ message: 'Failed to authenticate token.' });
         
-        req.userId = decoded.id;
+        req.user = decoded; // Standardize as req.user
+        req.userId = decoded.id; // Keep legacy for compatibility
         req.userRole = decoded.role;
         next();
     });
 }
 
 function verifyAdmin(req, res, next) {
-    if (req.userRole !== 'admin') {
+    if (req.userRole !== 'admin' && req.user?.role !== 'admin') {
         return res.status(403).json({ message: 'Require Admin Role!' });
     }
     next();
