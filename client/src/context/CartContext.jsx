@@ -26,13 +26,25 @@ export const CartProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
+  const updateQty = (productId, newQty) => {
+    if (newQty <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item.id === productId ? { ...item, qty: newQty } : item
+      )
+    );
+  };
+
   const clearCart = () => setCart([]);
 
   const cartCount = cart.reduce((total, item) => total + (item.qty || 1), 0);
   const cartTotal = cart.reduce((total, item) => total + (parseFloat(item.price) * (item.qty || 1)), 0);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart, cartCount, cartTotal }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQty, clearCart, cartCount, cartTotal }}>
       {children}
     </CartContext.Provider>
   );
