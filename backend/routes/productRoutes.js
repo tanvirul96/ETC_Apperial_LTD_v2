@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
+const { cacheMiddleware } = require('../middleware/cacheMiddleware');
 
 // Get all products (Public)
-router.get('/', async (req, res) => {
+router.get('/', cacheMiddleware(30), async (req, res) => {
     try {
         const { data: products, error } = await supabase
             .from('products')

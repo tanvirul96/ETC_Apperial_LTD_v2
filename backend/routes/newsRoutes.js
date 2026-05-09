@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
+const { cacheMiddleware } = require('../middleware/cacheMiddleware');
 
 // Get all news entries (Public)
-router.get('/', async (req, res) => {
+router.get('/', cacheMiddleware(30), async (req, res) => {
   try {
     const { data: news, error } = await supabase
       .from('news')
@@ -19,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 // Get a single news entry (Public)
-router.get('/:id', async (req, res) => {
+router.get('/:id', cacheMiddleware(30), async (req, res) => {
   try {
     const { data: entry, error } = await supabase
       .from('news')
