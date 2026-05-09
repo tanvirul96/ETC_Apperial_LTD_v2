@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
+import api from '../utils/api';
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,14 +14,26 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Simulating API call
-    setTimeout(() => {
-      setSubmitted(false);
+    setLoading(true);
+    setError('');
+    
+    try {
+      await api.post('/contacts', {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.type, // Map 'type' form field to 'subject' in PostgreSQL
+        message: formData.message
+      });
+      setSubmitted(true);
       setFormData({ name: '', email: '', type: 'Wholesale Partnerships', message: '' });
-    }, 5000);
+    } catch (err) {
+      console.error('Error submitting inquiry:', err);
+      setError(err.response?.data?.message || 'Failed to submit inquiry. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -91,7 +106,7 @@ const Contact = () => {
               ></textarea>
             </div>
             
-            {submitted && (
+             {submitted && (
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -102,13 +117,33 @@ const Contact = () => {
               </motion.div>
             )}
 
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 font-label text-sm"
+              >
+                {error}
+              </motion.div>
+            )}
+
             <div className="pt-4">
               <button 
-                className="editorial-gradient text-on-primary px-10 py-5 rounded-lg font-label font-bold uppercase tracking-widest text-[10px] hover:opacity-90 transition-all flex items-center gap-3 shadow-xl shadow-primary/20" 
+                disabled={loading}
+                className="editorial-gradient text-on-primary px-10 py-5 rounded-lg font-label font-bold uppercase tracking-widest text-[10px] hover:opacity-90 transition-all flex items-center gap-3 shadow-xl shadow-primary/20 disabled:opacity-55 cursor-pointer" 
                 type="submit"
               >
-                Submit Inquiry
-                <ArrowRight className="w-4 h-4" />
+                {loading ? (
+                  <>
+                    Submitting...
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Submit Inquiry
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </div>
           </form>

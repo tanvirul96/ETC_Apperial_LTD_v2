@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingCart, Newspaper, BarChart3, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Newspaper, BarChart3, Settings, LogOut, MessageSquare } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const AdminSidebar = () => {
@@ -12,6 +12,7 @@ const AdminSidebar = () => {
     { name: 'Orders', path: '/admin/orders', icon: ShoppingCart },
     { name: 'News Feed', path: '/admin/news', icon: Newspaper },
     { name: 'Analytics', path: '/admin/analytics', icon: BarChart3 },
+    { name: 'Inquiries', path: '/admin/inquiries', icon: MessageSquare },
   ];
 
   return (

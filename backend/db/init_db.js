@@ -78,11 +78,23 @@ CREATE TABLE IF NOT EXISTS news (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 6. Contacts / Inquiries Table (Customer Message Box)
+CREATE TABLE IF NOT EXISTS contacts (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    status VARCHAR(50) DEFAULT 'Unread', -- 'Unread', 'Read', 'Resolved'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Seeding Default Admin User (admin@etc.com / password123)
 -- Encoded using bcrypt-compatible hash for "password123"
 INSERT INTO users (name, email, password_hash, role) 
 VALUES ('Master Curator', 'admin@etc.com', '$2b$10$Usc81uR6eH.t7mQ3vE7DquF.T4PjUun2UvL/g8nZ05g6BwP/kK3U6', 'admin')
 ON CONFLICT (email) DO NOTHING;
+
 `;
 
 async function init() {

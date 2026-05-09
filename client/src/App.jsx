@@ -20,6 +20,7 @@ import Analytics from './pages/Analytics';
 import Inventory from './pages/Inventory';
 import Orders from './pages/Orders';
 import NewsFeed from './pages/NewsFeed';
+import Inquiries from './pages/Inquiries';
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
@@ -51,6 +52,7 @@ const App = () => {
                 <Route path="orders" element={<Orders />} />
                 <Route path="news" element={<NewsFeed />} />
                 <Route path="analytics" element={<Analytics />} />
+                <Route path="inquiries" element={<Inquiries />} />
               </Routes>
             </div>
           </div>
@@ -68,6 +70,7 @@ const App = () => {
                 <Route path="orders" element={<Orders />} />
                 <Route path="news" element={<NewsFeed />} />
                 <Route path="analytics" element={<Analytics />} />
+                <Route path="inquiries" element={<Inquiries />} />
               </Routes>
             </div>
           </div>
