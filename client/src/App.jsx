@@ -190,6 +190,18 @@ const App = () => {
         </ProtectedRoute>
       } />
 
+      <Route path="/profile" element={
+        <ProtectedRoute>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <div className="flex-grow">
+              <MyAccount />
+            </div>
+            <Footer />
+          </div>
+        </ProtectedRoute>
+      } />
+
       {/* Catch-all redirect to Home */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

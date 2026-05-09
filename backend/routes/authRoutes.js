@@ -83,4 +83,61 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Get current user details (Private)
+const { verifyToken } = require('../middleware/auth');
+router.get('/me', verifyToken, async (req, res) => {
+    try {
+        const { data: user, error } = await supabase
+            .from('users')
+            .select('id, name, email, role, created_at')
+            .eq('id', req.userId)
+            .single();
+
+        if (error || !user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        res.json(user);
+    } catch (err) {
+        console.error('Error fetching profile:', err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Update current user profile (Private)
+router.put('/update-profile', verifyToken, async (req, res) => {
+    const { name, email } = req.body;
+    if (!name || !email) {
+        return res.status(400).json({ message: 'Name and Email are required.' });
+    }
+
+    try {
+        // Check if email is taken
+        const { data: existingEmailUser } = await supabase
+            .from('users')
+            .select('id')
+            .eq('email', email)
+            .neq('id', req.userId)
+            .maybeSingle();
+
+        if (existingEmailUser) {
+            return res.status(400).json({ message: 'Email is already in use by another account.' });
+        }
+
+        const { data: updatedUser, error } = await supabase
+            .from('users')
+            .update({ name, email })
+            .eq('id', req.userId)
+            .select('id, name, email, role')
+            .single();
+
+        if (error) throw error;
+
+        res.json({ message: 'Profile updated successfully!', user: updatedUser });
+    } catch (err) {
+        console.error('Error updating profile:', err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 module.exports = router;

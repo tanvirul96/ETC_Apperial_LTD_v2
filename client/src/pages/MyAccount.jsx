@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, CheckCircle } from 'lucide-react';
+import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, CheckCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import api from '../utils/api';
 
 const MyAccount = () => {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, syncUserLocal } = useAuth();
   const { cartCount } = useCart();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({ name: '', email: '' });
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchMyOrders = async () => {
@@ -35,12 +37,25 @@ const MyAccount = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    // Simulate API call for profile update
-    setUpdateSuccess(true);
-    setTimeout(() => {
-      setUpdateSuccess(false);
-      setIsEditModalOpen(false);
-    }, 2000);
+    setError('');
+    setUpdating(true);
+    try {
+      const response = await api.put('/auth/update-profile', {
+        name: editFormData.name,
+        email: editFormData.email
+      });
+      syncUserLocal(response.data.user);
+      setUpdateSuccess(true);
+      setTimeout(() => {
+        setUpdateSuccess(false);
+        setIsEditModalOpen(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Error updating profile:', err);
+      setError(err.response?.data?.message || 'Failed to update profile. Please try again.');
+    } finally {
+      setUpdating(false);
+    }
   };
 
   const statusStyles = {
@@ -232,25 +247,49 @@ const MyAccount = () => {
                 </motion.div>
               ) : (
                 <form onSubmit={handleUpdateProfile} className="space-y-8">
+                  {error && (
+                    <div className="p-4 bg-red-50 border border-red-100 text-red-700 text-xs font-body rounded-xl">
+                      {error}
+                    </div>
+                  )}
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">Full Name</label>
                     <input 
-                      required value={editFormData.name} 
+                      required 
+                      disabled={updating}
+                      value={editFormData.name} 
                       onChange={(e) => setEditFormData({...editFormData, name: e.target.value})}
-                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10" 
+                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">Email Address</label>
                     <input 
-                      type="email" required value={editFormData.email} 
+                      type="email" 
+                      required 
+                      disabled={updating}
+                      value={editFormData.email} 
                       onChange={(e) => setEditFormData({...editFormData, email: e.target.value})}
-                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10" 
+                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
                     />
                   </div>
                   <div className="flex gap-4 pt-4">
-                    <button type="submit" className="flex-grow editorial-gradient text-on-primary py-4 font-label text-[10px] font-bold uppercase tracking-widest rounded-lg shadow-xl shadow-primary/20">Commit Changes</button>
-                    <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-8 py-4 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors">Abort</button>
+                    <button 
+                      type="submit" 
+                      disabled={updating}
+                      className="flex-grow editorial-gradient text-on-primary py-4 font-label text-[10px] font-bold uppercase tracking-widest rounded-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {updating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
+                      {updating ? 'Committing...' : 'Commit Changes'}
+                    </button>
+                    <button 
+                      type="button" 
+                      disabled={updating}
+                      onClick={() => setIsEditModalOpen(false)} 
+                      className="px-8 py-4 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors disabled:opacity-30"
+                    >
+                      Abort
+                    </button>
                   </div>
                 </form>
               )}

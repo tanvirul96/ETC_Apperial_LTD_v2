@@ -54,7 +54,7 @@ const Header = () => {
                   {isAdmin && (
                     <Link to="/admin" className="font-label text-[10px] uppercase tracking-[0.3em] text-secondary hover:text-primary transition-all font-bold">Admin Panel</Link>
                   )}
-                  <Link to="/account" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">
+                  <Link to="/profile" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">
                     {user.name.split(' ')[0]}
                   </Link>
                   <button onClick={logout} className="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">
@@ -114,9 +114,9 @@ const Header = () => {
               ))}
             </nav>
             <div className="mt-auto flex flex-col gap-4">
-              {user ? (
+               {user ? (
                 <>
-                  <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">My Account</Link>
+                  <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">My Profile</Link>
                   <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="w-full py-4 text-center bg-primary text-white font-label text-xs uppercase tracking-widest font-bold">Sign Out</button>
                 </>
               ) : (
