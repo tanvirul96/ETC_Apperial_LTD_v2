@@ -4,7 +4,7 @@ import { Plus, Search, Edit2, Trash2, X, Upload, Loader2, Image as ImageIcon } f
 import api from '../utils/api';
 import { supabase } from '../supabase';
 
-const CATEGORIES = ['Men', 'Women', 'Kids', 'Accessories', 'Signature Knits', 'Outerwear', 'Essentials'];
+const CATEGORIES = ['Men', 'Women', 'Kids'];
 
 const Inventory = () => {
   const [products, setProducts] = useState([]);
