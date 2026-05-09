@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, CheckCircle, Loader2 } from 'lucide-react';
+import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, CheckCircle, Loader2, Key, Camera } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import api from '../utils/api';
@@ -15,6 +15,16 @@ const MyAccount = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState('');
+
+  // Password Update States
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+  const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '' });
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordUpdating, setPasswordUpdating] = useState(false);
+
+  // Avatar Upload States
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
 
   useEffect(() => {
     const fetchMyOrders = async () => {
@@ -58,6 +68,59 @@ const MyAccount = () => {
     }
   };
 
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    setPasswordError('');
+    setPasswordUpdating(true);
+    try {
+      await api.put('/auth/change-password', {
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword
+      });
+      setPasswordSuccess(true);
+      setPasswordData({ currentPassword: '', newPassword: '' });
+      setTimeout(() => {
+        setPasswordSuccess(false);
+        setIsPasswordModalOpen(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Error changing password:', err);
+      setPasswordError(err.response?.data?.message || 'Failed to update password. Please try again.');
+    } finally {
+      setPasswordUpdating(false);
+    }
+  };
+
+  const handleAvatarUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Profile picture size should be less than 2MB.');
+      return;
+    }
+
+    setUploadingAvatar(true);
+    const reader = new FileReader();
+    reader.onloadend = async () => {
+      const base64String = reader.result;
+      try {
+        const response = await api.put('/auth/update-profile', {
+          name: user.name,
+          email: user.email,
+          avatar_url: base64String
+        });
+        syncUserLocal(response.data.user);
+      } catch (err) {
+        console.error('Error uploading profile picture:', err);
+        alert('Failed to update profile picture. Please try again.');
+      } finally {
+        setUploadingAvatar(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
   const statusStyles = {
     Pending: 'bg-orange-100 text-orange-800',
     Processing: 'bg-blue-100 text-blue-800',
@@ -77,8 +140,29 @@ const MyAccount = () => {
         className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-16"
       >
         <div className="flex items-center gap-6">
-          <div className="w-24 h-24 rounded-full editorial-gradient flex items-center justify-center text-3xl font-bold text-white font-headline shadow-2xl">
-            {user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+          <div className="relative group w-24 h-24 shrink-0">
+            {user.avatar_url ? (
+              <div className="w-24 h-24 rounded-full overflow-hidden border border-outline-variant/10 shadow-2xl">
+                <img src={user.avatar_url} alt={user.name} className="w-full h-full object-cover" />
+              </div>
+            ) : (
+              <div className="w-24 h-24 rounded-full editorial-gradient flex items-center justify-center text-3xl font-bold text-white font-headline shadow-2xl">
+                {user.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()}
+              </div>
+            )}
+            <label className="absolute inset-0 bg-primary/60 backdrop-blur-sm rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center cursor-pointer text-white gap-1 select-none">
+              <Camera className="w-4 h-4 text-white" />
+              <span className="font-label text-[8px] font-bold uppercase tracking-wider text-center px-2">
+                {uploadingAvatar ? 'Saving...' : 'Upload Picture'}
+              </span>
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={handleAvatarUpload} 
+                className="hidden" 
+                disabled={uploadingAvatar}
+              />
+            </label>
           </div>
           <div>
             <h1 className="font-headline text-4xl font-bold text-primary">{user.name}</h1>
@@ -88,12 +172,18 @@ const MyAccount = () => {
             </span>
           </div>
         </div>
-        <div className="flex gap-4">
+        <div className="flex flex-wrap gap-4">
           <button 
             onClick={() => setIsEditModalOpen(true)}
             className="flex items-center gap-2 px-8 py-4 border border-primary text-primary font-label text-[10px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all rounded-lg shadow-sm"
           >
             <Edit3 className="w-3 h-3" /> Edit Profile
+          </button>
+          <button 
+            onClick={() => setIsPasswordModalOpen(true)}
+            className="flex items-center gap-2 px-8 py-4 border border-outline-variant/30 text-on-surface-variant font-label text-[10px] font-bold uppercase tracking-widest hover:bg-surface-container-low transition-all rounded-lg"
+          >
+            <Key className="w-3 h-3" /> Security
           </button>
           <button 
             onClick={logout}
@@ -286,6 +376,92 @@ const MyAccount = () => {
                       type="button" 
                       disabled={updating}
                       onClick={() => setIsEditModalOpen(false)} 
+                      className="px-8 py-4 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors disabled:opacity-30"
+                    >
+                      Abort
+                    </button>
+                  </div>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Change Password Modal */}
+      <AnimatePresence>
+        {isPasswordModalOpen && (
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              onClick={() => setIsPasswordModalOpen(false)} 
+              className="absolute inset-0 bg-primary/40 backdrop-blur-sm" 
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              exit={{ scale: 0.9, opacity: 0 }} 
+              className="relative bg-white w-full max-w-md p-12 rounded-2xl shadow-2xl"
+            >
+              <div className="flex justify-between items-center mb-10">
+                <h2 className="text-3xl font-headline font-bold text-primary italic">Change Password.</h2>
+                <button onClick={() => setIsPasswordModalOpen(false)}><X className="w-6 h-6 text-outline" /></button>
+              </div>
+
+              {passwordSuccess ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-12 text-center"
+                >
+                  <CheckCircle className="w-16 h-16 text-secondary mx-auto mb-6" />
+                  <p className="font-headline text-2xl text-primary font-bold">Password Updated.</p>
+                  <p className="text-on-surface-variant font-body text-sm mt-2">Your credentials have been securely refreshed.</p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handlePasswordChange} className="space-y-8">
+                  {passwordError && (
+                    <div className="p-4 bg-red-50 border border-red-100 text-red-700 text-xs font-body rounded-xl">
+                      {passwordError}
+                    </div>
+                  )}
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">Current Password</label>
+                    <input 
+                      type="password"
+                      required 
+                      disabled={passwordUpdating}
+                      value={passwordData.currentPassword} 
+                      onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">New Password</label>
+                    <input 
+                      type="password"
+                      required 
+                      disabled={passwordUpdating}
+                      value={passwordData.newPassword} 
+                      onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
+                    />
+                  </div>
+                  <div className="flex gap-4 pt-4">
+                    <button 
+                      type="submit" 
+                      disabled={passwordUpdating}
+                      className="flex-grow editorial-gradient text-on-primary py-4 font-label text-[10px] font-bold uppercase tracking-widest rounded-lg shadow-xl shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                      {passwordUpdating ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
+                      {passwordUpdating ? 'Updating...' : 'Update Password'}
+                    </button>
+                    <button 
+                      type="button" 
+                      disabled={passwordUpdating}
+                      onClick={() => setIsPasswordModalOpen(false)} 
                       className="px-8 py-4 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors disabled:opacity-30"
                     >
                       Abort
