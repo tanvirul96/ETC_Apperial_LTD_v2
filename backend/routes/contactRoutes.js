@@ -3,12 +3,22 @@ const router = express.Router();
 const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
 
+const { validateFields } = require('../utils/validator');
+
+const contactRules = {
+  name: { required: true, min: 2, max: 100, label: 'Name' },
+  email: { required: true, isEmail: true, label: 'Email' },
+  subject: { required: true, min: 4, max: 150, label: 'Subject' },
+  message: { required: true, min: 10, max: 2000, label: 'Message' }
+};
+
 // Create a new contact inquiry (Public)
 router.post('/', async (req, res) => {
   const { name, email, subject, message } = req.body;
   
-  if (!name || !email || !subject || !message) {
-    return res.status(400).json({ message: 'All fields (name, email, subject, and message) are required.' });
+  const validation = validateFields(req.body, contactRules);
+  if (!validation.isValid) {
+    return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
   }
 
   try {

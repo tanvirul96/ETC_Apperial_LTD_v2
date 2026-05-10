@@ -10,14 +10,40 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
   const [isAdminMode, setIsAdminMode] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const validate = () => {
+    const localErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      localErrors.email = 'Email address is required.';
+    } else if (!emailRegex.test(email.trim())) {
+      localErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!password) {
+      localErrors.password = 'Password is required.';
+    } else if (password.length < 6) {
+      localErrors.password = 'Password must be at least 6 characters.';
+    }
+
+    setErrors(localErrors);
+    return Object.keys(localErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setErrors({});
     setError('');
+    
+    if (!validate()) {
+      return;
+    }
+
+    setLoading(true);
     
     try {
       const response = await api.post('/auth/login', { email, password });
@@ -36,8 +62,12 @@ const Login = () => {
       }
     } catch (err) {
       console.error('Login Error:', err);
-      const message = err.response?.data?.message || 'Server error. Please verify the backend is running and connected.';
-      setError(message);
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      } else {
+        const message = err.response?.data?.message || 'Server error. Please verify the backend is running and connected.';
+        setError(message);
+      }
     } finally {
       setLoading(false);
     }
@@ -94,31 +124,33 @@ const Login = () => {
               <div className="relative">
                 <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Identity</label>
                 <div className="relative group">
-                  <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-outline group-focus-within:text-primary transition-colors" />
+                  <Mail className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.email ? 'text-red-500' : 'text-outline group-focus-within:text-primary'} transition-colors`} />
                   <input
                     type="email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-8 py-3 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-all font-body text-sm outline-none"
+                    className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.email ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm outline-none`}
                     placeholder="name@atelier.com"
                   />
                 </div>
+                {errors.email && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.email}</p>}
               </div>
 
               <div className="relative">
                 <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Security Cipher</label>
                 <div className="relative group">
-                  <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-outline group-focus-within:text-primary transition-colors" />
+                  <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.password ? 'text-red-500' : 'text-outline group-focus-within:text-primary'} transition-colors`} />
                   <input
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-8 py-3 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-all font-body text-sm outline-none"
+                    className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.password ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm outline-none`}
                     placeholder="••••••••"
                   />
                 </div>
+                {errors.password && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.password}</p>}
               </div>
             </div>
 

@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
+const { validateFields } = require('../utils/validator');
+
+const orderRules = {
+  customer_name: { required: true, min: 2, max: 100, label: 'Name' },
+  customer_email: { required: true, isEmail: true, label: 'Email' },
+  shipping_address: { required: true, min: 10, max: 500, label: 'Shipping Address' },
+  phone: { required: true, isPhone: true, label: 'Phone' },
+  total_amount: { required: true, type: 'number', min: 0.01, label: 'Total Amount' }
+};
 
 // Get all orders (Admin only) - Detailed view
 router.get('/', [verifyToken, verifyAdmin], async (req, res) => {
@@ -38,6 +47,18 @@ router.post('/', verifyToken, async (req, res) => {
         total_amount, 
         items 
     } = req.body;
+
+    const validation = validateFields(req.body, orderRules);
+    if (!validation.isValid) {
+        return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
+    }
+
+    if (!items || !Array.isArray(items) || items.length === 0) {
+        return res.status(400).json({ 
+            message: 'Validation failed', 
+            errors: { items: 'Your shopping cart must contain at least one item.' } 
+        });
+    }
 
     try {
         // 1. Create the Order

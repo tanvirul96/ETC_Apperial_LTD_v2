@@ -24,13 +24,56 @@ const Checkout = () => {
     paymentMethod: 'COD' // Cash on Delivery as default for simplicity
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (errors[e.target.name]) {
+      setErrors({ ...errors, [e.target.name]: null });
+    }
+  };
+
+  const validate = () => {
+    const localErrors = {};
+    if (!formData.name.trim()) {
+      localErrors.name = 'Full Name is required.';
+    } else if (formData.name.trim().length < 2) {
+      localErrors.name = 'Name must be at least 2 characters.';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      localErrors.email = 'Email address is required.';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      localErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!formData.phone.trim()) {
+      localErrors.phone = 'Phone number is required.';
+    }
+
+    if (!formData.address.trim()) {
+      localErrors.address = 'Delivery address is required.';
+    } else if (formData.address.trim().length < 10) {
+      localErrors.address = 'Please specify a complete delivery address.';
+    }
+
+    if (!formData.city.trim()) {
+      localErrors.city = 'City is required.';
+    }
+
+    setErrors(localErrors);
+    return Object.keys(localErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
     if (cart.length === 0) return;
+
+    if (!validate()) {
+      return;
+    }
 
     setLoading(true);
     const newOrderNumber = `ETC-${Math.floor(100000 + Math.random() * 900000)}`;
@@ -53,7 +96,11 @@ const Checkout = () => {
       clearCart();
     } catch (err) {
       console.error('Checkout error:', err);
-      alert('Failed to place order. Please check your connection.');
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      } else {
+        alert(err.response?.data?.message || 'Failed to place order. Please check your connection.');
+      }
     } finally {
       setLoading(false);
     }
@@ -105,46 +152,51 @@ const Checkout = () => {
                   <div className="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center font-headline text-lg font-black">1</div>
                   <h3 className="font-headline text-2xl font-bold text-primary">Shipping Archives</h3>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">Full Name</label>
                     <input 
                       required name="name" value={formData.name} onChange={handleInputChange}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all"
+                      className={`w-full bg-transparent border-0 border-b ${errors.name ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all`}
                       placeholder="Enter your name"
                     />
+                    {errors.name && <p className="text-red-500 text-[11px] font-label">{errors.name}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">Email Address</label>
                     <input 
                       required type="email" name="email" value={formData.email} onChange={handleInputChange}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all"
+                      className={`w-full bg-transparent border-0 border-b ${errors.email ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all`}
                       placeholder="atelier@etc.com"
                     />
+                    {errors.email && <p className="text-red-500 text-[11px] font-label">{errors.email}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">Contact Number</label>
                     <input 
                       required name="phone" value={formData.phone} onChange={handleInputChange}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all"
+                      className={`w-full bg-transparent border-0 border-b ${errors.phone ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all`}
                       placeholder="+880"
                     />
+                    {errors.phone && <p className="text-red-500 text-[11px] font-label">{errors.phone}</p>}
                   </div>
                   <div className="space-y-2 md:col-span-2">
                     <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">Delivery Address</label>
                     <input 
                       required name="address" value={formData.address} onChange={handleInputChange}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all"
+                      className={`w-full bg-transparent border-0 border-b ${errors.address ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all`}
                       placeholder="Street, House, Apartment"
                     />
+                    {errors.address && <p className="text-red-500 text-[11px] font-label">{errors.address}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">City</label>
                     <input 
                       required name="city" value={formData.city} onChange={handleInputChange}
-                      className="w-full bg-transparent border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all"
+                      className={`w-full bg-transparent border-0 border-b ${errors.city ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all`}
                       placeholder="Dhaka"
                     />
+                    {errors.city && <p className="text-red-500 text-[11px] font-label">{errors.city}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">Country</label>

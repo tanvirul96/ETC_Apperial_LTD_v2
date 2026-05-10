@@ -13,19 +13,49 @@ const Register = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+  const validate = () => {
+    const localErrors = {};
+    if (!formData.name.trim()) {
+      localErrors.name = 'Full Name is required.';
+    } else if (formData.name.trim().length < 2) {
+      localErrors.name = 'Name must be at least 2 characters.';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      localErrors.email = 'Email address is required.';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      localErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!formData.password) {
+      localErrors.password = 'Password is required.';
+    } else if (formData.password.length < 6) {
+      localErrors.password = 'Password must be at least 6 characters.';
+    }
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
-      setLoading(false);
+      localErrors.confirmPassword = 'Passwords do not match.';
+    }
+
+    setErrors(localErrors);
+    return Object.keys(localErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+    setError('');
+
+    if (!validate()) {
       return;
     }
+
+    setLoading(true);
 
     try {
       await api.post('/auth/register', {
@@ -36,7 +66,12 @@ const Register = () => {
       setSuccess(true);
       setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      console.error('Registration Error:', err);
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      } else {
+        setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -73,61 +108,65 @@ const Register = () => {
             <div className="relative">
               <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Full Name</label>
               <div className="relative">
-                <User className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
+                <User className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.name ? 'text-red-500' : 'text-outline'}`} />
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full pl-8 py-3 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-all font-body text-sm"
+                  className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.name ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm`}
                   placeholder="Alexander Reed"
                 />
               </div>
+              {errors.name && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.name}</p>}
             </div>
 
             <div className="relative">
               <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
+                <Mail className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.email ? 'text-red-500' : 'text-outline'}`} />
                 <input
                   type="email"
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full pl-8 py-3 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-all font-body text-sm"
+                  className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.email ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm`}
                   placeholder="alexander@editorial.com"
                 />
               </div>
+              {errors.email && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.email}</p>}
             </div>
 
             <div className="relative">
               <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Password</label>
               <div className="relative">
-                <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
+                <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.password ? 'text-red-500' : 'text-outline'}`} />
                 <input
                   type="password"
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full pl-8 py-3 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-all font-body text-sm"
+                  className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.password ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm`}
                   placeholder="••••••••"
                 />
               </div>
+              {errors.password && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.password}</p>}
             </div>
 
             <div className="relative">
               <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Confirm Password</label>
               <div className="relative">
-                <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
+                <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.confirmPassword ? 'text-red-500' : 'text-outline'}`} />
                 <input
                   type="password"
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full pl-8 py-3 bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary transition-all font-body text-sm"
+                  className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.confirmPassword ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm`}
                   placeholder="••••••••"
                 />
               </div>
+              {errors.confirmPassword && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.confirmPassword}</p>}
             </div>
           </div>
 

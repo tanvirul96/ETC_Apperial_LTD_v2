@@ -15,12 +15,14 @@ const MyAccount = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updating, setUpdating] = useState(false);
   const [error, setError] = useState('');
+  const [profileErrors, setProfileErrors] = useState({});
 
   // Password Update States
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '' });
   const [passwordSuccess, setPasswordSuccess] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [passwordErrors, setPasswordErrors] = useState({});
   const [passwordUpdating, setPasswordUpdating] = useState(false);
 
   // Avatar Upload States
@@ -48,6 +50,27 @@ const MyAccount = () => {
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
     setError('');
+    setProfileErrors({});
+
+    const localErrors = {};
+    if (!editFormData.name.trim()) {
+      localErrors.name = 'Full name is required.';
+    } else if (editFormData.name.trim().length < 2) {
+      localErrors.name = 'Name must be at least 2 characters.';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!editFormData.email.trim()) {
+      localErrors.email = 'Email address is required.';
+    } else if (!emailRegex.test(editFormData.email.trim())) {
+      localErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (Object.keys(localErrors).length > 0) {
+      setProfileErrors(localErrors);
+      return;
+    }
+
     setUpdating(true);
     try {
       const response = await api.put('/auth/update-profile', {
@@ -62,7 +85,11 @@ const MyAccount = () => {
       }, 2000);
     } catch (err) {
       console.error('Error updating profile:', err);
-      setError(err.response?.data?.message || 'Failed to update profile. Please try again.');
+      if (err.response?.data?.errors) {
+        setProfileErrors(err.response.data.errors);
+      } else {
+        setError(err.response?.data?.message || 'Failed to update profile. Please try again.');
+      }
     } finally {
       setUpdating(false);
     }
@@ -71,6 +98,25 @@ const MyAccount = () => {
   const handlePasswordChange = async (e) => {
     e.preventDefault();
     setPasswordError('');
+    setPasswordErrors({});
+
+    const localErrors = {};
+    if (!passwordData.currentPassword) {
+      localErrors.currentPassword = 'Current password is required.';
+    }
+    if (!passwordData.newPassword) {
+      localErrors.newPassword = 'New password is required.';
+    } else if (passwordData.newPassword.length < 6) {
+      localErrors.newPassword = 'New password must be at least 6 characters.';
+    } else if (passwordData.newPassword === passwordData.currentPassword) {
+      localErrors.newPassword = 'New password cannot be the same as current password.';
+    }
+
+    if (Object.keys(localErrors).length > 0) {
+      setPasswordErrors(localErrors);
+      return;
+    }
+
     setPasswordUpdating(true);
     try {
       await api.put('/auth/change-password', {
@@ -85,7 +131,11 @@ const MyAccount = () => {
       }, 2000);
     } catch (err) {
       console.error('Error changing password:', err);
-      setPasswordError(err.response?.data?.message || 'Failed to update password. Please try again.');
+      if (err.response?.data?.errors) {
+        setPasswordErrors(err.response.data.errors);
+      } else {
+        setPasswordError(err.response?.data?.message || 'Failed to update password. Please try again.');
+      }
     } finally {
       setPasswordUpdating(false);
     }
@@ -349,8 +399,9 @@ const MyAccount = () => {
                       disabled={updating}
                       value={editFormData.name} 
                       onChange={(e) => setEditFormData({...editFormData, name: e.target.value})}
-                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
+                      className={`w-full bg-surface-container-low border ${profileErrors.name ? 'border-red-500' : 'border-none'} rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
                     />
+                    {profileErrors.name && <p className="text-red-500 text-[11px] font-label">{profileErrors.name}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">Email Address</label>
@@ -360,8 +411,9 @@ const MyAccount = () => {
                       disabled={updating}
                       value={editFormData.email} 
                       onChange={(e) => setEditFormData({...editFormData, email: e.target.value})}
-                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
+                      className={`w-full bg-surface-container-low border ${profileErrors.email ? 'border-red-500' : 'border-none'} rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
                     />
+                    {profileErrors.email && <p className="text-red-500 text-[11px] font-label">{profileErrors.email}</p>}
                   </div>
                   <div className="flex gap-4 pt-4">
                     <button 
@@ -435,8 +487,9 @@ const MyAccount = () => {
                       disabled={passwordUpdating}
                       value={passwordData.currentPassword} 
                       onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
-                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
+                      className={`w-full bg-surface-container-low border ${passwordErrors.currentPassword ? 'border-red-500' : 'border-none'} rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
                     />
+                    {passwordErrors.currentPassword && <p className="text-red-500 text-[11px] font-label">{passwordErrors.currentPassword}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">New Password</label>
@@ -446,8 +499,9 @@ const MyAccount = () => {
                       disabled={passwordUpdating}
                       value={passwordData.newPassword} 
                       onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
-                      className="w-full bg-surface-container-low border-none rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50" 
+                      className={`w-full bg-surface-container-low border ${passwordErrors.newPassword ? 'border-red-500' : 'border-none'} rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
                     />
+                    {passwordErrors.newPassword && <p className="text-red-500 text-[11px] font-label">{passwordErrors.newPassword}</p>}
                   </div>
                   <div className="flex gap-4 pt-4">
                     <button 

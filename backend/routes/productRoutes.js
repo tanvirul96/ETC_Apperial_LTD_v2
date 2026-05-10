@@ -3,6 +3,14 @@ const router = express.Router();
 const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
 const { cacheMiddleware } = require('../middleware/cacheMiddleware');
+const { validateFields } = require('../utils/validator');
+
+const productRules = {
+  name: { required: true, min: 2, max: 100, label: 'Product Name' },
+  category: { required: true, label: 'Category' },
+  price: { required: true, type: 'number', min: 0.01, label: 'Price' },
+  stock: { required: true, type: 'integer', min: 0, label: 'Stock' }
+};
 
 // Get all products (Public)
 router.get('/', cacheMiddleware(30), async (req, res) => {
@@ -25,6 +33,18 @@ router.post('/', [verifyToken, verifyAdmin], async (req, res) => {
     try {
         console.log('📦 Create Product Request:', req.body);
         const { sku, name, category, price, stock, status, image_url, description } = req.body;
+        
+        const validation = validateFields(req.body, productRules);
+        if (!validation.isValid) {
+            return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
+        }
+
+        if (!['Men', 'Women', 'Kid'].includes(category)) {
+            return res.status(400).json({ 
+                message: 'Validation failed', 
+                errors: { category: 'Category must be Men, Women, or Kid.' } 
+            });
+        }
         
         // Robust SKU generation
         const finalSku = (sku && sku.trim() !== '') ? sku : `ETC-${Date.now().toString().slice(-6)}`;
@@ -63,6 +83,19 @@ router.post('/', [verifyToken, verifyAdmin], async (req, res) => {
 router.put('/:id', [verifyToken, verifyAdmin], async (req, res) => {
     try {
         const { name, category, price, stock, status, image_url, description } = req.body;
+
+        const validation = validateFields(req.body, productRules);
+        if (!validation.isValid) {
+            return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
+        }
+
+        if (!['Men', 'Women', 'Kid'].includes(category)) {
+            return res.status(400).json({ 
+                message: 'Validation failed', 
+                errors: { category: 'Category must be Men, Women, or Kid.' } 
+            });
+        }
+
         const stockNum = parseInt(stock);
         const autoStatus = status || (stockNum > 0 ? 'Active' : 'Out of Stock');
 

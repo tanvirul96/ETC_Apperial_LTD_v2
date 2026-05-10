@@ -4,15 +4,38 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const supabase = require('../db');
 const { verifyToken, verifyAdmin } = require('../middleware/auth');
+const { validateFields } = require('../utils/validator');
+
+const registerRules = {
+  name: { required: true, min: 2, max: 100, label: 'Name' },
+  email: { required: true, isEmail: true, label: 'Email' },
+  password: { required: true, min: 6, max: 100, label: 'Password' }
+};
+
+const loginRules = {
+  email: { required: true, isEmail: true, label: 'Email' },
+  password: { required: true, min: 6, label: 'Password' }
+};
+
+const changePasswordRules = {
+  currentPassword: { required: true, min: 6, label: 'Current Password' },
+  newPassword: { required: true, min: 6, label: 'New Password' }
+};
+
+const addAdminRules = {
+  name: { required: true, min: 2, max: 100, label: 'Name' },
+  email: { required: true, isEmail: true, label: 'Email' },
+  password: { required: true, min: 6, max: 100, label: 'Password' }
+};
 
 // Register (Public - STRICTLY CLIENT/CUSTOMER ONLY)
 router.post('/register', async (req, res) => {
     try {
         const { name, email, password } = req.body;
         
-        // Validation
-        if (!name || !email || !password) {
-            return res.status(400).json({ message: 'All fields are required.' });
+        const validation = validateFields(req.body, registerRules);
+        if (!validation.isValid) {
+            return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
         }
 
         // Check if user exists
@@ -54,8 +77,9 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password are required.' });
+        const validation = validateFields(req.body, loginRules);
+        if (!validation.isValid) {
+            return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
         }
 
         // Check if user exists
@@ -164,8 +188,10 @@ router.put('/update-profile', verifyToken, async (req, res) => {
 // Change Password (Private - Users and Admins)
 router.put('/change-password', verifyToken, async (req, res) => {
     const { currentPassword, newPassword } = req.body;
-    if (!currentPassword || !newPassword) {
-        return res.status(400).json({ message: 'Current password and new password are required.' });
+    
+    const validation = validateFields(req.body, changePasswordRules);
+    if (!validation.isValid) {
+        return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
     }
 
     try {
@@ -208,8 +234,10 @@ router.put('/change-password', verifyToken, async (req, res) => {
 // Register New Admin (Private - RESTRICTED TO ADMINS ONLY)
 router.post('/add-admin', [verifyToken, verifyAdmin], async (req, res) => {
     const { name, email, password } = req.body;
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: 'Name, email, and password are required.' });
+    
+    const validation = validateFields(req.body, addAdminRules);
+    if (!validation.isValid) {
+        return res.status(400).json({ message: 'Validation failed', errors: validation.errors });
     }
 
     try {
