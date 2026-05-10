@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, UserPlus, RefreshCw, AlertCircle, ShieldCheck, Mail, Calendar, Key, CheckCircle } from 'lucide-react';
+import { Users, UserPlus, RefreshCw, AlertCircle, ShieldCheck, Mail, Calendar, Key, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import api from '../utils/api';
 
 const Curators = () => {
@@ -9,6 +9,7 @@ const Curators = () => {
   const [error, setError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -125,15 +126,24 @@ const Curators = () => {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-black">Security Password</label>
-                  <input
-                    type="password"
-                    required
-                    disabled={submitting}
-                    placeholder="Min 6 characters"
-                    value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full bg-surface border border-outline-variant/10 rounded-xl p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 focus:border-primary disabled:opacity-50"
-                  />
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      required
+                      disabled={submitting}
+                      placeholder="Min 6 characters"
+                      value={formData.password}
+                      onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                      className="w-full bg-surface border border-outline-variant/10 rounded-xl p-4 pr-12 font-body text-sm focus:ring-2 focus:ring-primary/10 focus:border-primary disabled:opacity-50"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-outline hover:text-primary transition-colors focus:outline-none"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
 
                 <button

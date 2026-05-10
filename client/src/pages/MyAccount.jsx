@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, CheckCircle, Loader2, Key, Camera } from 'lucide-react';
+import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, CheckCircle, Loader2, Key, Camera, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import api from '../utils/api';
@@ -24,6 +24,8 @@ const MyAccount = () => {
   const [passwordError, setPasswordError] = useState('');
   const [passwordErrors, setPasswordErrors] = useState({});
   const [passwordUpdating, setPasswordUpdating] = useState(false);
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
 
   // Avatar Upload States
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -481,26 +483,44 @@ const MyAccount = () => {
                   )}
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">Current Password</label>
-                    <input 
-                      type="password"
-                      required 
-                      disabled={passwordUpdating}
-                      value={passwordData.currentPassword} 
-                      onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
-                      className={`w-full bg-surface-container-low border ${passwordErrors.currentPassword ? 'border-red-500' : 'border-none'} rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
-                    />
+                    <div className="relative">
+                      <input 
+                        type={showCurrentPassword ? "text" : "password"}
+                        required 
+                        disabled={passwordUpdating}
+                        value={passwordData.currentPassword} 
+                        onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                        className={`w-full bg-surface-container-low border ${passwordErrors.currentPassword ? 'border-red-500' : 'border-none'} rounded-lg p-4 pr-12 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-outline hover:text-primary transition-colors focus:outline-none"
+                      >
+                        {showCurrentPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
                     {passwordErrors.currentPassword && <p className="text-red-500 text-[11px] font-label">{passwordErrors.currentPassword}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-label uppercase tracking-[0.2em] text-on-surface-variant font-bold">New Password</label>
-                    <input 
-                      type="password"
-                      required 
-                      disabled={passwordUpdating}
-                      value={passwordData.newPassword} 
-                      onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
-                      className={`w-full bg-surface-container-low border ${passwordErrors.newPassword ? 'border-red-500' : 'border-none'} rounded-lg p-4 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
-                    />
+                    <div className="relative">
+                      <input 
+                        type={showNewPassword ? "text" : "password"}
+                        required 
+                        disabled={passwordUpdating}
+                        value={passwordData.newPassword} 
+                        onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                        className={`w-full bg-surface-container-low border ${passwordErrors.newPassword ? 'border-red-500' : 'border-none'} rounded-lg p-4 pr-12 font-body text-sm focus:ring-2 focus:ring-primary/10 disabled:opacity-50`} 
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 p-1 text-outline hover:text-primary transition-colors focus:outline-none"
+                      >
+                        {showNewPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
                     {passwordErrors.newPassword && <p className="text-red-500 text-[11px] font-label">{passwordErrors.newPassword}</p>}
                   </div>
                   <div className="flex gap-4 pt-4">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, Loader2, Eye, EyeOff } from 'lucide-react';
 import api from '../utils/api';
 
 const Register = () => {
@@ -11,6 +11,8 @@ const Register = () => {
     password: '',
     confirmPassword: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [errors, setErrors] = useState({});
@@ -139,32 +141,46 @@ const Register = () => {
 
             <div className="relative">
               <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Password</label>
-              <div className="relative">
-                <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.password ? 'text-red-500' : 'text-outline'}`} />
+              <div className="relative group">
+                <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.password ? 'text-red-500' : 'text-outline group-focus-within:text-primary'} transition-colors`} />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.password ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm`}
+                  className={`w-full pl-8 pr-10 py-3 bg-transparent border-0 border-b ${errors.password ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm outline-none`}
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-outline hover:text-primary transition-colors focus:outline-none"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
               {errors.password && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.password}</p>}
             </div>
 
             <div className="relative">
               <label className="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-2 block">Confirm Password</label>
-              <div className="relative">
-                <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.confirmPassword ? 'text-red-500' : 'text-outline'}`} />
+              <div className="relative group">
+                <Lock className={`absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 ${errors.confirmPassword ? 'text-red-500' : 'text-outline group-focus-within:text-primary'} transition-colors`} />
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className={`w-full pl-8 py-3 bg-transparent border-0 border-b ${errors.confirmPassword ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm`}
+                  className={`w-full pl-8 pr-10 py-3 bg-transparent border-0 border-b ${errors.confirmPassword ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary transition-all font-body text-sm outline-none`}
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-outline hover:text-primary transition-colors focus:outline-none"
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
               {errors.confirmPassword && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.confirmPassword}</p>}
             </div>
