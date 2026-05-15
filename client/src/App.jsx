@@ -23,6 +23,7 @@ import NewsFeed from './pages/NewsFeed';
 import Inquiries from './pages/Inquiries';
 import Curators from './pages/Curators';
 import PageTransition from './components/PageTransition';
+import ScrollToTop from './components/ScrollToTop';
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
@@ -41,7 +42,9 @@ const App = () => {
   }
 
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       {/* Admin Routes */}
       <Route path="/admin" element={
         <ProtectedRoute requireAdmin={true}>
@@ -233,6 +236,7 @@ const App = () => {
       {/* Catch-all redirect to Home */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
+    </>
   );
 };
 
