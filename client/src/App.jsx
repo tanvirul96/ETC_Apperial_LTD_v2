@@ -24,6 +24,7 @@ import Inquiries from './pages/Inquiries';
 import Curators from './pages/Curators';
 import PageTransition from './components/PageTransition';
 import ScrollToTop from './components/ScrollToTop';
+import Loader from './components/Loader';
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
@@ -38,7 +39,7 @@ const App = () => {
   const { loading } = useAuth();
 
   if (loading) {
-    return <div className="h-screen w-full flex items-center justify-center bg-surface italic font-headline text-3xl">ETC.</div>;
+    return <Loader fullScreen />;
   }
 
   return (

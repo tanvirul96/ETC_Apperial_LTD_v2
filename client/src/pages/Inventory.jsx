@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, Edit2, Trash2, X, Upload, Loader2, Image as ImageIcon } from 'lucide-react';
 import api from '../utils/api';
 import { supabase } from '../supabase';
+import Loader from '../components/Loader';
 
 const CATEGORIES = ['Men', 'Women', 'Kid'];
 
@@ -221,7 +222,11 @@ const Inventory = () => {
             </thead>
             <tbody className="divide-y divide-outline-variant/5">
               {loading && products.length === 0 ? (
-                <tr><td colSpan="5" className="px-10 py-24 text-center italic text-on-surface-variant font-body">Accessing atelier archives...</td></tr>
+                <tr>
+                  <td colSpan="5" className="px-10 py-24">
+                    <Loader size="sm" />
+                  </td>
+                </tr>
               ) : filteredProducts.length === 0 ? (
                 <tr><td colSpan="5" className="px-10 py-24 text-center italic text-on-surface-variant font-body">No pieces found matching your query.</td></tr>
               ) : filteredProducts.map((product) => (

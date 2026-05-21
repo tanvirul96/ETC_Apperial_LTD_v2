@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Eye, Edit3, CheckCircle, XCircle, Clock, Search, Download, X, Loader2, Truck, Phone, Mail, MapPin } from 'lucide-react';
 import api from '../utils/api';
+import Loader from '../components/Loader';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -88,7 +89,11 @@ const Orders = () => {
             </thead>
             <tbody className="divide-y divide-outline-variant/5">
               {loading && orders.length === 0 ? (
-                <tr><td colSpan="5" className="px-8 py-12 text-center italic text-on-surface-variant">Accessing manifest...</td></tr>
+                <tr>
+                  <td colSpan="5" className="px-8 py-20">
+                    <Loader size="sm" />
+                  </td>
+                </tr>
               ) : filteredOrders.map((order) => (
                 <tr key={order.id} className="hover:bg-surface-container-low/30 transition-colors group">
                   <td className="px-8 py-6 font-label text-sm font-bold text-primary">#{order.order_number}</td>

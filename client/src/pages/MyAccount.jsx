@@ -4,6 +4,7 @@ import { User, LogOut, Edit3, ShoppingBag, Heart, Package, Bell, Settings, X, Ch
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import api from '../utils/api';
+import Loader from '../components/Loader';
 
 const MyAccount = () => {
   const { user, logout, isAdmin, syncUserLocal } = useAuth();
@@ -287,7 +288,9 @@ const MyAccount = () => {
           
           <div className="space-y-4">
             {loading ? (
-              <div className="bg-white/50 backdrop-blur p-12 rounded-2xl text-center border border-dashed border-outline-variant italic text-on-surface-variant">Opening archives...</div>
+              <div className="bg-white/50 backdrop-blur p-12 rounded-2xl border border-dashed border-outline-variant">
+                <Loader size="sm" />
+              </div>
             ) : orders.length === 0 ? (
               <div className="bg-white p-12 rounded-2xl text-center border border-outline-variant/10 shadow-sm">
                 <ShoppingBag className="w-12 h-12 text-outline-variant mx-auto mb-4 opacity-20" />
