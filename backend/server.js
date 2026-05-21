@@ -36,7 +36,11 @@ app.use((req, res) => {
     res.status(404).json({ message: 'Route not found' });
 });
 
-app.listen(PORT, () => {
-    console.log(`✅ ETC Apparel server running on http://localhost:${PORT}`);
-    console.log(`🚀 Connection Mode: Supabase HTTPS API (Stable)`);
-});
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`✅ ETC Apparel server running on http://localhost:${PORT}`);
+        console.log(`🚀 Connection Mode: Supabase HTTPS API (Stable)`);
+    });
+}
+
+module.exports = app;
