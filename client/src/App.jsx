@@ -20,6 +20,11 @@ import Analytics from './pages/Analytics';
 import Inventory from './pages/Inventory';
 import Orders from './pages/Orders';
 import NewsFeed from './pages/NewsFeed';
+import Inquiries from './pages/Inquiries';
+import Curators from './pages/Curators';
+import PageTransition from './components/PageTransition';
+import ScrollToTop from './components/ScrollToTop';
+import Loader from './components/Loader';
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children, requireAdmin = false }) => {
@@ -34,23 +39,27 @@ const App = () => {
   const { loading } = useAuth();
 
   if (loading) {
-    return <div className="h-screen w-full flex items-center justify-center bg-surface italic font-headline text-3xl">ETC.</div>;
+    return <Loader fullScreen />;
   }
 
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       {/* Admin Routes */}
       <Route path="/admin" element={
         <ProtectedRoute requireAdmin={true}>
           <div className="flex bg-surface min-h-screen">
             <AdminSidebar />
             <div className="flex-grow lg:ml-64">
-              <Routes>
-                <Route index element={<AdminDashboard />} />
-                <Route path="inventory" element={<Inventory />} />
-                <Route path="orders" element={<Orders />} />
-                <Route path="news" element={<NewsFeed />} />
-                <Route path="analytics" element={<Analytics />} />
+               <Routes>
+                <Route index element={<PageTransition><AdminDashboard /></PageTransition>} />
+                <Route path="inventory" element={<PageTransition><Inventory /></PageTransition>} />
+                <Route path="orders" element={<PageTransition><Orders /></PageTransition>} />
+                <Route path="news" element={<PageTransition><NewsFeed /></PageTransition>} />
+                <Route path="analytics" element={<PageTransition><Analytics /></PageTransition>} />
+                <Route path="inquiries" element={<PageTransition><Inquiries /></PageTransition>} />
+                <Route path="curators" element={<PageTransition><Curators /></PageTransition>} />
               </Routes>
             </div>
           </div>
@@ -64,10 +73,12 @@ const App = () => {
             <AdminSidebar />
             <div className="flex-grow lg:ml-64">
               <Routes>
-                <Route path="inventory" element={<Inventory />} />
-                <Route path="orders" element={<Orders />} />
-                <Route path="news" element={<NewsFeed />} />
-                <Route path="analytics" element={<Analytics />} />
+                <Route path="inventory" element={<PageTransition><Inventory /></PageTransition>} />
+                <Route path="orders" element={<PageTransition><Orders /></PageTransition>} />
+                <Route path="news" element={<PageTransition><NewsFeed /></PageTransition>} />
+                <Route path="analytics" element={<PageTransition><Analytics /></PageTransition>} />
+                <Route path="inquiries" element={<PageTransition><Inquiries /></PageTransition>} />
+                <Route path="curators" element={<PageTransition><Curators /></PageTransition>} />
               </Routes>
             </div>
           </div>
@@ -79,7 +90,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Home />
+            <PageTransition>
+              <Home />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -89,7 +102,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Shop />
+            <PageTransition>
+              <Shop />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -99,7 +114,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Login />
+            <PageTransition>
+              <Login />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -109,7 +126,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Register />
+            <PageTransition>
+              <Register />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -119,7 +138,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <About />
+            <PageTransition>
+              <About />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -129,7 +150,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Management />
+            <PageTransition>
+              <Management />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -139,7 +162,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Contact />
+            <PageTransition>
+              <Contact />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -149,7 +174,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Checkout />
+            <PageTransition>
+              <Checkout />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -159,7 +186,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <Journal />
+            <PageTransition>
+              <Journal />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -169,7 +198,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           <Header />
           <div className="flex-grow">
-            <NewsDetail />
+            <PageTransition>
+              <NewsDetail />
+            </PageTransition>
           </div>
           <Footer />
         </div>
@@ -180,7 +211,23 @@ const App = () => {
           <div className="flex flex-col min-h-screen">
             <Header />
             <div className="flex-grow">
-              <MyAccount />
+              <PageTransition>
+                <MyAccount />
+              </PageTransition>
+            </div>
+            <Footer />
+          </div>
+        </ProtectedRoute>
+      } />
+
+      <Route path="/profile" element={
+        <ProtectedRoute>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <div className="flex-grow">
+              <PageTransition>
+                <MyAccount />
+              </PageTransition>
             </div>
             <Footer />
           </div>
@@ -190,6 +237,7 @@ const App = () => {
       {/* Catch-all redirect to Home */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
+    </>
   );
 };
 

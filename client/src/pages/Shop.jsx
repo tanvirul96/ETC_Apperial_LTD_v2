@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Filter, Search, ShoppingBag, ArrowRight } from 'lucide-react';
 import api from '../utils/api';
 import { useCart } from '../context/CartContext';
+import Loader from '../components/Loader';
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -75,7 +76,9 @@ const Shop = () => {
         </header>
 
         {loading ? (
-          <div className="py-20 text-center italic text-on-surface-variant">Gathering items...</div>
+          <div className="py-20">
+            <Loader size="lg" />
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
             {filteredProducts.map((product, index) => (

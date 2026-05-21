@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, CheckCircle, Loader2 } from 'lucide-react';
+import api from '../utils/api';
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,14 +15,61 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const validate = () => {
+    const localErrors = {};
+    if (!formData.name.trim()) {
+      localErrors.name = 'Name is required.';
+    } else if (formData.name.trim().length < 2) {
+      localErrors.name = 'Name must be at least 2 characters long.';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      localErrors.email = 'Email address is required.';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      localErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!formData.message.trim()) {
+      localErrors.message = 'Message is required.';
+    } else if (formData.message.trim().length < 10) {
+      localErrors.message = 'Message must be at least 10 characters long.';
+    }
+
+    setErrors(localErrors);
+    return Object.keys(localErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Simulating API call
-    setTimeout(() => {
-      setSubmitted(false);
+    setErrors({});
+    setError('');
+    
+    if (!validate()) {
+      return;
+    }
+
+    setLoading(true);
+    
+    try {
+      await api.post('/contacts', {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.type, // Map 'type' form field to 'subject' in PostgreSQL
+        message: formData.message
+      });
+      setSubmitted(true);
       setFormData({ name: '', email: '', type: 'Wholesale Partnerships', message: '' });
-    }, 5000);
+    } catch (err) {
+      console.error('Error submitting inquiry:', err);
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      } else {
+        setError(err.response?.data?.message || 'Failed to submit inquiry. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,18 +105,20 @@ const Contact = () => {
                 <input 
                   required value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all" 
+                  className={`w-full bg-transparent border-0 border-b ${errors.name ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all`} 
                   placeholder="E.g. Alexander Reed" type="text"
                 />
+                {errors.name && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.name}</p>}
               </div>
               <div className="relative">
                 <label className="font-label text-xs font-semibold text-on-surface-variant uppercase tracking-widest mb-2 block">Email Address</label>
                 <input 
                   required value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all" 
+                  className={`w-full bg-transparent border-0 border-b ${errors.email ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all`} 
                   placeholder="alexander@editorial.com" type="email"
                 />
+                {errors.email && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.email}</p>}
               </div>
             </div>
             <div className="relative">
@@ -86,12 +139,13 @@ const Contact = () => {
               <textarea 
                 required value={formData.message}
                 onChange={(e) => setFormData({...formData, message: e.target.value})}
-                className="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all resize-none" 
+                className={`w-full bg-transparent border-0 border-b ${errors.message ? 'border-red-500' : 'border-outline-variant'} focus:ring-0 focus:border-primary px-0 py-3 text-on-surface font-body placeholder:text-on-surface-variant/40 transition-all resize-none`} 
                 placeholder="How can our editorial team assist you?" rows="4"
               ></textarea>
+              {errors.message && <p className="text-red-500 text-[11px] mt-1 font-label">{errors.message}</p>}
             </div>
             
-            {submitted && (
+             {submitted && (
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -102,13 +156,33 @@ const Contact = () => {
               </motion.div>
             )}
 
+            {error && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 font-label text-sm"
+              >
+                {error}
+              </motion.div>
+            )}
+
             <div className="pt-4">
               <button 
-                className="editorial-gradient text-on-primary px-10 py-5 rounded-lg font-label font-bold uppercase tracking-widest text-[10px] hover:opacity-90 transition-all flex items-center gap-3 shadow-xl shadow-primary/20" 
+                disabled={loading}
+                className="editorial-gradient text-on-primary px-10 py-5 rounded-lg font-label font-bold uppercase tracking-widest text-[10px] hover:opacity-90 transition-all flex items-center gap-3 shadow-xl shadow-primary/20 disabled:opacity-55 cursor-pointer" 
                 type="submit"
               >
-                Submit Inquiry
-                <ArrowRight className="w-4 h-4" />
+                {loading ? (
+                  <>
+                    Submitting...
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Submit Inquiry
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </div>
           </form>

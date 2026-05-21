@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, Edit2, Trash2, X, Upload, Loader2, Image as ImageIcon } from 'lucide-react';
 import api from '../utils/api';
 import { supabase } from '../supabase';
+import Loader from '../components/Loader';
 
-const CATEGORIES = ['Men', 'Women', 'Kids', 'Accessories', 'Signature Knits', 'Outerwear', 'Essentials'];
+const CATEGORIES = ['Men', 'Women', 'Kid'];
 
 const Inventory = () => {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ const Inventory = () => {
   const [search, setSearch] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [errors, setErrors] = useState({});
   
   const [formData, setFormData] = useState({
     sku: '',
@@ -70,6 +72,7 @@ const Inventory = () => {
   };
 
   const handleOpenModal = (product = null) => {
+    setErrors({});
     if (product) {
       setEditingProduct(product);
       setFormData({
@@ -98,8 +101,44 @@ const Inventory = () => {
     setIsModalOpen(true);
   };
 
+  const validate = () => {
+    const localErrors = {};
+    if (!formData.sku.trim()) {
+      localErrors.sku = 'SKU is required.';
+    }
+
+    if (!formData.name.trim()) {
+      localErrors.name = 'Design Name is required.';
+    } else if (formData.name.trim().length < 2) {
+      localErrors.name = 'Design Name must be at least 2 characters.';
+    }
+
+    if (!['Men', 'Women', 'Kid'].includes(formData.category)) {
+      localErrors.category = 'Classification must be Men, Women, or Kid.';
+    }
+
+    const priceNum = parseFloat(formData.price);
+    if (isNaN(priceNum) || priceNum < 0.01) {
+      localErrors.price = 'Valuation must be a positive number greater than or equal to $0.01.';
+    }
+
+    const stockNum = parseInt(formData.stock);
+    if (isNaN(stockNum) || stockNum < 0) {
+      localErrors.stock = 'Stock Quota must be a valid non-negative integer.';
+    }
+
+    setErrors(localErrors);
+    return Object.keys(localErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
+
+    if (!validate()) {
+      return;
+    }
+
     setLoading(true);
     try {
       if (editingProduct) {
@@ -111,7 +150,11 @@ const Inventory = () => {
       fetchProducts();
     } catch (err) {
       console.error('Error saving product:', err);
-      alert('Error saving product. Check console for details.');
+      if (err.response?.data?.errors) {
+        setErrors(err.response.data.errors);
+      } else {
+        alert(err.response?.data?.message || 'Error saving product. Check console for details.');
+      }
     } finally {
       setLoading(false);
     }
@@ -179,7 +222,11 @@ const Inventory = () => {
             </thead>
             <tbody className="divide-y divide-outline-variant/5">
               {loading && products.length === 0 ? (
-                <tr><td colSpan="5" className="px-10 py-24 text-center italic text-on-surface-variant font-body">Accessing atelier archives...</td></tr>
+                <tr>
+                  <td colSpan="5" className="px-10 py-24">
+                    <Loader size="sm" />
+                  </td>
+                </tr>
               ) : filteredProducts.length === 0 ? (
                 <tr><td colSpan="5" className="px-10 py-24 text-center italic text-on-surface-variant font-body">No pieces found matching your query.</td></tr>
               ) : filteredProducts.map((product) => (
@@ -270,51 +317,56 @@ const Inventory = () => {
               <div className="flex-1 p-10 overflow-y-auto max-h-[85vh]">
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                    <div className="space-y-2">
+                      <div className="space-y-2">
                       <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Identity (SKU)</label>
                       <input 
                         required value={formData.sku}
                         onChange={(e) => setFormData({...formData, sku: e.target.value})}
-                        className="w-full bg-surface border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm"
+                        className={`w-full bg-surface border-0 border-b ${errors.sku ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm`}
                         placeholder="ETC-XXXX"
                       />
+                      {errors.sku && <p className="text-red-500 text-[11px] font-label">{errors.sku}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Design Name</label>
                       <input 
                         required value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full bg-surface border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm"
+                        className={`w-full bg-surface border-0 border-b ${errors.name ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm`}
                         placeholder="e.g. Signature Silk Gown"
                       />
+                      {errors.name && <p className="text-red-500 text-[11px] font-label">{errors.name}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Classification</label>
                       <select 
                         value={formData.category}
                         onChange={(e) => setFormData({...formData, category: e.target.value})}
-                        className="w-full bg-surface border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm cursor-pointer"
+                        className={`w-full bg-surface border-0 border-b ${errors.category ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm cursor-pointer`}
                       >
                         {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
                       </select>
+                      {errors.category && <p className="text-red-500 text-[11px] font-label">{errors.category}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Valuation ($)</label>
                       <input 
                         required type="number" step="0.01" value={formData.price}
                         onChange={(e) => setFormData({...formData, price: e.target.value})}
-                        className="w-full bg-surface border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm"
+                        className={`w-full bg-surface border-0 border-b ${errors.price ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm`}
                         placeholder="0.00"
                       />
+                      {errors.price && <p className="text-red-500 text-[11px] font-label">{errors.price}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Stock Quota</label>
                       <input 
                         required type="number" value={formData.stock}
                         onChange={(e) => setFormData({...formData, stock: e.target.value})}
-                        className="w-full bg-surface border-0 border-b border-outline-variant/20 py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm"
+                        className={`w-full bg-surface border-0 border-b ${errors.stock ? 'border-red-500' : 'border-outline-variant/20'} py-3 font-body focus:ring-0 focus:border-primary transition-all text-sm`}
                         placeholder="Quantity"
                       />
+                      {errors.stock && <p className="text-red-500 text-[11px] font-label">{errors.stock}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-label uppercase tracking-widest text-on-surface-variant font-bold">Status</label>

@@ -50,7 +50,7 @@ router.get('/', [verifyToken, verifyAdmin], async (req, res) => {
             .from('products')
             .select('category');
         
-        const categoryMap = { 'Men': 12, 'Women': 18, 'Kids': 8, 'Archive': 5 }; // Dummy base
+        const categoryMap = { 'Men': 12, 'Women': 18, 'Kid': 8, 'Archive': 5 }; // Dummy base
         products?.forEach(p => {
             if (p.category) categoryMap[p.category] = (categoryMap[p.category] || 0) + 1;
         });

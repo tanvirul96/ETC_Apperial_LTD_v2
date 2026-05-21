@@ -9,8 +9,23 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verify token on mount if needed
-    setLoading(false);
+    const verifyAndSyncProfile = async () => {
+      const savedToken = localStorage.getItem('token');
+      if (savedToken) {
+        try {
+          // Sync profile details with live database on load
+          const response = await api.get('/auth/me');
+          setUser(response.data);
+          localStorage.setItem('user', JSON.stringify(response.data));
+          localStorage.setItem('role', response.data.role);
+        } catch (err) {
+          console.error('Error syncing profile, terminating session:', err);
+          logout();
+        }
+      }
+      setLoading(false);
+    };
+    verifyAndSyncProfile();
   }, []);
 
   const login = (userData, userToken) => {
@@ -29,10 +44,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('role');
   };
 
+  const syncUserLocal = (updatedUser) => {
+    const currentLocalUser = JSON.parse(localStorage.getItem('user')) || {};
+    const mergedUser = { ...currentLocalUser, ...updatedUser };
+    setUser(mergedUser);
+    localStorage.setItem('user', JSON.stringify(mergedUser));
+  };
+
   const isAdmin = user?.role === 'admin';
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading, isAdmin }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading, isAdmin, syncUserLocal }}>
       {children}
     </AuthContext.Provider>
   );

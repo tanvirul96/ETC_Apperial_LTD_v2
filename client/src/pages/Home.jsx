@@ -222,37 +222,50 @@ const Home = () => {
               <ArrowRight className="text-sm group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-auto md:h-[800px]">
-            <Link to="/shop" className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-lg shadow-lg">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7h06E9qDUKq9xalBzao-1lZAZNK0Kgu6VLGnKxCrlE2miNi7oxtpqkdB1nfaq8fDtpO-pehlLFpuYfIfBhm5rivJG1pc1mF-41PW3MFht7dlJSjjQ_cmHU42-yISdMPkogdjhQ1Dlm-7um0fZAeWU5JbT-FdGX_O47dG2pjLBDtSIm3VNWTBTtwXy3FdZW8FtmPKz6WU8s38_vmeEohAtFUWi6j9YyYhW_A0I5lhiyAi32Fp2Q_Sw15zaWBYL6Cn7AJQaTKbCaBR" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Menswear" />
-              <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
-              <div className="absolute bottom-10 left-10 text-white z-10">
-                <p className="font-label text-xs tracking-[0.3em] mb-2 uppercase">Curated for Him</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 h-[800px] md:h-[700px]">
+            {/* Menswear - Left Column (Tall) */}
+            <Link to="/shop" className="relative group overflow-hidden rounded-sm shadow-md h-full">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7h06E9qDUKq9xalBzao-1lZAZNK0Kgu6VLGnKxCrlE2miNi7oxtpqkdB1nfaq8fDtpO-pehlLFpuYfIfBhm5rivJG1pc1mF-41PW3MFht7dlJSjjQ_cmHU42-yISdMPkogdjhQ1Dlm-7um0fZAeWU5JbT-FdGX_O47dG2pjLBDtSIm3VNWTBTtwXy3FdZW8FtmPKz6WU8s38_vmeEohAtFUWi6j9YyYhW_A0I5lhiyAi32Fp2Q_Sw15zaWBYL6Cn7AJQaTKbCaBR" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Menswear" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute bottom-10 left-8 text-white z-10">
+                <p className="font-label text-[10px] tracking-[0.3em] mb-2 uppercase font-bold text-white/90">Curated for Him</p>
                 <h3 className="font-headline text-4xl font-bold">Menswear</h3>
               </div>
             </Link>
-            <Link to="/shop" className="md:col-span-2 relative group overflow-hidden rounded-lg shadow-lg">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9WlH5JDUbxluGtsNw7Wosolq2H6v3BjMkVFZLJrKMV8oN0qS-NwjOYkopQySW5YLR-tVM73gN-G4CIcfzacPboZwyiSxACV2yGnLGliyFwld5Fx5PySZgl63uIK0AQctFx_-ZwL29zBjPT9T7Oma6Nei095hXsqM5uD53j-kapSSG7lxNDuZzLPLI-qVd9KDMXQYfIiR0-1zG4H2beMwS4hX9fRzXOy6LHMldJPr0mSwtzM7w28GwByETfTItwWpB4BkRgGV9G-LA" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Womenswear" />
-              <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
-              <div className="absolute bottom-8 left-8 text-white z-10">
-                <p className="font-label text-xs tracking-[0.3em] mb-2 uppercase">Curated for Her</p>
-                <h3 className="font-headline text-3xl font-bold">Womenswear</h3>
+
+            {/* Right Column (Stacked) */}
+            <div className="flex flex-col gap-4 md:gap-6 h-full">
+              {/* Womenswear - Top Right (Wide) */}
+              <Link to="/shop" className="relative group overflow-hidden rounded-sm shadow-md h-1/2">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9WlH5JDUbxluGtsNw7Wosolq2H6v3BjMkVFZLJrKMV8oN0qS-NwjOYkopQySW5YLR-tVM73gN-G4CIcfzacPboZwyiSxACV2yGnLGliyFwld5Fx5PySZgl63uIK0AQctFx_-ZwL29zBjPT9T7Oma6Nei095hXsqM5uD53j-kapSSG7lxNDuZzLPLI-qVd9KDMXQYfIiR0-1zG4H2beMwS4hX9fRzXOy6LHMldJPr0mSwtzM7w28GwByETfTItwWpB4BkRgGV9G-LA" className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" alt="Womenswear" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute bottom-8 left-8 text-white z-10">
+                  <p className="font-label text-[10px] tracking-[0.3em] mb-2 uppercase font-bold text-white/90">Curated for Her</p>
+                  <h3 className="font-headline text-3xl font-bold">Womenswear</h3>
+                </div>
+              </Link>
+
+              {/* Bottom Right (Two Squares) */}
+              <div className="grid grid-cols-2 gap-4 md:gap-6 h-1/2">
+                {/* Accessories */}
+                <Link to="/shop" className="relative group overflow-hidden rounded-sm shadow-md h-full">
+                  <img src="/images/accessories.png" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Accessories" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute bottom-6 left-6 text-white z-10">
+                    <h3 className="font-headline text-xl md:text-2xl font-bold">Accessories</h3>
+                  </div>
+                </Link>
+
+                {/* Kids Collection */}
+                <Link to="/shop" className="relative group overflow-hidden rounded-sm shadow-md h-full">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa5p-ctTWjDmLIndxEfCA8dt5Sx5WC-RQMRhBn2NrjXlSKOPlH-m0YnYFDB_uJvhE6df9Naks90uffU0MTaakIKa38aqwcBocfxoPS5VKoX40JLLtY6dWFLB0aMz3R_jFtXKCeCRV80Hb7LknxElUsv8imWvoHBwOqpMdjceAWgbLyhFE7EKFcNXccAnppY783dIxPjelPcEqkUqXtBwm3WKp3AEQhcivryAOziGjJ7Gs9kHizLyAIqNEM2grwMFHxcIzwN3cnjZvJ" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Kids Collection" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute bottom-6 left-6 text-white z-10">
+                    <h3 className="font-headline text-xl md:text-2xl font-bold">Kids Collection</h3>
+                  </div>
+                </Link>
               </div>
-            </Link>
-            <Link to="/shop" className="relative group overflow-hidden rounded-lg shadow-lg">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBsnjcKhDzcQIQ8DLe5XmlN8puBsUgNPGFShKiMi05iKeTWq9cb_adpPttT6D5-0MLmDvthHWegd-Oevgl6RdnmFOLEqRmqfI_-MmhMcfu56d5HubeR8hU5qj_kxw7FOcThcXxitV6vuAfRn_q1mk-fLd278waYDKWKJ8sq3xQPiPCNJeE8Ln95A28yA6HYcXuDJXaeeFPaibRnzb904T04vHZYJaPK_n8RCV8L5tNvCVPvNTcmBpHLZ01yDlf93m39iZ6_P-P_wxQ" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Accessories" />
-              <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
-              <div className="absolute bottom-6 left-6 text-white z-10">
-                <h3 className="font-headline text-xl font-bold">Accessories</h3>
-              </div>
-            </Link>
-            <Link to="/shop" className="relative group overflow-hidden rounded-lg shadow-lg">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCa5p-ctTWjDmLIndxEfCA8dt5Sx5WC-RQMRhBn2NrjXlSKOPlH-m0YnYFDB_uJvhE6df9Naks90uffU0MTaakIKa38aqwcBocfxoPS5VKoX40JLLtY6dWFLB0aMz3R_jFtXKCeCRV80Hb7LknxElUsv8imWvoHBwOqpMdjceAWgbLyhFE7EKFcNXccAnppY783dIxPjelPcEqkUqXtBwm3WKp3AEQhcivryAOziGjJ7Gs9kHizLyAIqNEM2grwMFHxcIzwN3cnjZvJ" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Kids" />
-              <div className="absolute inset-0 bg-primary/20 group-hover:bg-primary/40 transition-colors"></div>
-              <div className="absolute bottom-6 left-6 text-white z-10">
-                <h3 className="font-headline text-xl font-bold">Kids Collection</h3>
-              </div>
-            </Link>
+            </div>
           </div>
         </div>
       </section>

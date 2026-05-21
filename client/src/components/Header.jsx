@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Menu, X, User, LogOut } from 'lucide-react';
+import { ShoppingBag, Menu, X, User, LogOut, Plus, Minus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const { user, logout, isAdmin } = useAuth();
-  const { cart, cartCount, cartTotal, removeFromCart } = useCart();
+  const { cart, cartCount, cartTotal, removeFromCart, updateQty } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,7 +54,7 @@ const Header = () => {
                   {isAdmin && (
                     <Link to="/admin" className="font-label text-[10px] uppercase tracking-[0.3em] text-secondary hover:text-primary transition-all font-bold">Admin Panel</Link>
                   )}
-                  <Link to="/account" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">
+                  <Link to="/profile" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">
                     {user.name.split(' ')[0]}
                   </Link>
                   <button onClick={logout} className="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">
@@ -114,9 +114,9 @@ const Header = () => {
               ))}
             </nav>
             <div className="mt-auto flex flex-col gap-4">
-              {user ? (
+               {user ? (
                 <>
-                  <Link to="/account" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">My Account</Link>
+                  <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">My Profile</Link>
                   <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="w-full py-4 text-center bg-primary text-white font-label text-xs uppercase tracking-widest font-bold">Sign Out</button>
                 </>
               ) : (
@@ -170,9 +170,25 @@ const Header = () => {
                       <div className="flex-grow">
                         <p className="font-bold text-sm text-primary leading-tight">{item.name}</p>
                         <p className="text-xs text-on-surface-variant font-label mt-1">{item.category}</p>
-                        <div className="flex items-center justify-between mt-2">
-                          <span className="font-headline font-bold text-secondary">${parseFloat(item.price).toFixed(2)}</span>
-                          <span className="font-label text-xs text-on-surface-variant">x{item.qty}</span>
+                        <div className="flex items-center justify-between mt-3">
+                          <span className="font-headline font-bold text-secondary text-sm">${parseFloat(item.price).toFixed(2)}</span>
+                          <div className="flex items-center border border-outline-variant/30 rounded bg-surface p-0.5">
+                            <button 
+                              onClick={() => updateQty(item.id, (item.qty || 1) - 1)}
+                              className="p-1 hover:bg-surface-container-low text-primary transition-colors rounded-sm"
+                            >
+                              <Minus className="w-2.5 h-2.5" />
+                            </button>
+                            <span className="px-2 font-label text-[10px] text-primary font-bold min-w-[16px] text-center">
+                              {item.qty || 1}
+                            </span>
+                            <button 
+                              onClick={() => updateQty(item.id, (item.qty || 1) + 1)}
+                              className="p-1 hover:bg-surface-container-low text-primary transition-colors rounded-sm"
+                            >
+                              <Plus className="w-2.5 h-2.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                       <button onClick={() => removeFromCart(item.id)} className="text-outline-variant hover:text-red-600 transition-colors flex-shrink-0">
