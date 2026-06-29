@@ -4,6 +4,7 @@ import { ShoppingBag, Menu, X, User, LogOut, Plus, Minus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import etcLogo from '../assets/ETC_logo.png';
 
 const Header = () => {
   const { user, logout, isAdmin } = useAuth();
@@ -33,7 +34,7 @@ const Header = () => {
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-outline-variant/10 h-20' : 'bg-transparent h-20'}`}>
         <nav className="container mx-auto px-6 md:px-16 h-full flex items-center justify-between">
           <div className="flex items-center gap-12">
-            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter"><img src="src/assets/ETC_logo.png" alt="Logo" className="h-16" /></Link>
+            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter"><img src={etcLogo} alt="Logo" className="h-16" /></Link>
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
