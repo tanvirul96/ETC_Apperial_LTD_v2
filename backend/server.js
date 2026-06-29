@@ -10,12 +10,13 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Serve frontend static files
-app.use('/frontend', express.static(path.join(__dirname, '..', 'frontend')));
-
-// Redirect root to frontend
+// Root route - Welcome message for the API
 app.get('/', (req, res) => {
-    res.redirect('/frontend/index.html');
+    res.json({ 
+        message: 'Welcome to the ETC Apparel API', 
+        status: 'Active',
+        healthCheck: '/api/health'
+    });
 });
 
 // API Routes
