@@ -3,7 +3,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import AdminSidebar from './components/AdminSidebar';
+import AdminLayout from './components/AdminLayout';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Login from './pages/Login';
@@ -49,39 +49,33 @@ const App = () => {
       {/* Admin Routes */}
       <Route path="/admin" element={
         <ProtectedRoute requireAdmin={true}>
-          <div className="flex bg-surface min-h-screen">
-            <AdminSidebar />
-            <div className="flex-grow lg:ml-64">
-               <Routes>
-                <Route index element={<PageTransition><AdminDashboard /></PageTransition>} />
-                <Route path="inventory" element={<PageTransition><Inventory /></PageTransition>} />
-                <Route path="orders" element={<PageTransition><Orders /></PageTransition>} />
-                <Route path="news" element={<PageTransition><NewsFeed /></PageTransition>} />
-                <Route path="analytics" element={<PageTransition><Analytics /></PageTransition>} />
-                <Route path="inquiries" element={<PageTransition><Inquiries /></PageTransition>} />
-                <Route path="curators" element={<PageTransition><Curators /></PageTransition>} />
-              </Routes>
-            </div>
-          </div>
+          <AdminLayout>
+             <Routes>
+              <Route index element={<PageTransition><AdminDashboard /></PageTransition>} />
+              <Route path="inventory" element={<PageTransition><Inventory /></PageTransition>} />
+              <Route path="orders" element={<PageTransition><Orders /></PageTransition>} />
+              <Route path="news" element={<PageTransition><NewsFeed /></PageTransition>} />
+              <Route path="analytics" element={<PageTransition><Analytics /></PageTransition>} />
+              <Route path="inquiries" element={<PageTransition><Inquiries /></PageTransition>} />
+              <Route path="curators" element={<PageTransition><Curators /></PageTransition>} />
+            </Routes>
+          </AdminLayout>
         </ProtectedRoute>
       } />
       
       {/* Nested Admin Routes for deep links */}
       <Route path="/admin/*" element={
         <ProtectedRoute requireAdmin={true}>
-          <div className="flex bg-surface min-h-screen">
-            <AdminSidebar />
-            <div className="flex-grow lg:ml-64">
-              <Routes>
-                <Route path="inventory" element={<PageTransition><Inventory /></PageTransition>} />
-                <Route path="orders" element={<PageTransition><Orders /></PageTransition>} />
-                <Route path="news" element={<PageTransition><NewsFeed /></PageTransition>} />
-                <Route path="analytics" element={<PageTransition><Analytics /></PageTransition>} />
-                <Route path="inquiries" element={<PageTransition><Inquiries /></PageTransition>} />
-                <Route path="curators" element={<PageTransition><Curators /></PageTransition>} />
-              </Routes>
-            </div>
-          </div>
+          <AdminLayout>
+            <Routes>
+              <Route path="inventory" element={<PageTransition><Inventory /></PageTransition>} />
+              <Route path="orders" element={<PageTransition><Orders /></PageTransition>} />
+              <Route path="news" element={<PageTransition><NewsFeed /></PageTransition>} />
+              <Route path="analytics" element={<PageTransition><Analytics /></PageTransition>} />
+              <Route path="inquiries" element={<PageTransition><Inquiries /></PageTransition>} />
+              <Route path="curators" element={<PageTransition><Curators /></PageTransition>} />
+            </Routes>
+          </AdminLayout>
         </ProtectedRoute>
       } />
 

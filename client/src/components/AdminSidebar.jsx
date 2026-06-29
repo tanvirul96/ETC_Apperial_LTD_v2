@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingCart, Newspaper, BarChart3, Settings, LogOut, MessageSquare, Users } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, Newspaper, BarChart3, LogOut, MessageSquare, Users, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ isOpen, onClose }) => {
   const { logout } = useAuth();
 
   const links = [
@@ -17,9 +17,23 @@ const AdminSidebar = () => {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-primary text-white z-[100] hidden lg:flex flex-col p-8 border-r border-white/5">
-      <div className="mb-12">
-        <h2 className="font-headline text-2xl font-black tracking-tighter">ETC. <span className="text-[10px] uppercase tracking-[0.3em] font-label text-secondary block mt-1">Admin Atelier</span></h2>
+    <aside 
+      className={`fixed left-0 top-0 h-screen w-64 bg-primary text-white z-[100] flex flex-col p-8 border-r border-white/5 transition-transform duration-300 ease-in-out lg:translate-x-0 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}
+    >
+      <div className="mb-12 flex items-center justify-between">
+        <h2 className="font-headline text-2xl font-black tracking-tighter">
+          ETC. <span className="text-[10px] uppercase tracking-[0.3em] font-label text-secondary block mt-1">Admin Atelier</span>
+        </h2>
+        {/* Close Button on Mobile */}
+        <button 
+          onClick={onClose}
+          className="lg:hidden p-2 hover:bg-white/10 rounded-lg transition-colors text-white/80"
+          aria-label="Close navigation drawer"
+        >
+          <X className="w-5 h-5" />
+        </button>
       </div>
 
       <nav className="flex-grow space-y-2">
@@ -28,6 +42,7 @@ const AdminSidebar = () => {
             key={link.path}
             to={link.path}
             end={link.path === '/admin'}
+            onClick={onClose}
             className={({ isActive }) => 
               `flex items-center gap-4 px-6 py-4 rounded-lg font-label text-[10px] uppercase tracking-widest transition-all ${
                 isActive 
@@ -44,7 +59,10 @@ const AdminSidebar = () => {
 
       <div className="mt-auto pt-8 border-t border-white/5">
         <button 
-          onClick={logout}
+          onClick={() => {
+            onClose();
+            logout();
+          }}
           className="flex items-center gap-4 px-6 py-4 w-full text-white/50 hover:text-red-400 transition-colors font-label text-[10px] uppercase tracking-widest"
         >
           <LogOut className="w-4 h-4" />
