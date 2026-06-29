@@ -55,7 +55,7 @@ const Inquiries = () => {
   };
 
   return (
-    <div className="p-8 lg:p-12 bg-surface min-h-screen">
+    <div className="p-4 md:p-8 lg:p-12 bg-surface min-h-screen">
       <header className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <h1 className="font-headline text-4xl md:text-5xl font-black text-primary tracking-tight mb-2 italic">Customer <span className="font-normal not-italic">Inquiries.</span></h1>
@@ -91,7 +91,7 @@ const Inquiries = () => {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* List panel */}
-          <div className="lg:col-span-5 bg-white rounded-3xl border border-outline-variant/5 p-8 shadow-2xl shadow-primary/5 h-[calc(100vh-280px)] overflow-y-auto">
+          <div className="lg:col-span-5 bg-white rounded-3xl border border-outline-variant/5 p-5 md:p-8 shadow-2xl shadow-primary/5 h-auto lg:h-[calc(100vh-280px)] overflow-y-auto">
             <h3 className="font-label text-xs font-black tracking-widest text-on-surface-variant uppercase mb-6">Conversation Log ({inquiries.length})</h3>
             <div className="space-y-4">
               {inquiries.map((inq) => {
@@ -142,7 +142,7 @@ const Inquiries = () => {
               <motion.div 
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-3xl border border-outline-variant/5 p-10 shadow-2xl shadow-primary/5 h-full flex flex-col justify-between"
+                className="bg-white rounded-3xl border border-outline-variant/5 p-6 md:p-10 shadow-2xl shadow-primary/5 h-full flex flex-col justify-between"
               >
                 <div>
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-outline-variant/10 pb-8 mb-8">

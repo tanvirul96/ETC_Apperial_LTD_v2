@@ -52,13 +52,13 @@ const Orders = () => {
   const filteredOrders = filter === 'All' ? orders : orders.filter(o => o.status === filter);
 
   return (
-    <div className="p-8 lg:p-12 bg-surface min-h-screen">
+    <div className="p-4 md:p-8 lg:p-12 bg-surface min-h-screen">
       <header className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
-          <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight mb-2">Order <span className="italic font-normal">Manifest.</span></h1>
-          <p className="text-on-surface-variant font-body">Review, manage and curate customer transaction cycles.</p>
+          <h1 className="font-headline text-4xl md:text-5xl font-bold text-primary tracking-tight mb-2 italic">Order <span className="font-normal not-italic">Manifest.</span></h1>
+          <p className="text-on-surface-variant font-body text-sm">Review, manage and curate customer transaction cycles.</p>
         </div>
-        <button className="flex items-center gap-2 border border-outline-variant/20 px-8 py-4 rounded-lg font-label font-bold text-xs uppercase tracking-widest hover:bg-surface-container-low transition-all shadow-sm">
+        <button className="flex items-center justify-center gap-2 border border-outline-variant/20 px-8 py-4 rounded-lg font-label font-bold text-xs uppercase tracking-widest hover:bg-surface-container-low transition-all shadow-sm w-full md:w-auto">
           <Download className="w-4 h-4" /> Export Manifest
         </button>
       </header>
@@ -75,59 +75,98 @@ const Orders = () => {
         ))}
       </div>
 
-      <div className="bg-white rounded-[2rem] border border-outline-variant/10 overflow-hidden shadow-2xl shadow-primary/5">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="bg-surface border-b border-outline-variant/10">
-                <th className="px-8 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Order ID</th>
-                <th className="px-6 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Customer</th>
-                <th className="px-6 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Valuation</th>
-                <th className="px-6 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant text-center">Status</th>
-                <th className="px-8 py-6 text-right font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Curate</th>
+      {/* ── Mobile Card List (hidden on lg+) ── */}
+      <div className="lg:hidden space-y-3">
+        {loading && orders.length === 0 ? (
+          <div className="py-20 flex justify-center"><Loader size="sm" /></div>
+        ) : filteredOrders.length === 0 ? (
+          <div className="py-16 text-center italic text-on-surface-variant font-body bg-white rounded-2xl border border-outline-variant/5">No orders match this filter.</div>
+        ) : filteredOrders.map((order) => (
+          <div key={order.id} className="bg-white rounded-2xl border border-outline-variant/5 shadow-lg shadow-primary/5 p-4">
+            {/* Top: Order number + Status badge */}
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-label text-xs font-black text-primary">#{order.order_number}</span>
+              <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase border-2 ${statusColors[order.status] || 'bg-gray-50 text-gray-700 border-gray-100'}`}>
+                {order.status}
+              </span>
+            </div>
+
+            {/* Customer info */}
+            <div className="mb-3">
+              <p className="font-bold text-sm text-primary leading-tight">{order.customer_name}</p>
+              <p className="text-[10px] text-on-surface-variant font-label mt-0.5">{order.customer_email}</p>
+            </div>
+
+            {/* Amount + Actions */}
+            <div className="flex items-center justify-between pt-3 border-t border-outline-variant/5">
+              <p className="font-headline font-bold text-secondary text-base">${parseFloat(order.total_amount).toFixed(2)}</p>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => { setSelectedOrder(order); setIsDetailModalOpen(true); }}
+                  className="p-2 bg-primary/5 text-primary rounded-full hover:bg-primary hover:text-white transition-all border border-primary/10"
+                >
+                  <Eye className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  onClick={() => { setSelectedOrder(order); setIsStatusModalOpen(true); }}
+                  className="p-2 bg-secondary/5 text-secondary rounded-full hover:bg-secondary hover:text-white transition-all border border-secondary/10"
+                >
+                  <Edit3 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Desktop Table (hidden below lg) ── */}
+      <div className="hidden lg:block bg-white rounded-[2rem] border border-outline-variant/10 overflow-hidden shadow-2xl shadow-primary/5">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="bg-surface border-b border-outline-variant/10">
+              <th className="px-8 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Order ID</th>
+              <th className="px-6 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Customer</th>
+              <th className="px-6 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Valuation</th>
+              <th className="px-6 py-6 font-label text-[10px] uppercase tracking-widest text-on-surface-variant text-center">Status</th>
+              <th className="px-8 py-6 text-right font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Curate</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-outline-variant/5">
+            {loading && orders.length === 0 ? (
+              <tr><td colSpan="5" className="px-8 py-20"><Loader size="sm" /></td></tr>
+            ) : filteredOrders.map((order) => (
+              <tr key={order.id} className="hover:bg-surface-container-low/30 transition-colors group">
+                <td className="px-8 py-6 font-label text-sm font-bold text-primary">#{order.order_number}</td>
+                <td className="px-6 py-6">
+                  <p className="font-bold text-sm text-primary leading-tight">{order.customer_name}</p>
+                  <p className="text-[10px] text-on-surface-variant font-label mt-1">{order.customer_email}</p>
+                </td>
+                <td className="px-6 py-6 font-headline font-bold text-secondary text-sm">${parseFloat(order.total_amount).toFixed(2)}</td>
+                <td className="px-6 py-6 text-center">
+                  <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase border-2 ${statusColors[order.status] || 'bg-gray-50 text-gray-700 border-gray-100'}`}>
+                    {order.status}
+                  </span>
+                </td>
+                <td className="px-8 py-6 text-right">
+                  <div className="flex items-center justify-end gap-3">
+                    <button
+                      onClick={() => { setSelectedOrder(order); setIsDetailModalOpen(true); }}
+                      className="p-3 bg-primary/5 text-primary rounded-full hover:bg-primary hover:text-white transition-all"
+                    >
+                      <Eye className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => { setSelectedOrder(order); setIsStatusModalOpen(true); }}
+                      className="p-3 bg-secondary/5 text-secondary rounded-full hover:bg-secondary hover:text-white transition-all"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </button>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody className="divide-y divide-outline-variant/5">
-              {loading && orders.length === 0 ? (
-                <tr>
-                  <td colSpan="5" className="px-8 py-20">
-                    <Loader size="sm" />
-                  </td>
-                </tr>
-              ) : filteredOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-surface-container-low/30 transition-colors group">
-                  <td className="px-8 py-6 font-label text-sm font-bold text-primary">#{order.order_number}</td>
-                  <td className="px-6 py-6">
-                    <p className="font-bold text-sm text-primary leading-tight">{order.customer_name}</p>
-                    <p className="text-[10px] text-on-surface-variant font-label mt-1">{order.customer_email}</p>
-                  </td>
-                  <td className="px-6 py-6 font-headline font-bold text-secondary text-sm">${parseFloat(order.total_amount).toFixed(2)}</td>
-                  <td className="px-6 py-6 text-center">
-                    <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase border-2 ${statusColors[order.status] || 'bg-gray-50 text-gray-700 border-gray-100'}`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-8 py-6 text-right">
-                    <div className="flex items-center justify-end gap-3">
-                      <button 
-                        onClick={() => { setSelectedOrder(order); setIsDetailModalOpen(true); }}
-                        className="p-3 bg-primary/5 text-primary rounded-full hover:bg-primary hover:text-white transition-all"
-                      >
-                        <Eye className="w-4 h-4" />
-                      </button>
-                      <button 
-                        onClick={() => { setSelectedOrder(order); setIsStatusModalOpen(true); }}
-                        className="p-3 bg-secondary/5 text-secondary rounded-full hover:bg-secondary hover:text-white transition-all"
-                      >
-                        <Edit3 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Detail Modal */}

@@ -45,7 +45,7 @@ const Analytics = () => {
   }
 
   return (
-    <div className="p-8 lg:p-12 bg-surface min-h-screen">
+    <div className="p-4 md:p-8 lg:p-12 bg-surface min-h-screen">
       <header className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-outline-variant/10 pb-12">
         <div>
           <span className="text-secondary font-label text-[10px] uppercase tracking-[0.4em] mb-4 block font-black">Strategic Intelligence</span>
@@ -75,7 +75,7 @@ const Analytics = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
         <div className="lg:col-span-8 space-y-12">
           {/* Revenue Chart */}
-          <div className="bg-white rounded-[3rem] p-12 shadow-2xl shadow-primary/5 border border-outline-variant/5">
+          <div className="bg-white rounded-2xl md:rounded-[3rem] p-6 md:p-12 shadow-2xl shadow-primary/5 border border-outline-variant/5">
             <div className="flex justify-between items-center mb-12">
                <h3 className="font-headline text-3xl font-black text-primary italic">Revenue Trajectory</h3>
                <div className="flex items-center gap-6">
@@ -85,7 +85,7 @@ const Analytics = () => {
                   </div>
                </div>
             </div>
-            <div className="h-[500px]">
+            <div className="h-[320px] md:h-[500px]">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={data?.charts?.revenue}>
                   <defs>
@@ -108,9 +108,9 @@ const Analytics = () => {
           </div>
 
           {/* Bar Chart - Category Volume */}
-          <div className="bg-white rounded-[3rem] p-12 shadow-2xl shadow-primary/5 border border-outline-variant/5">
+          <div className="bg-white rounded-2xl md:rounded-[3rem] p-6 md:p-12 shadow-2xl shadow-primary/5 border border-outline-variant/5">
              <h3 className="font-headline text-3xl font-black text-primary italic mb-12">Collection Volume</h3>
-             <div className="h-[400px]">
+             <div className="h-[280px] md:h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={data?.charts?.categories}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F5F5F5" />
@@ -130,9 +130,9 @@ const Analytics = () => {
 
         <div className="lg:col-span-4 space-y-12">
           {/* Pie Chart */}
-          <div className="bg-white rounded-[3rem] p-12 shadow-2xl shadow-primary/5 border border-outline-variant/5">
+          <div className="bg-white rounded-2xl md:rounded-[3rem] p-6 md:p-12 shadow-2xl shadow-primary/5 border border-outline-variant/5">
             <h3 className="font-headline text-2xl font-black text-primary italic mb-12 text-center">Market Presence</h3>
-            <div className="h-[350px] relative">
+            <div className="h-[250px] md:h-[350px] relative">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -166,7 +166,7 @@ const Analytics = () => {
           </div>
 
           {/* Efficiency & Progression */}
-          <div className="bg-primary text-white rounded-[3rem] p-12 shadow-2xl shadow-primary/20 relative overflow-hidden">
+          <div className="bg-primary text-white rounded-2xl md:rounded-[3rem] p-6 md:p-12 shadow-2xl shadow-primary/20 relative overflow-hidden">
              <div className="relative z-10">
                 <h4 className="font-headline text-3xl font-black italic mb-8">Quarterly Progress.</h4>
                 <div className="space-y-10">

@@ -131,29 +131,26 @@ const NewsFeed = () => {
   );
 
   return (
-    <div className="p-8 lg:p-12 min-h-screen bg-surface">
-      <header className="mb-16 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
-        <div className="max-w-2xl">
+    <div className="p-4 md:p-8 lg:p-12 min-h-screen bg-surface">
+      <header className="mb-12 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+        <div>
           <div className="flex items-center gap-3 mb-3">
-            <span className="w-12 h-[1px] bg-primary/20"></span>
-            <p className="text-[10px] font-label uppercase tracking-[0.5em] text-on-surface-variant font-bold">Editorial Control Room</p>
+            <span className="w-8 h-[1px] bg-primary/30"></span>
+            <p className="text-[10px] font-label uppercase tracking-[0.4em] text-on-surface-variant font-black">Editorial Journal</p>
           </div>
-          <h1 className="font-headline text-6xl md:text-7xl font-black text-primary tracking-tighter mb-4">
-            Narrative <span className="italic font-normal text-secondary">Curation.</span>
+          <h1 className="font-headline text-5xl md:text-6xl font-black text-primary tracking-tighter">
+            News & <span className="italic font-normal">Announcements.</span>
           </h1>
-          <p className="text-on-surface-variant font-body text-sm max-w-lg leading-relaxed">
-            Manage the brand voice through meticulously curated narratives, collection perspectives, and atelier updates.
-          </p>
         </div>
         <button 
           onClick={() => handleOpenModal()}
-          className="flex items-center gap-3 bg-primary text-white px-12 py-5 rounded-full font-label font-bold text-[10px] uppercase tracking-widest hover:scale-105 shadow-2xl transition-all active:scale-95"
+          className="flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-full font-label font-bold text-[10px] uppercase tracking-widest hover:scale-105 shadow-2xl transition-all active:scale-95 w-full lg:w-auto"
         >
-          <Plus className="w-4 h-4" /> Create New Narrative
+          <Plus className="w-4 h-4" /> Add New Entry
         </button>
       </header>
 
-      <div className="mb-12 relative max-w-2xl">
+      <div className="mb-10 relative max-w-xl group">
         <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 text-outline" />
         <input 
           type="text"
@@ -164,7 +161,7 @@ const NewsFeed = () => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-10">
         {loading && news.length === 0 ? (
           <div className="col-span-full py-32 text-center">
             <Loader2 className="w-10 h-10 animate-spin text-primary/20 mx-auto mb-4" />
@@ -176,7 +173,7 @@ const NewsFeed = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-white rounded-[2rem] border border-outline-variant/5 overflow-hidden shadow-2xl shadow-primary/5 flex flex-col group relative"
+            className="bg-white rounded-2xl md:rounded-[2rem] border border-outline-variant/5 overflow-hidden shadow-2xl shadow-primary/5 flex flex-col group relative"
           >
             <div className="relative aspect-[16/10] overflow-hidden">
               {entry.image_url ? (
@@ -184,14 +181,14 @@ const NewsFeed = () => {
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-surface-container"><ImageIcon className="w-10 h-10 text-outline/30" /></div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity flex items-end justify-between p-6 md:p-8">
                 <div className="flex gap-3">
-                  <button onClick={() => handleOpenModal(entry)} className="p-4 bg-white/90 backdrop-blur rounded-full text-primary hover:text-secondary hover:scale-110 transition-all shadow-xl"><Edit3 className="w-4 h-4" /></button>
-                  <button onClick={() => handleDelete(entry.id)} className="p-4 bg-white/90 backdrop-blur rounded-full text-primary hover:text-red-600 hover:scale-110 transition-all shadow-xl"><Trash2 className="w-4 h-4" /></button>
+                  <button onClick={() => handleOpenModal(entry)} className="p-3 md:p-4 bg-white/90 backdrop-blur rounded-full text-primary hover:text-secondary hover:scale-110 transition-all shadow-xl"><Edit3 className="w-4 h-4" /></button>
+                  <button onClick={() => handleDelete(entry.id)} className="p-3 md:p-4 bg-white/90 backdrop-blur rounded-full text-primary hover:text-red-600 hover:scale-110 transition-all shadow-xl"><Trash2 className="w-4 h-4" /></button>
                 </div>
               </div>
             </div>
-            <div className="p-8 flex-grow flex flex-col">
+            <div className="p-6 md:p-8 flex-grow flex flex-col">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-secondary font-label text-[9px] font-black uppercase tracking-[0.3em] px-3 py-1 bg-secondary/5 rounded-full border border-secondary/10">
                   {entry.category}

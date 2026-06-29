@@ -178,7 +178,7 @@ const Inventory = () => {
   );
 
   return (
-    <div className="p-8 lg:p-12 min-h-screen bg-surface">
+    <div className="p-4 md:p-8 lg:p-12 min-h-screen bg-surface">
       <header className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
@@ -191,7 +191,7 @@ const Inventory = () => {
         </div>
         <button 
           onClick={() => handleOpenModal()}
-          className="flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full font-label font-bold text-[10px] uppercase tracking-widest hover:scale-105 shadow-2xl transition-all active:scale-95"
+          className="flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full font-label font-bold text-[10px] uppercase tracking-widest hover:scale-105 shadow-2xl transition-all active:scale-95 w-full md:w-auto justify-center"
         >
           <Plus className="w-4 h-4" /> Add New Piece
         </button>
@@ -208,75 +208,126 @@ const Inventory = () => {
         />
       </div>
 
-      <div className="bg-white rounded-[2rem] border border-outline-variant/5 overflow-hidden shadow-2xl shadow-primary/5">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="bg-surface-container-low/30 border-b border-outline-variant/5">
-                <th className="px-10 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Design & Identity</th>
-                <th className="px-6 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Curation</th>
-                <th className="px-6 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Valuation</th>
-                <th className="px-6 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black text-center">Availability</th>
-                <th className="px-10 py-6 text-right font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-outline-variant/5">
-              {loading && products.length === 0 ? (
-                <tr>
-                  <td colSpan="5" className="px-10 py-24">
-                    <Loader size="sm" />
-                  </td>
-                </tr>
-              ) : filteredProducts.length === 0 ? (
-                <tr><td colSpan="5" className="px-10 py-24 text-center italic text-on-surface-variant font-body">No pieces found matching your query.</td></tr>
-              ) : filteredProducts.map((product) => (
-                <tr key={product.id} className="hover:bg-surface-container-low/20 transition-colors group">
-                  <td className="px-10 py-6">
-                    <div className="flex items-center gap-6">
-                      <div className="w-16 h-20 bg-surface rounded-xl overflow-hidden shadow-md flex-shrink-0 border border-outline-variant/10">
-                        {product.image_url ? (
-                          <img src={product.image_url} alt={product.name} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-surface-container"><ImageIcon className="w-6 h-6 text-outline" /></div>
-                        )}
-                      </div>
-                      <div>
-                        <p className="font-headline font-bold text-lg text-primary leading-tight mb-1">{product.name}</p>
-                        <p className="text-[9px] text-on-surface-variant font-label uppercase tracking-widest bg-surface px-2 py-0.5 rounded border border-outline-variant/10 inline-block">
-                          {product.sku || `ETC-${product.id}`}
-                        </p>
-                      </div>
+      {/* ── Mobile Card Grid (hidden on lg+) ── */}
+      <div className="lg:hidden space-y-3">
+        {loading && products.length === 0 ? (
+          <div className="py-20 flex justify-center"><Loader size="sm" /></div>
+        ) : filteredProducts.length === 0 ? (
+          <div className="py-16 text-center italic text-on-surface-variant font-body bg-white rounded-2xl border border-outline-variant/5">No pieces found matching your query.</div>
+        ) : filteredProducts.map((product) => (
+          <div key={product.id} className="bg-white rounded-2xl border border-outline-variant/5 shadow-lg shadow-primary/5 p-4 flex gap-4">
+            {/* Thumbnail */}
+            <div className="w-16 h-20 bg-surface rounded-xl overflow-hidden shadow-md flex-shrink-0 border border-outline-variant/10">
+              {product.image_url ? (
+                <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-surface-container"><ImageIcon className="w-5 h-5 text-outline" /></div>
+              )}
+            </div>
+
+            {/* Details */}
+            <div className="flex-grow min-w-0">
+              <div className="flex items-start justify-between gap-2 mb-1">
+                <p className="font-headline font-bold text-base text-primary leading-tight truncate">{product.name}</p>
+                {/* Stock badge */}
+                <span className={`shrink-0 px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${product.stock > 10 ? 'bg-emerald-50 text-emerald-700' : product.stock > 0 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'}`}>
+                  {product.stock > 0 ? `${product.stock}` : '0'}
+                </span>
+              </div>
+
+              {/* SKU + Category row */}
+              <div className="flex items-center gap-2 flex-wrap mb-2">
+                <span className="text-[9px] text-on-surface-variant font-label uppercase tracking-widest bg-surface px-2 py-0.5 rounded border border-outline-variant/10">
+                  {product.sku || `ETC-${product.id}`}
+                </span>
+                <span className="text-[9px] font-label text-on-surface-variant uppercase tracking-widest px-2 py-0.5 bg-surface-container-low rounded-full border border-outline-variant/5">
+                  {product.category}
+                </span>
+              </div>
+
+              {/* Price + Actions row */}
+              <div className="flex items-center justify-between">
+                <p className="font-headline font-bold text-secondary text-base">
+                  ${parseFloat(product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                </p>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => handleOpenModal(product)} className="p-2 bg-primary/5 rounded-full text-primary hover:bg-primary hover:text-white transition-all border border-primary/10">
+                    <Edit2 className="w-3.5 h-3.5" />
+                  </button>
+                  <button onClick={() => handleDelete(product.id)} className="p-2 bg-red-50 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-all border border-red-100">
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Desktop Table (hidden below lg) ── */}
+      <div className="hidden lg:block bg-white rounded-[2rem] border border-outline-variant/5 overflow-hidden shadow-2xl shadow-primary/5">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="bg-surface-container-low/30 border-b border-outline-variant/5">
+              <th className="px-10 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Design & Identity</th>
+              <th className="px-6 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Curation</th>
+              <th className="px-6 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Valuation</th>
+              <th className="px-6 py-6 font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black text-center">Availability</th>
+              <th className="px-10 py-6 text-right font-label text-[10px] uppercase tracking-[0.2em] text-on-surface-variant font-black">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-outline-variant/5">
+            {loading && products.length === 0 ? (
+              <tr><td colSpan="5" className="px-10 py-24"><Loader size="sm" /></td></tr>
+            ) : filteredProducts.length === 0 ? (
+              <tr><td colSpan="5" className="px-10 py-24 text-center italic text-on-surface-variant font-body">No pieces found matching your query.</td></tr>
+            ) : filteredProducts.map((product) => (
+              <tr key={product.id} className="hover:bg-surface-container-low/20 transition-colors group">
+                <td className="px-10 py-6">
+                  <div className="flex items-center gap-6">
+                    <div className="w-16 h-20 bg-surface rounded-xl overflow-hidden shadow-md flex-shrink-0 border border-outline-variant/10">
+                      {product.image_url ? (
+                        <img src={product.image_url} alt={product.name} className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-surface-container"><ImageIcon className="w-6 h-6 text-outline" /></div>
+                      )}
                     </div>
-                  </td>
-                  <td className="px-6 py-6">
-                    <span className="text-[10px] font-label text-on-surface-variant uppercase tracking-widest px-3 py-1 bg-surface-container-low rounded-full border border-outline-variant/5">
-                      {product.category}
+                    <div>
+                      <p className="font-headline font-bold text-lg text-primary leading-tight mb-1">{product.name}</p>
+                      <p className="text-[9px] text-on-surface-variant font-label uppercase tracking-widest bg-surface px-2 py-0.5 rounded border border-outline-variant/10 inline-block">
+                        {product.sku || `ETC-${product.id}`}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-6">
+                  <span className="text-[10px] font-label text-on-surface-variant uppercase tracking-widest px-3 py-1 bg-surface-container-low rounded-full border border-outline-variant/5">
+                    {product.category}
+                  </span>
+                </td>
+                <td className="px-6 py-6">
+                  <p className="font-headline font-bold text-secondary text-base">
+                    ${parseFloat(product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                  </p>
+                </td>
+                <td className="px-6 py-6 text-center">
+                  <div className="flex flex-col items-center gap-1">
+                    <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest ${product.stock > 10 ? 'bg-emerald-50 text-emerald-700' : product.stock > 0 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'}`}>
+                      {product.stock > 0 ? `${product.stock} Units` : 'Depleted'}
                     </span>
-                  </td>
-                  <td className="px-6 py-6">
-                    <p className="font-headline font-bold text-secondary text-base">
-                      ${parseFloat(product.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}
-                    </p>
-                  </td>
-                  <td className="px-6 py-6 text-center">
-                    <div className="flex flex-col items-center gap-1">
-                      <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest ${product.stock > 10 ? 'bg-emerald-50 text-emerald-700' : product.stock > 0 ? 'bg-amber-50 text-amber-700' : 'bg-red-50 text-red-700'}`}>
-                        {product.stock > 0 ? `${product.stock} Units` : 'Depleted'}
-                      </span>
-                      <p className="text-[8px] uppercase tracking-tighter text-outline font-label">{product.status}</p>
-                    </div>
-                  </td>
-                  <td className="px-10 py-6 text-right">
-                    <div className="flex items-center justify-end gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => handleOpenModal(product)} className="p-3 bg-white shadow-lg rounded-full text-on-surface-variant hover:text-primary hover:scale-110 transition-all border border-outline-variant/10"><Edit2 className="w-4 h-4" /></button>
-                      <button onClick={() => handleDelete(product.id)} className="p-3 bg-white shadow-lg rounded-full text-on-surface-variant hover:text-red-600 hover:scale-110 transition-all border border-outline-variant/10"><Trash2 className="w-4 h-4" /></button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    <p className="text-[8px] uppercase tracking-tighter text-outline font-label">{product.status}</p>
+                  </div>
+                </td>
+                <td className="px-10 py-6 text-right">
+                  <div className="flex items-center justify-end gap-3">
+                    <button onClick={() => handleOpenModal(product)} className="p-3 bg-white shadow-lg rounded-full text-on-surface-variant hover:text-primary hover:scale-110 transition-all border border-outline-variant/10"><Edit2 className="w-4 h-4" /></button>
+                    <button onClick={() => handleDelete(product.id)} className="p-3 bg-white shadow-lg rounded-full text-on-surface-variant hover:text-red-600 hover:scale-110 transition-all border border-outline-variant/10"><Trash2 className="w-4 h-4" /></button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <AnimatePresence>
