@@ -197,15 +197,15 @@ const Contact = () => {
           {/* London Office */}
           <div className="bg-white p-10 rounded-xl border border-outline-variant/15 transition-all hover:bg-surface-container-low group shadow-sm">
             <span className="font-label text-secondary text-[10px] font-bold tracking-[0.2em] mb-4 block">HEADQUARTERS</span>
-            <h3 className="font-headline text-2xl text-primary mb-4">London Office</h3>
+            <h3 className="font-headline text-2xl text-primary mb-4">UK OFFICE</h3>
             <p className="font-body text-on-surface-variant leading-relaxed mb-6">
-              24 Savile Row, Mayfair<br/>
-              London W1S 3PR, United Kingdom
+              10 Radlett Close, Forest Gate,<br/>
+              London  (E7 9JF), United Kingdom
             </p>
             <div className="flex flex-col gap-4 font-body text-on-surface text-sm">
               <a className="flex items-center gap-3 hover:text-secondary transition-colors" href="tel:+442071234567">
                 <Phone className="w-4 h-4 text-secondary" />
-                +44 (0) 20 7123 4567
+                +44
               </a>
               <a className="flex items-center gap-3 hover:text-secondary transition-colors" href="mailto:london@etcapparel.com">
                 <Mail className="w-4 h-4 text-secondary" />
@@ -217,15 +217,15 @@ const Contact = () => {
           {/* Bangladesh Office */}
           <div className="bg-white p-10 rounded-xl border border-outline-variant/15 transition-all hover:bg-surface-container-low group shadow-sm">
             <span className="font-label text-secondary text-[10px] font-bold tracking-[0.2em] mb-4 block">PRODUCTION HUB</span>
-            <h3 className="font-headline text-2xl text-primary mb-4">Bangladesh Atelier</h3>
+            <h3 className="font-headline text-2xl text-primary mb-4">Bangladesh Office</h3>
             <p className="font-body text-on-surface-variant leading-relaxed mb-6">
-              Level 12, Crystal Palace, Gulshan-2<br/>
-              Dhaka 1212, Bangladesh
+              House-405, Lane-06, DOHS Baridhara<br/>
+              Dhaka 1206, Bangladesh
             </p>
             <div className="flex flex-col gap-4 font-body text-on-surface text-sm">
               <a className="flex items-center gap-3 hover:text-secondary transition-colors" href="tel:+88029876543">
                 <Phone className="w-4 h-4 text-secondary" />
-                +880 2 987 6543
+                +880
               </a>
               <a className="flex items-center gap-3 hover:text-secondary transition-colors" href="mailto:dhaka@etcapparel.com">
                 <Mail className="w-4 h-4 text-secondary" />

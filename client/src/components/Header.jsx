@@ -34,13 +34,13 @@ const Header = () => {
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-outline-variant/10 h-20' : 'bg-transparent h-20'}`}>
         <nav className="container mx-auto px-6 md:px-16 h-full flex items-center justify-between">
           <div className="flex items-center gap-12">
-            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter"><img src={etcLogo} alt="Logo" className="h-16" /></Link>
+            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter"><img src={etcLogo} alt="Logo" className="h-20" /></Link>
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-label text-[10px] uppercase tracking-[0.3em] transition-all hover:text-secondary ${location.pathname === link.path ? 'text-secondary font-bold' : 'text-on-surface-variant'}`}
+                  className={`font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary ${location.pathname === link.path ? 'text-secondary font-bold' : 'text-on-surface-variant'}`}
                 >
                   {link.name}
                 </Link>

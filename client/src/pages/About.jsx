@@ -30,7 +30,7 @@ const About = () => {
               transition={{ delay: 0.4 }}
               className="text-secondary font-label font-medium uppercase tracking-[0.2em] pb-4"
             >
-              Est. 1994
+            {/* add your company establsih year here */}
             </motion.p>
           </div>
           <motion.div 
