@@ -6,6 +6,26 @@ import { useCart } from '../context/CartContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import etcLogo from '../assets/ETC_logo.png';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: 25 },
+  show: { 
+    opacity: 1, 
+    x: 0, 
+    transition: { type: 'spring', stiffness: 220, damping: 22 } 
+  }
+};
+
 const Header = () => {
   const { user, logout, isAdmin } = useAuth();
   const { cart, cartCount, cartTotal, removeFromCart, updateQty } = useCart();
@@ -44,13 +64,18 @@ const Header = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary ${
+                  className={`relative py-1 font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary group ${
                     location.pathname === link.path 
                       ? 'text-secondary font-bold' 
                       : (isTransparent ? 'text-white/80 hover:text-white' : 'text-on-surface-variant')
                   }`}
                 >
                   {link.name}
+                  <span className={`absolute bottom-0 left-0 w-full h-[1px] transition-transform duration-300 origin-left ${
+                    location.pathname === link.path 
+                      ? 'bg-secondary scale-x-100' 
+                      : (isTransparent ? 'bg-white scale-x-0 group-hover:scale-x-100' : 'bg-secondary scale-x-0 group-hover:scale-x-100')
+                  }`}></span>
                 </Link>
               ))}
             </div>
@@ -110,18 +135,24 @@ const Header = () => {
                 <X className="w-6 h-6" />
               </button>
             </div>
-            <nav className="flex flex-col gap-8">
+            <motion.nav 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="flex flex-col gap-8"
+            >
               {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="font-headline text-3xl font-bold text-primary"
-                >
-                  {link.name}
-                </Link>
+                <motion.div key={link.path} variants={itemVariants}>
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="font-headline text-3xl font-bold text-primary hover:text-secondary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
               ))}
-            </nav>
+            </motion.nav>
             <div className="mt-auto flex flex-col gap-4">
                {user ? (
                 <>

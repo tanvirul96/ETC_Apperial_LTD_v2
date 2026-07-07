@@ -58,6 +58,11 @@
   --radius-xl: 0.5rem;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   @apply font-body bg-surface text-on-surface;
 }

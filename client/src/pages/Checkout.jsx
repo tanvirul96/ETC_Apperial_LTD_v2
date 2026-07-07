@@ -117,7 +117,7 @@ const Checkout = () => {
           <div className="w-20 h-20 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
             <CheckCircle className="w-10 h-10" />
           </div>
-          <h2 className="font-headline text-5xl font-black text-primary mb-4 italic">Narrative Secured.</h2>
+          <h2 className="font-headline text-3xl md:text-5xl font-black text-primary mb-4 italic">Narrative Secured.</h2>
           <p className="text-on-surface-variant font-body text-lg mb-10 leading-relaxed">
             Your order <span className="font-bold text-primary">#{orderNumber}</span> has been archived in our atelier. 
             We are now preparing your pieces for their journey.
@@ -140,7 +140,7 @@ const Checkout = () => {
           <Link to="/shop" className="inline-flex items-center gap-2 text-outline hover:text-primary transition-colors font-label text-[10px] uppercase tracking-widest mb-6">
             <ChevronLeft className="w-4 h-4" /> Return to Collections
           </Link>
-          <h1 className="font-headline text-6xl font-black text-primary tracking-tighter italic">Checkout.</h1>
+          <h1 className="font-headline text-4xl md:text-6xl font-black text-primary tracking-tighter italic">Checkout.</h1>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">

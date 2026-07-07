@@ -83,7 +83,7 @@ const NewsDetail = () => {
                   <Calendar className="w-3.5 h-3.5" /> {new Date(entry.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                 </span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-black text-primary font-headline tracking-tighter leading-[1.1] mb-10">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-primary font-headline tracking-tighter leading-[1.1] mb-10">
                 {entry.title}
               </h1>
               <div className="flex items-center gap-4 py-8 border-y border-outline-variant/10">

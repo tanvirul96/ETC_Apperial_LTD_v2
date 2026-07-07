@@ -138,7 +138,7 @@ const NewsFeed = () => {
             <span className="w-8 h-[1px] bg-primary/30"></span>
             <p className="text-[10px] font-label uppercase tracking-[0.4em] text-on-surface-variant font-black">Editorial Journal</p>
           </div>
-          <h1 className="font-headline text-5xl md:text-6xl font-black text-primary tracking-tighter">
+          <h1 className="font-headline text-4xl md:text-6xl font-black text-primary tracking-tighter">
             News & <span className="italic font-normal">Announcements.</span>
           </h1>
         </div>

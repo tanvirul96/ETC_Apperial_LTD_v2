@@ -40,7 +40,7 @@ const Journal = () => {
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-8xl font-black text-primary tracking-tighter font-headline mb-8"
+            className="text-4xl sm:text-6xl md:text-8xl font-black text-primary tracking-tighter font-headline mb-8"
           >
             Studio <span className="italic font-normal">Narratives.</span>
           </motion.h1>

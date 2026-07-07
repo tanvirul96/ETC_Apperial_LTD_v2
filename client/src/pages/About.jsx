@@ -50,6 +50,8 @@ const About = () => {
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="md:col-span-5"
           >
             <span className="text-secondary font-label font-bold tracking-widest uppercase text-xs mb-6 block">Heritage</span>
@@ -62,6 +64,8 @@ const About = () => {
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="md:col-start-7 md:col-span-6 relative"
           >
             <div className="aspect-[4/5] bg-surface-container-highest rounded-lg overflow-hidden translate-y-12 shadow-2xl">
@@ -111,6 +115,8 @@ const About = () => {
           <motion.span 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
             className="text-secondary font-label font-bold tracking-[0.3em] uppercase text-xs mb-8 block"
           >
             Our Mission
@@ -118,7 +124,9 @@ const About = () => {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-headline mb-10 leading-tight"
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="text-3xl sm:text-5xl md:text-6xl font-headline mb-10 leading-tight"
           >
             To dress the modern curator in garments that endure.
           </motion.h2>

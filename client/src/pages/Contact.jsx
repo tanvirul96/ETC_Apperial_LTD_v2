@@ -82,7 +82,7 @@ const Contact = () => {
           className="max-w-4xl"
         >
           <span className="font-label text-secondary uppercase tracking-[0.2em] text-xs font-semibold mb-4 block">Editorial Precision</span>
-          <h1 className="font-headline text-5xl md:text-7xl text-primary leading-tight tracking-tight mb-8">Connect with our <br/><span className="italic font-normal text-secondary">Global Atelier.</span></h1>
+          <h1 className="font-headline text-4xl sm:text-6xl md:text-7xl text-primary leading-tight tracking-tight mb-8">Connect with our <br/><span className="italic font-normal text-secondary">Global Atelier.</span></h1>
           <p className="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
             Whether you are an artisan, a global retailer, or a creative mind, we invite you to start a dialogue. Our headquarters in London and hubs in Bangladesh are ready to assist.
           </p>

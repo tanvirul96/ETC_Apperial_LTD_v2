@@ -32,7 +32,7 @@ const Management = () => {
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl font-bold tracking-tight text-primary mb-8 leading-tight font-headline"
+            className="text-4xl sm:text-6xl md:text-8xl font-bold tracking-tight text-primary mb-8 leading-tight font-headline"
           >
             The Curators of <span className="italic text-secondary font-normal">Excellence.</span>
           </motion.h1>
@@ -71,7 +71,7 @@ const Management = () => {
           className="md:col-span-5 md:col-start-8"
         >
           <span className="font-label text-xs uppercase tracking-[0.3em] text-secondary mb-4 block">Founder & Creative Director</span>
-          <h2 className="text-5xl font-bold text-primary mb-6 font-headline">Julian V. Sterling</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-primary mb-6 font-headline">Julian V. Sterling</h2>
           <p className="text-lg text-on-surface-variant leading-relaxed mb-8 font-body">
             With over two decades in high-fashion curation, Julian founded ETC Apparel with a singular vision: to bridge the gap between bespoke craftsmanship and contemporary readiness. His philosophy of "Atmospheric Design" governs every collection we release.
           </p>

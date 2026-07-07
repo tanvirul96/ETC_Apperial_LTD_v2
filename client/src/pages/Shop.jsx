@@ -46,7 +46,7 @@ const Shop = () => {
       <div className="container mx-auto px-6 md:px-16">
         <header className="mb-16">
           <span className="text-secondary font-label text-primary tracking-widest uppercase mb-4 block">The Collection</span>
-          <h1 className="text-5xl md:text-7xl font-black text-primary tracking-tighter font-headline mb-8"> Discover <span className="italic font-normal">Our Latest Styles.</span></h1>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-primary tracking-tighter font-headline mb-8"> Discover <span className="italic font-normal">Our Latest Styles.</span></h1>
           
           <div className="flex flex-col md:flex-row gap-8 items-center justify-between bg-white p-6 rounded-lg shadow-sm border border-outline-variant/10">
             <div className="relative w-full md:w-96">

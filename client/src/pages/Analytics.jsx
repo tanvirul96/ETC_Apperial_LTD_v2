@@ -49,7 +49,7 @@ const Analytics = () => {
       <header className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-outline-variant/10 pb-12">
         <div>
           <span className="text-secondary font-label text-[10px] uppercase tracking-[0.4em] mb-4 block font-black">Strategic Intelligence</span>
-          <h1 className="font-headline text-5xl md:text-7xl font-black text-primary tracking-tight italic">Market <span className="font-normal not-italic underline decoration-secondary decoration-4 underline-offset-8">Metrics.</span></h1>
+          <h1 className="font-headline text-4xl sm:text-6xl md:text-7xl font-black text-primary tracking-tight italic">Market <span className="font-normal not-italic underline decoration-secondary decoration-4 underline-offset-8">Metrics.</span></h1>
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <div className="bg-white border border-outline-variant/10 rounded-2xl px-6 py-4 flex items-center gap-4 shadow-sm hover:border-secondary transition-all">
