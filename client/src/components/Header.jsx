@@ -13,6 +13,8 @@ const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
+  const isTransparent = isHomePage && !isScrolled;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -31,16 +33,22 @@ const Header = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-outline-variant/10 h-20' : 'bg-transparent h-20'}`}>
+      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${!isTransparent ? 'bg-white/80 backdrop-blur-md border-b border-outline-variant/10 h-20' : 'bg-transparent h-20'}`}>
         <nav className="container mx-auto px-6 md:px-16 h-full flex items-center justify-between">
           <div className="flex items-center gap-12">
-            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter"><img src={etcLogo} alt="Logo" className="h-20" /></Link>
+            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter">
+              <img src={etcLogo} alt="Logo" className={`h-20 transition-all duration-300 ${isTransparent ? 'brightness-0 invert' : ''}`} />
+            </Link>
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary ${location.pathname === link.path ? 'text-secondary font-bold' : 'text-on-surface-variant'}`}
+                  className={`font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary ${
+                    location.pathname === link.path 
+                      ? 'text-secondary font-bold' 
+                      : (isTransparent ? 'text-white/80 hover:text-white' : 'text-on-surface-variant')
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -53,9 +61,9 @@ const Header = () => {
               {user ? (
                 <>
                   {isAdmin && (
-                    <Link to="/admin" className="font-label text-[10px] uppercase tracking-[0.3em] text-secondary hover:text-primary transition-all font-bold">Admin Panel</Link>
+                    <Link to="/admin" className={`font-label text-[10px] uppercase tracking-[0.3em] font-bold transition-all ${isTransparent ? 'text-secondary-fixed-dim hover:text-white' : 'text-secondary hover:text-primary'}`}>Admin Panel</Link>
                   )}
-                  <Link to="/profile" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">
+                  <Link to="/profile" className={`font-label text-[10px] uppercase tracking-[0.3em] transition-all ${isTransparent ? 'text-white/80 hover:text-white' : 'text-on-surface-variant hover:text-secondary'}`}>
                     {user.name.split(' ')[0]}
                   </Link>
                   <button onClick={logout} className="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">
@@ -64,14 +72,14 @@ const Header = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant hover:text-secondary transition-all">Sign In</Link>
+                  <Link to="/login" className={`font-label text-[10px] uppercase tracking-[0.3em] transition-all ${isTransparent ? 'text-white/80 hover:text-white' : 'text-on-surface-variant hover:text-secondary'}`}>Sign In</Link>
                   <Link to="/register" className="editorial-gradient text-on-primary px-6 py-3 rounded-DEFAULT font-label text-[10px] uppercase tracking-widest shadow-sm hover:opacity-90 transition-all">Join Atelier</Link>
                 </>
               )}
             </div>
 
             <button onClick={() => setIsCartOpen(true)} className="relative group">
-              <ShoppingBag className="text-primary w-6 h-6" />
+              <ShoppingBag className={`w-6 h-6 transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary'}`} />
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 w-4 h-4 bg-secondary text-on-secondary text-[8px] flex items-center justify-center rounded-full font-bold">
                   {cartCount}
@@ -79,7 +87,7 @@ const Header = () => {
               )}
             </button>
 
-            <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2 text-primary">
+            <button onClick={() => setIsMobileMenuOpen(true)} className={`lg:hidden p-2 transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary'}`}>
               <Menu className="w-6 h-6" />
             </button>
           </div>
