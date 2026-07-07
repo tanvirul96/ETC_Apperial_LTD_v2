@@ -16,11 +16,11 @@ const About = () => {
       {/* Hero Section: Editorial Header */}
       <section className="px-8 md:px-20 py-16 md:py-32">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-end gap-8 mb-12">
+          <div className="flex flex-col md:flex-row items-start md:items-end gap-8 mb-12">
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-6xl md:text-8xl font-headline font-bold text-primary leading-tight tracking-tighter max-w-3xl"
+              className="text-4xl sm:text-6xl md:text-8xl font-headline font-bold text-primary leading-tight tracking-tighter max-w-3xl"
             >
               The Architecture <br/> of Apparel.
             </motion.h1>
