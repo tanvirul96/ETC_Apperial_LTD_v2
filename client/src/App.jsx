@@ -22,6 +22,7 @@ import Orders from './pages/Orders';
 import NewsFeed from './pages/NewsFeed';
 import Inquiries from './pages/Inquiries';
 import Curators from './pages/Curators';
+import Products from './pages/Products';
 import PageTransition from './components/PageTransition';
 import ScrollToTop from './components/ScrollToTop';
 import Loader from './components/Loader';
@@ -98,6 +99,18 @@ const App = () => {
           <div className="flex-grow">
             <PageTransition>
               <Shop />
+            </PageTransition>
+          </div>
+          <Footer />
+        </div>
+      } />
+
+      <Route path="/products" element={
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-grow">
+            <PageTransition>
+              <Products />
             </PageTransition>
           </div>
           <Footer />
