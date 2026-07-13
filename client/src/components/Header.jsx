@@ -19,10 +19,10 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, x: 25 },
-  show: { 
-    opacity: 1, 
-    x: 0, 
-    transition: { type: 'spring', stiffness: 220, damping: 22 } 
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { type: 'spring', stiffness: 220, damping: 22 }
   }
 };
 
@@ -44,8 +44,8 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Collections', path: '/shop' },
-    { name: 'Our Products', path: '/products' },
+    { name: 'Shop', path: '/shop' },
+    { name: 'Products', path: '/products' },
     { name: 'Our Story', path: '/about' },
     { name: 'Management', path: '/management' },
     { name: 'Contact', path: '/contact' },
@@ -56,32 +56,49 @@ const Header = () => {
     <>
       <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${!isTransparent ? 'bg-white/80 backdrop-blur-md border-b border-outline-variant/10 h-20' : 'bg-transparent h-20'}`}>
         <nav className="container mx-auto px-6 md:px-16 h-full flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            <Link to="/" className="font-headline text-2xl md:text-3xl font-black text-primary tracking-tighter">
-              <img src={etcLogo} alt="Logo" className={`h-20 transition-all duration-300 ${isTransparent ? 'brightness-0 invert' : ''}`} />
-            </Link>
-            <div className="hidden lg:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`relative py-1 font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary group ${
-                    location.pathname === link.path 
-                      ? 'text-secondary font-bold' 
-                      : (isTransparent ? 'text-white/80 hover:text-white' : 'text-on-surface-variant')
-                  }`}
-                >
-                  {link.name}
-                  <span className={`absolute bottom-0 left-0 w-full h-[1px] transition-transform duration-300 origin-left ${
-                    location.pathname === link.path 
-                      ? 'bg-secondary scale-x-100' 
-                      : (isTransparent ? 'bg-white scale-x-0 group-hover:scale-x-100' : 'bg-secondary scale-x-0 group-hover:scale-x-100')
-                  }`}></span>
-                </Link>
-              ))}
+          {/* Logo (Left) */}
+          <Link to="/" className="flex items-center gap-3 md:gap-4 group">
+            {/* Logo Graphic (cropped from top) */}
+            <div className="relative overflow-hidden w-12 h-10 md:w-16 md:h-12 flex items-start justify-center">
+              <img
+                src={etcLogo}
+                alt="ETC Graphic"
+                className={`w-full h-auto object-contain object-top scale-[1.8] origin-top transition-all duration-300 ${isTransparent ? 'brightness-0 invert' : ''}`}
+              />
             </div>
+
+            {/* Logo Text */}
+            <div className="flex flex-col justify-center">
+              <span className={`font-headline text-lg md:text-[15px] font-black tracking-widest leading-none transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary'}`}>
+                ETC APPAREL
+              </span>
+              <span className={`font-label text-[5.5px] md:text-[7px] uppercase tracking-[0.25em] mt-1.5 font-bold transition-colors duration-300 ${isTransparent ? 'text-white/80' : 'text-on-surface-variant'}`}>
+                UK Bangladesh Venture
+              </span>
+            </div>
+          </Link>
+
+          {/* Navigation Links (Center) */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`relative py-1 font-label text-[15px] uppercase tracking-[0.2em] transition-all hover:text-secondary group ${location.pathname === link.path
+                  ? 'text-secondary font-bold'
+                  : (isTransparent ? 'text-white/80 hover:text-white' : 'text-on-surface-variant')
+                  }`}
+              >
+                {link.name}
+                <span className={`absolute bottom-0 left-0 w-full h-[1px] transition-transform duration-300 origin-left ${location.pathname === link.path
+                  ? 'bg-secondary scale-x-100'
+                  : (isTransparent ? 'bg-white scale-x-0 group-hover:scale-x-100' : 'bg-secondary scale-x-0 group-hover:scale-x-100')
+                  }`}></span>
+              </Link>
+            ))}
           </div>
 
+          {/* Actions (Right) */}
           <div className="flex items-center gap-4 md:gap-8">
             <div className="hidden md:flex items-center gap-6">
               {user ? (
@@ -136,7 +153,7 @@ const Header = () => {
                 <X className="w-6 h-6" />
               </button>
             </div>
-            <motion.nav 
+            <motion.nav
               variants={containerVariants}
               initial="hidden"
               animate="show"
@@ -155,7 +172,7 @@ const Header = () => {
               ))}
             </motion.nav>
             <div className="mt-auto flex flex-col gap-4">
-               {user ? (
+              {user ? (
                 <>
                   <Link to="/profile" onClick={() => setIsMobileMenuOpen(false)} className="w-full py-4 text-center border border-primary text-primary font-label text-xs uppercase tracking-widest font-bold">My Profile</Link>
                   <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="w-full py-4 text-center bg-primary text-white font-label text-xs uppercase tracking-widest font-bold">Sign Out</button>
@@ -214,7 +231,7 @@ const Header = () => {
                         <div className="flex items-center justify-between mt-3">
                           <span className="font-headline font-bold text-secondary text-sm">${parseFloat(item.price).toFixed(2)}</span>
                           <div className="flex items-center border border-outline-variant/30 rounded bg-surface p-0.5">
-                            <button 
+                            <button
                               onClick={() => updateQty(item.id, (item.qty || 1) - 1)}
                               className="p-1 hover:bg-surface-container-low text-primary transition-colors rounded-sm"
                             >
@@ -223,7 +240,7 @@ const Header = () => {
                             <span className="px-2 font-label text-[10px] text-primary font-bold min-w-[16px] text-center">
                               {item.qty || 1}
                             </span>
-                            <button 
+                            <button
                               onClick={() => updateQty(item.id, (item.qty || 1) + 1)}
                               className="p-1 hover:bg-surface-container-low text-primary transition-colors rounded-sm"
                             >
