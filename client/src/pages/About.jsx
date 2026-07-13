@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, Users, ShieldCheck, Truck, Compass, Heart, Layers } from 'lucide-react';
 
@@ -26,6 +26,36 @@ const About = () => {
       text: "For us, textiles are a deeply human art. Behind every fabric sample, pattern, and stitch is a dedicated worker. We partner exclusively with compliant, ethically certified mills that provide fair wages, safe workspaces, and environmental respect. Sourcing responsibly means keeping the livelihood of our partners at the heart of every decision.",
       quote: "Sustainable business is built on dignity and respect for the makers.",
       image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=800"
+    }
+  };
+
+  useEffect(() => {
+    const keys = Object.keys(stories);
+    const interval = setInterval(() => {
+      setActiveTab((prev) => {
+        const currentIndex = keys.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % keys.length;
+        return keys[nextIndex];
+      });
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [activeTab]);
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
@@ -159,44 +189,71 @@ const About = () => {
           ))}
         </div>
 
+
         {/* Active Tab Panel */}
-        <div className="bg-white rounded-3xl p-6 md:p-12 border border-outline-variant/10 shadow-xl overflow-hidden min-h-[400px]">
+        <div className="bg-white rounded-3xl p-6 md:p-12 border border-outline-variant/10 shadow-xl overflow-hidden min-h-[400px] relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, x: 24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -24 }}
+              transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center"
             >
               <div className="lg:col-span-7 space-y-6">
-                <span className="text-secondary font-label font-bold tracking-widest uppercase text-[10px] bg-secondary/10 px-3 py-1.5 rounded-full inline-block">
+                <motion.span
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.15 }}
+                  className="text-secondary font-label font-bold tracking-widest uppercase text-[10px] bg-secondary/10 px-3 py-1.5 rounded-full inline-block"
+                >
                   {stories[activeTab].subtitle}
-                </span>
-                <h3 className="text-2xl md:text-4xl font-headline font-bold text-primary">
+                </motion.span>
+                <motion.h3
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.22 }}
+                  className="text-2xl md:text-4xl font-headline font-bold text-primary"
+                >
                   {stories[activeTab].title}
-                </h3>
-                <p className="font-body text-base md:text-lg text-on-surface-variant leading-relaxed">
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="font-body text-base md:text-lg text-on-surface-variant leading-relaxed"
+                >
                   {stories[activeTab].text}
-                </p>
-                <div className="border-l-4 border-secondary pl-4 py-1 italic font-headline text-lg text-primary">
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.38 }}
+                  className="border-l-4 border-secondary pl-4 py-1 italic font-headline text-lg text-primary"
+                >
                   "{stories[activeTab].quote}"
-                </div>
+                </motion.div>
               </div>
-              <div className="lg:col-span-5 relative">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="lg:col-span-5 relative"
+              >
                 <div className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
-                  <img 
-                    src={stories[activeTab].image} 
-                    alt={stories[activeTab].title} 
+                  <img
+                    src={stories[activeTab].image}
+                    alt={stories[activeTab].title}
                     className="w-full h-full object-cover grayscale contrast-115"
                   />
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
+
 
       {/* Sourcing Suffix: Sourcing Journey Timeline */}
       <section className="px-8 md:px-20 py-24 bg-surface-container-low border-t border-outline-variant/15">
@@ -207,9 +264,19 @@ const About = () => {
             <div className="w-16 h-1 bg-secondary mx-auto mt-4" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {journeySteps.map((step, idx) => (
-              <div key={idx} className="p-8 bg-white border border-outline-variant/10 rounded-2xl hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+              <motion.div 
+                key={idx} 
+                variants={cardVariants}
+                className="p-8 bg-white border border-outline-variant/10 rounded-2xl hover:shadow-xl transition-all duration-300 group flex flex-col justify-between"
+              >
                 <div>
                   <div className="w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
                     <step.icon className="w-6 h-6 text-secondary group-hover:text-white transition-colors duration-300" />
@@ -217,9 +284,9 @@ const About = () => {
                   <h3 className="font-headline text-xl font-bold text-primary mb-4">{step.title}</h3>
                   <p className="font-body text-sm text-on-surface-variant leading-relaxed">{step.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
