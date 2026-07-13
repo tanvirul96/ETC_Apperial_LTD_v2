@@ -46,7 +46,7 @@ const Header = () => {
     { name: 'Home', path: '/' },
     { name: 'Shop', path: '/shop' },
     { name: 'Products', path: '/products' },
-    { name: 'Our Story', path: '/about' },
+    { name: 'Partners', path: '/partners' },
     { name: 'Management', path: '/management' },
     { name: 'Contact', path: '/contact' },
     { name: 'News', path: '/news' },
