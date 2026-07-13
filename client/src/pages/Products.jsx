@@ -151,36 +151,17 @@ const CategorySection = ({ category, sectionIndex, onSelectProduct }) => {
         role="button"
         aria-expanded={expanded}
       >
-        <div className="flex items-center gap-4">
-          {/* icon badge */}
-          <div
-            className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-md flex-shrink-0 transition-transform duration-300 group-hover:scale-110"
-            style={{ background: `${category.accent}18`, border: `1.5px solid ${category.accent}33` }}
+        <div>
+          <h2
+            className="font-headline text-xl md:text-2xl font-bold leading-tight"
+            style={{ color: '#171e29' }}
           >
-            {category.icon}
-          </div>
-
-          <div>
-            <h2
-              className="font-headline text-xl md:text-2xl font-bold leading-tight"
-              style={{ color: '#171e29' }}
-            >
-              {category.name}
-            </h2>
-            <p className="text-sm text-on-surface-variant mt-0.5 font-label">
-              {category.description}
-            </p>
-          </div>
+            {category.name}
+          </h2>
         </div>
 
-        {/* item count + toggle */}
+        {/* toggle */}
         <div className="flex items-center gap-3 flex-shrink-0 ml-4">
-          <span
-            className="hidden sm:flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-label font-bold uppercase tracking-widest"
-            style={{ background: `${category.accent}18`, color: category.accent }}
-          >
-            {category.items.length} items
-          </span>
           <div
             className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300"
             style={{ background: `${category.accent}15`, color: category.accent }}
@@ -260,8 +241,8 @@ const Products = () => {
       ...cat,
       items: searchQuery.trim()
         ? cat.items.filter((item) =>
-            item.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
         : cat.items,
     }))
     .filter((cat) => cat.items.length > 0);
@@ -333,39 +314,7 @@ const Products = () => {
             <span style={{ color: '#feb564' }}>Catalogue</span>
           </motion.h1>
 
-          <motion.p
-            className="font-body text-white/60 text-base md:text-lg max-w-xl leading-relaxed mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            Explore our comprehensive range of textile products — from premium
-            woven fabrics to sustainable eco-certified ranges — curated for the
-            global fashion market.
-          </motion.p>
 
-          {/* stats row */}
-          <motion.div
-            className="flex flex-wrap gap-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-          >
-            {[
-              { label: 'Categories', value: productCategories.length },
-              { label: 'Products', value: `${totalProducts}+` },
-              { label: 'Countries Served', value: '30+' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="font-headline text-3xl font-bold" style={{ color: '#feb564' }}>
-                  {stat.value}
-                </p>
-                <p className="font-label text-[11px] uppercase tracking-widest text-white/50 mt-1">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </motion.div>
         </div>
 
         {/* bottom fade */}
@@ -382,11 +331,10 @@ const Products = () => {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setActiveFilter('all')}
-              className={`px-4 py-1.5 rounded-full font-label text-[11px] uppercase tracking-widest font-bold border transition-all duration-200 ${
-                activeFilter === 'all'
-                  ? 'bg-primary text-white border-primary'
-                  : 'bg-white text-on-surface-variant border-outline-variant/40 hover:border-primary/40 hover:text-primary'
-              }`}
+              className={`px-4 py-1.5 rounded-full font-label text-[11px] uppercase tracking-widest font-bold border transition-all duration-200 ${activeFilter === 'all'
+                ? 'bg-primary text-white border-primary'
+                : 'bg-white text-on-surface-variant border-outline-variant/40 hover:border-primary/40 hover:text-primary'
+                }`}
             >
               All
             </button>
@@ -394,18 +342,17 @@ const Products = () => {
               <button
                 key={cat.id}
                 onClick={() => setActiveFilter(cat.id)}
-                className={`px-4 py-1.5 rounded-full font-label text-[11px] uppercase tracking-widest font-bold border transition-all duration-200 whitespace-nowrap ${
-                  activeFilter === cat.id
-                    ? 'text-white border-transparent'
-                    : 'bg-white text-on-surface-variant border-outline-variant/40 hover:border-opacity-60'
-                }`}
+                className={`px-4 py-1.5 rounded-full font-label text-[11px] uppercase tracking-widest font-bold border transition-all duration-200 whitespace-nowrap ${activeFilter === cat.id
+                  ? 'text-white border-transparent'
+                  : 'bg-white text-on-surface-variant border-outline-variant/40 hover:border-opacity-60'
+                  }`}
                 style={
                   activeFilter === cat.id
                     ? { background: cat.accent, borderColor: cat.accent }
                     : {}
                 }
               >
-                {cat.icon} {cat.name}
+                {cat.name}
               </button>
             ))}
           </div>
@@ -544,7 +491,7 @@ const Products = () => {
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 30 }}
                 transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                className="relative w-full max-w-3xl bg-white rounded-3xl overflow-hidden shadow-2xl pointer-events-auto border border-outline-variant/10 flex flex-col md:flex-row max-h-[90vh] md:max-h-[80vh]"
+                className="relative w-auto h-auto max-w-[95vw] md:max-w-[90vw] lg:max-w-6xl bg-white rounded-3xl overflow-hidden shadow-2xl pointer-events-auto border border-outline-variant/10 flex flex-col md:flex-row max-h-[90vh]"
               >
                 {/* Close Button */}
                 <button
@@ -558,20 +505,19 @@ const Products = () => {
                 </button>
 
                 {/* Left side: Full Resolution Image View */}
-                <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto md:h-full overflow-hidden bg-surface-container-low flex-shrink-0">
+                <div className="relative w-full md:w-auto h-auto min-w-0 flex items-center justify-center overflow-hidden bg-surface-container-low">
                   <img
                     src={selectedProduct.image || 'https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop'}
                     alt={selectedProduct.name}
-                    className="w-full h-full object-cover"
+                    className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-[85vh] object-contain"
                   />
                 </div>
 
                 {/* Right side: Information */}
-                <div className="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto">
+                <div className="w-full md:w-[400px] lg:w-[450px] shrink-0 p-6 md:p-8 flex flex-col justify-center overflow-y-auto bg-white">
                   <div>
                     {/* Category Label */}
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="text-lg">{selectedCategory.icon}</span>
                       <span
                         className="font-label text-[11px] uppercase tracking-[0.2em] font-bold"
                         style={{ color: selectedCategory.accent }}
@@ -586,37 +532,15 @@ const Products = () => {
                     </h2>
 
                     <p className="text-on-surface-variant font-body text-sm leading-relaxed mb-6">
-                      Premium quality {selectedProduct.name.toLowerCase()} sourced by ETC Apparel Ltd. Specially designed and constructed to meet international standards for global brands.
+                      {selectedProduct.description || `Premium quality ${selectedProduct.name.toLowerCase()} sourced by ETC Apparel Ltd. Specially designed and constructed to meet international standards for global brands.`}
                     </p>
 
                     {/* Spec features placeholder */}
-                    <div className="grid grid-cols-2 gap-4 border-t border-b border-outline-variant/15 py-4 mb-6">
-                      <div>
-                        <span className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant/60 block">Sourcing type</span>
-                        <span className="font-body text-xs font-semibold text-primary">Made to Order / Custom</span>
-                      </div>
-                      <div>
-                        <span className="font-label text-[9px] uppercase tracking-widest text-on-surface-variant/60 block">Availability</span>
-                        <span className="font-body text-xs font-semibold text-primary">Global Shipping Available</span>
-                      </div>
-                    </div>
+
                   </div>
 
                   {/* Actions */}
                   <div className="flex flex-col gap-2.5">
-                    <a
-                      href={`/contact?inquiry=${encodeURIComponent(selectedProduct.name)}`}
-                      className="w-full py-3.5 text-center font-label text-[11px] uppercase tracking-widest font-bold text-white rounded-xl shadow-md hover:opacity-95 transition-opacity"
-                      style={{ background: selectedCategory.accent }}
-                    >
-                      Inquire about this product
-                    </a>
-                    <button
-                      onClick={() => setSelectedProduct(null)}
-                      className="w-full py-3 text-center font-label text-[11px] uppercase tracking-widest font-bold text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/30 rounded-xl bg-surface-container-low"
-                    >
-                      Close View
-                    </button>
                   </div>
                 </div>
               </motion.div>

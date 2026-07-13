@@ -44,12 +44,13 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'Shop', path: '/shop' },
     { name: 'Products', path: '/products' },
     { name: 'Partners', path: '/partners' },
     { name: 'Management', path: '/management' },
     { name: 'Contact', path: '/contact' },
     { name: 'News', path: '/news' },
+    { name: 'Shop', path: '/shop' }
+
   ];
 
   return (

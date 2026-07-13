@@ -18,8 +18,8 @@
 
 export const productCategories = [
   {
-    id: 'woven-fabrics',
-    name: 'Woven Fabrics',
+    id: 'mens-wear',
+    name: 'Mens Wear',
     icon: '🧵',
     accent: '#885203',
     description: 'Premium woven textiles sourced from world-class mills.',
@@ -35,8 +35,8 @@ export const productCategories = [
     ],
   },
   {
-    id: 'knit-fabrics',
-    name: 'Knit Fabrics',
+    id: 'ladies-wear',
+    name: 'Ladies Wear',
     icon: '🪡',
     accent: '#3c5a96',
     description: 'Stretchy, comfortable knit constructions for every style.',
@@ -51,8 +51,8 @@ export const productCategories = [
     ],
   },
   {
-    id: 'garments',
-    name: 'Garments',
+    id: 'boys-wear',
+    name: 'Boys Wear',
     icon: '👕',
     accent: '#2e7d32',
     description: 'Ready-to-ship and made-to-order garment lines.',
@@ -70,8 +70,8 @@ export const productCategories = [
     ],
   },
   {
-    id: 'home-textiles',
-    name: 'Home Textiles',
+    id: 'girls-wear',
+    name: 'Girls Wear',
     icon: '🛏️',
     accent: '#6d4c41',
     description: 'Luxurious home textile products for modern living.',
@@ -86,8 +86,8 @@ export const productCategories = [
     ],
   },
   {
-    id: 'accessories',
-    name: 'Accessories & Trims',
+    id: 'kids-wear',
+    name: 'Kids Wear',
     icon: '🪢',
     accent: '#6a1b9a',
     description: 'Quality trims and accessories to finish every garment.',
@@ -103,8 +103,8 @@ export const productCategories = [
     ],
   },
   {
-    id: 'sustainable',
-    name: 'Sustainable Range',
+    id: 'others',
+    name: 'Others',
     icon: '🌿',
     accent: '#1b5e20',
     description: 'Eco-conscious textiles certified for sustainability.',
