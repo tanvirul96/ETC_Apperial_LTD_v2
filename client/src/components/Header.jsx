@@ -73,7 +73,7 @@ const Header = () => {
               <span className={`font-headline text-lg md:text-[15px] font-black tracking-widest leading-none transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary'}`}>
                 ETC APPAREL
               </span>
-              <span className={`font-label text-[5.5px] md:text-[7px] uppercase tracking-[0.25em] mt-1.5 font-bold transition-colors duration-300 ${isTransparent ? 'text-white/80' : 'text-on-surface-variant'}`}>
+              <span className={`font-label text-[5.5px] md:text-[7.5px] uppercase tracking-[0.25em] mt-1.5 font-bold transition-colors duration-300 ${isTransparent ? 'text-white/80' : 'text-on-surface-variant'}`}>
                 UK Bangladesh Venture
               </span>
             </div>
