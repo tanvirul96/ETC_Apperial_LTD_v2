@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { productCategories } from '../data/products';
+import api from '../utils/api';
 
 /* ── tiny helper: random stagger so cards feel organic ── */
 const stagger = (i) => ({ delay: i * 0.04 });

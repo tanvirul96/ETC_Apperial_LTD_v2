@@ -60,7 +60,17 @@ const Home = () => {
         console.error('Error fetching news:', error);
       }
     };
+    const fetchProducts = async () => {
+      try {
+        const response = await api.get('/products');
+        setDbProducts(response.data || []);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
     fetchLatestNews();
+    fetchProducts();
 
     const slideTimer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -75,6 +85,28 @@ const Home = () => {
       clearInterval(testimonialTimer);
     };
   }, []);
+
+  const activeCategories = React.useMemo(() => {
+    if (!dbProducts || dbProducts.length === 0) {
+      return productCategories;
+    }
+    const catMap = {};
+    dbProducts.forEach((p) => {
+      const cat = p.category || 'Collection';
+      if (!catMap[cat]) {
+        catMap[cat] = {
+          name: cat === 'Men' ? 'Mens Wear' : cat === 'Women' ? 'Ladies Wear' : cat === 'Kid' ? 'Kids Collection' : cat,
+          items: []
+        };
+      }
+      catMap[cat].items.push({
+        id: p.id,
+        name: p.name,
+        image: p.image_url
+      });
+    });
+    return Object.values(catMap);
+  }, [dbProducts]);
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
@@ -227,13 +259,13 @@ const Home = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 h-auto md:h-[700px]">
             {/* Left Column (Tall) - Index 0 */}
-            {productCategories[0] && (
+            {activeCategories[0] && (
               <Link to="/products" className="relative group overflow-hidden rounded-sm shadow-md h-[400px] md:h-full">
-                <img src={productCategories[0].items[0]?.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={productCategories[0].name} />
+                <img src={activeCategories[0].items[0]?.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={activeCategories[0].name} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
                 <div className="absolute bottom-6 left-6 md:bottom-10 md:left-8 text-white z-10">
                   <p className="font-label text-[10px] tracking-[0.3em] mb-2 uppercase font-bold text-white/90">Featured Collection</p>
-                  <h3 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold">{productCategories[0].name}</h3>
+                  <h3 className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold">{activeCategories[0].name}</h3>
                 </div>
               </Link>
             )}
@@ -241,35 +273,35 @@ const Home = () => {
             {/* Right Column (Stacked) */}
             <div className="flex flex-col gap-4 md:gap-6 h-[600px] md:h-full">
               {/* Top Right (Wide) - Index 1 */}
-              {productCategories[1] && (
+              {activeCategories[1] && (
                 <Link to="/products" className="relative group overflow-hidden rounded-sm shadow-md h-[280px] md:h-1/2">
-                  <img src={productCategories[1].items[0]?.image} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" alt={productCategories[1].name} />
+                  <img src={activeCategories[1].items[0]?.image} className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105" alt={activeCategories[1].name} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
                   <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8 text-white z-10">
                     <p className="font-label text-[10px] tracking-[0.3em] mb-2 uppercase font-bold text-white/90">Curated Edit</p>
-                    <h3 className="font-headline text-xl sm:text-2xl md:text-3xl font-bold">{productCategories[1].name}</h3>
+                    <h3 className="font-headline text-xl sm:text-2xl md:text-3xl font-bold">{activeCategories[1].name}</h3>
                   </div>
                 </Link>
               )}
 
               {/* Bottom Right (Two Squares) - Index 2 and 3 */}
               <div className="grid grid-cols-2 gap-4 md:gap-6 h-[280px] md:h-1/2">
-                {productCategories[2] && (
+                {activeCategories[2] && (
                   <Link to="/products" className="relative group overflow-hidden rounded-sm shadow-md h-full">
-                    <img src={productCategories[2].items[0]?.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={productCategories[2].name} />
+                    <img src={activeCategories[2].items[0]?.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={activeCategories[2].name} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
                     <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 text-white z-10">
-                      <h3 className="font-headline text-sm sm:text-base md:text-2xl font-bold">{productCategories[2].name}</h3>
+                      <h3 className="font-headline text-sm sm:text-base md:text-2xl font-bold">{activeCategories[2].name}</h3>
                     </div>
                   </Link>
                 )}
 
-                {productCategories[3] && (
+                {activeCategories[3] && (
                   <Link to="/products" className="relative group overflow-hidden rounded-sm shadow-md h-full">
-                    <img src={productCategories[3].items[0]?.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={productCategories[3].name} />
+                    <img src={activeCategories[3].items[0]?.image} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt={activeCategories[3].name} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity"></div>
                     <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 text-white z-10">
-                      <h3 className="font-headline text-sm sm:text-base md:text-2xl font-bold">{productCategories[3].name}</h3>
+                      <h3 className="font-headline text-sm sm:text-base md:text-2xl font-bold">{activeCategories[3].name}</h3>
                     </div>
                   </Link>
                 )}

@@ -163,10 +163,12 @@ const Inventory = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to remove this piece from the vault?')) {
       try {
+        setProducts(prev => prev.filter(p => p.id !== id));
         await api.delete(`/products/${id}`);
         fetchProducts();
       } catch (err) {
         console.error('Error deleting product:', err);
+        fetchProducts();
       }
     }
   };

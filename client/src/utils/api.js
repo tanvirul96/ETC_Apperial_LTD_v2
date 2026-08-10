@@ -13,6 +13,8 @@ const api = axios.create({
 const cache = new Map();
 const CACHE_TTL = 30000; // 30 seconds
 
+export const clearApiCache = () => cache.clear();
+
 // Add a request interceptor to include the auth token and check cache
 api.interceptors.request.use(
   (config) => {
@@ -22,8 +24,10 @@ api.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
 
+    const method = (config.method || 'get').toLowerCase();
+
     // Cache control logic: Only cache GET requests
-    if (config.method === 'get') {
+    if (method === 'get') {
       const cacheKey = config.url + (config.params ? JSON.stringify(config.params) : '');
       const cached = cache.get(cacheKey);
       
@@ -39,7 +43,7 @@ api.interceptors.request.use(
           });
         };
       }
-    } else if (['post', 'put', 'delete'].includes(config.method)) {
+    } else if (['post', 'put', 'delete', 'patch'].includes(method)) {
       // Invalidate the cache completely on mutations
       cache.clear();
     }
@@ -53,8 +57,9 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     const config = response.config;
+    const method = (config.method || 'get').toLowerCase();
     // Store only GET requests with 200 status in cache
-    if (config.method === 'get' && response.status === 200) {
+    if (method === 'get' && response.status === 200) {
       const cacheKey = config.url + (config.params ? JSON.stringify(config.params) : '');
       cache.set(cacheKey, {
         data: response.data,

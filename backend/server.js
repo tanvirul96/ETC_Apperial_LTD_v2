@@ -32,7 +32,17 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'API is running', database: 'Supabase (PostgreSQL)' });
 });
 
-// 404 handler
+// Serve frontend build static files if available
+const clientDistPath = path.join(__dirname, '../client/dist');
+if (require('fs').existsSync(clientDistPath)) {
+    app.use(express.static(clientDistPath));
+    app.get('*', (req, res, next) => {
+        if (req.path.startsWith('/api')) return next();
+        res.sendFile(path.join(clientDistPath, 'index.html'));
+    });
+}
+
+// 404 handler for API routes
 app.use((req, res) => {
     res.status(404).json({ message: 'Route not found' });
 });
