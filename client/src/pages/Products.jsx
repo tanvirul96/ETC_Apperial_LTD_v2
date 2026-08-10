@@ -234,26 +234,72 @@ const Products = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [dbProducts, setDbProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await api.get('/products');
+        setDbProducts(response.data || []);
+      } catch (err) {
+        console.error('Error fetching products:', err);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  const activeCategoryList = useMemo(() => {
+    if (!dbProducts || dbProducts.length === 0) return productCategories;
+
+    const catMap = {};
+    dbProducts.forEach((p) => {
+      const cat = p.category || 'General';
+      const catId = cat.toLowerCase().replace(/\s+/g, '-');
+      if (!catMap[catId]) {
+        let accent = '#885203';
+        let icon = '🧵';
+        if (cat === 'Women') { accent = '#3c5a96'; icon = '🪡'; }
+        else if (cat === 'Kid') { accent = '#6a1b9a'; icon = '🪢'; }
+
+        catMap[catId] = {
+          id: catId,
+          name: cat === 'Men' ? 'Mens Wear' : cat === 'Women' ? 'Ladies Wear' : cat === 'Kid' ? 'Kids Collection' : cat,
+          icon,
+          accent,
+          description: `Curated ${cat} collection from our atelier.`,
+          items: [],
+        };
+      }
+      catMap[catId].items.push({
+        id: p.id,
+        name: p.name,
+        image: p.image_url,
+        price: p.price,
+        description: p.description,
+      });
+    });
+    return Object.values(catMap);
+  }, [dbProducts]);
 
   /* Filtered categories */
-  const filteredCategories = productCategories
+  const filteredCategories = activeCategoryList
     .filter((cat) => activeFilter === 'all' || cat.id === activeFilter)
     .map((cat) => ({
       ...cat,
       items: searchQuery.trim()
         ? cat.items.filter((item) =>
-          item.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+            item.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
         : cat.items,
     }))
     .filter((cat) => cat.items.length > 0);
 
-  const totalProducts = productCategories.reduce((acc, c) => acc + c.items.length, 0);
+  const totalProducts = activeCategoryList.reduce((acc, c) => acc + c.items.length, 0);
 
   // Helper to find the parent category of the selected product
   const getSelectedProductCategory = () => {
     if (!selectedProduct) return null;
-    return productCategories.find((cat) =>
+    return activeCategoryList.find((cat) =>
       cat.items.some((item) => item.id === selectedProduct.id)
     );
   };
@@ -346,7 +392,7 @@ const Products = () => {
             >
               All
             </button>
-            {productCategories.map((cat) => (
+            {activeCategoryList.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveFilter(cat.id)}
