@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, Quote, Mail } from 'lucide-react';
@@ -7,6 +7,7 @@ import api from '../utils/api';
 
 const Home = () => {
   const [news, setNews] = useState([]);
+  const [dbProducts, setDbProducts] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -86,7 +87,7 @@ const Home = () => {
     };
   }, []);
 
-  const activeCategories = React.useMemo(() => {
+  const activeCategories = useMemo(() => {
     if (!dbProducts || dbProducts.length === 0) {
       return productCategories;
     }
