@@ -266,9 +266,9 @@ const Products = () => {
       <Decoration x="78%" y="8%" size="260px" color="rgba(60,90,150,0.05)" delay={0.3} />
       <Decoration x="50%" y="55%" size="340px" color="rgba(46,125,50,0.04)" delay={0.6} />
 
-      {/* ═══════════════ HERO SECTION ═══════════════ */}
+      {/* ═══════════════ HERO SECTION (COMPACT & SLEEK) ═══════════════ */}
       <section
-        className="relative pt-32 pb-20 px-6 md:px-16 overflow-hidden"
+        className="relative pt-24 pb-5 px-6 md:px-16 overflow-hidden"
         style={{
           background:
             'linear-gradient(160deg, #171e29 0%, #2c333f 60%, #1a1f2b 100%)',
@@ -291,35 +291,42 @@ const Products = () => {
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         />
 
-        <div className="container mx-auto relative z-10 max-w-5xl">
-          {/* eyebrow label */}
+        <div className="container mx-auto relative z-10 max-w-7xl flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div>
+            {/* eyebrow label */}
+            <motion.p
+              className="font-label text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-1"
+              style={{ color: '#ffb86b' }}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              ETC Apparel Ltd · Buying House
+            </motion.p>
+
+            <motion.h1
+              className="font-headline text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Our Product <span style={{ color: '#feb564' }}>Catalogue</span>
+            </motion.h1>
+          </div>
+
           <motion.p
-            className="font-label text-[11px] uppercase tracking-[0.35em] mb-5"
-            style={{ color: '#ffb86b' }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            className="font-label text-xs text-white/60 tracking-wider hidden sm:block pb-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            ETC Apparel Ltd · Buying House
+            Explore our curated apparel collections
           </motion.p>
-
-          <motion.h1
-            className="font-headline text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.08] mb-6"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
-            Our Product
-            <br />
-            <span style={{ color: '#feb564' }}>Catalogue</span>
-          </motion.h1>
-
-
         </div>
 
         {/* bottom fade */}
         <div
-          className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+          className="absolute bottom-0 left-0 right-0 h-6 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, transparent, #fef8f4)' }}
         />
       </section>

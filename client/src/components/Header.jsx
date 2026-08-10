@@ -64,7 +64,7 @@ const Header = () => {
               <img
                 src={etcLogo}
                 alt="ETC Graphic"
-                className={`w-full h-auto object-contain object-top scale-[1.8] origin-top transition-all duration-300 ${isTransparent ? 'brightness-0 invert' : ''}`}
+                className="w-full h-auto object-contain object-top scale-[1.8] origin-top transition-all duration-300"
               />
             </div>
 
