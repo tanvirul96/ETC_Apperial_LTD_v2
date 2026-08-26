@@ -249,36 +249,95 @@ const Products = () => {
   }, []);
 
   const activeCategoryList = useMemo(() => {
-    if (!dbProducts || dbProducts.length === 0) return productCategories;
+    const ALLOWED_CATEGORIES = [
+      {
+        id: 'mens-wear',
+        name: 'Mens Wear',
+        icon: '🧵',
+        accent: '#885203',
+        description: 'Curated menswear and tailoring from our atelier.',
+      },
+      {
+        id: 'kids-collection',
+        name: 'Kids Collection',
+        icon: '🪢',
+        accent: '#6a1b9a',
+        description: 'Curated kids collection and activewear from our atelier.',
+      },
+      {
+        id: 'ladies-wear',
+        name: 'Ladies Wear',
+        icon: '🪡',
+        accent: '#3c5a96',
+        description: 'Curated ladies wear and knitwear from our atelier.',
+      },
+    ];
 
-    const catMap = {};
+    if (!dbProducts || dbProducts.length === 0) {
+      return productCategories
+        .filter((cat) => ['mens-wear', 'kids-collection', 'ladies-wear'].includes(cat.id))
+        .map((cat) => ({
+          ...cat,
+          name: cat.id === 'kids-collection' ? 'Kids Collection' : cat.name,
+        }));
+    }
+
+    const catMap = {
+      'mens-wear': { ...ALLOWED_CATEGORIES[0], items: [] },
+      'kids-collection': { ...ALLOWED_CATEGORIES[1], items: [] },
+      'ladies-wear': { ...ALLOWED_CATEGORIES[2], items: [] },
+    };
+
     dbProducts.forEach((p) => {
-      const cat = p.category || 'General';
-      const catId = cat.toLowerCase().replace(/\s+/g, '-');
-      if (!catMap[catId]) {
-        let accent = '#885203';
-        let icon = '🧵';
-        if (cat === 'Women') { accent = '#3c5a96'; icon = '🪡'; }
-        else if (cat === 'Kid') { accent = '#6a1b9a'; icon = '🪢'; }
+      const rawCat = (p.category || '').trim().toLowerCase();
 
-        catMap[catId] = {
-          id: catId,
-          name: cat === 'Men' ? 'Mens Wear' : cat === 'Women' ? 'Ladies Wear' : cat === 'Kid' ? 'Kids Collection' : cat,
-          icon,
-          accent,
-          description: `Curated ${cat} collection from our atelier.`,
-          items: [],
-        };
+      // Explicitly ignore / remove Archive, Outerwear, Apparel, and others
+      if (['archive', 'outerwear', 'apparel', 'others', 'general'].includes(rawCat)) {
+        return;
       }
-      catMap[catId].items.push({
-        id: p.id,
-        name: p.name,
-        image: p.image_url,
-        price: p.price,
-        description: p.description,
-      });
+
+      if (['men', 'mens', 'mens wear', 'mens-wear', 'male'].includes(rawCat)) {
+        catMap['mens-wear'].items.push({
+          id: p.id,
+          name: p.name,
+          image: p.image_url,
+          price: p.price,
+          description: p.description,
+        });
+      } else if (['kid', 'kids', 'kids wear', 'kids-wear', 'kids collection', 'kids-collection', 'boy', 'boys', 'girl', 'girls'].includes(rawCat)) {
+        catMap['kids-collection'].items.push({
+          id: p.id,
+          name: p.name,
+          image: p.image_url,
+          price: p.price,
+          description: p.description,
+        });
+      } else if (['women', 'womens', 'ladies', 'ladies wear', 'ladies-wear', 'female'].includes(rawCat)) {
+        catMap['ladies-wear'].items.push({
+          id: p.id,
+          name: p.name,
+          image: p.image_url,
+          price: p.price,
+          description: p.description,
+        });
+      }
     });
-    return Object.values(catMap);
+
+    const populated = ALLOWED_CATEGORIES.map((def) => catMap[def.id]).filter(
+      (cat) => cat.items.length > 0
+    );
+
+    // Fallback to static catalog if DB has no items matching the allowed categories
+    if (populated.length === 0) {
+      return productCategories
+        .filter((cat) => ['mens-wear', 'kids-collection', 'ladies-wear'].includes(cat.id))
+        .map((cat) => ({
+          ...cat,
+          name: cat.id === 'kids-collection' ? 'Kids Collection' : cat.name,
+        }));
+    }
+
+    return populated;
   }, [dbProducts]);
 
   /* Filtered categories */

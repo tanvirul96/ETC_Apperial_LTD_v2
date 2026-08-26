@@ -39,7 +39,22 @@ const Shop = () => {
     setFilteredProducts(result);
   }, [search, category, products]);
 
-  const categories = ['All', ...new Set(products.map(p => p.category))];
+  const categories = [
+    'All',
+    ...new Set(
+      products
+        .map((p) =>
+          p.category === 'Men'
+            ? 'Mens Wear'
+            : p.category === 'Women'
+            ? 'Ladies Wear'
+            : p.category === 'Kid'
+            ? 'Kids Collection'
+            : p.category
+        )
+        .filter((cat) => cat && !['Archive', 'Outerwear', 'Apparel'].includes(cat))
+    ),
+  ];
 
   return (
     <main className="pt-32 pb-24 bg-surface noise-bg min-h-screen">

@@ -91,22 +91,41 @@ const Home = () => {
     if (!dbProducts || dbProducts.length === 0) {
       return productCategories;
     }
-    const catMap = {};
+    const catMap = {
+      'Mens Wear': { name: 'Mens Wear', items: [] },
+      'Kids Collection': { name: 'Kids Collection', items: [] },
+      'Ladies Wear': { name: 'Ladies Wear', items: [] },
+    };
+
     dbProducts.forEach((p) => {
-      const cat = p.category || 'Collection';
-      if (!catMap[cat]) {
-        catMap[cat] = {
-          name: cat === 'Men' ? 'Mens Wear' : cat === 'Women' ? 'Ladies Wear' : cat === 'Kid' ? 'Kids Collection' : cat,
-          items: []
-        };
+      const rawCat = (p.category || '').trim().toLowerCase();
+      if (['archive', 'outerwear', 'apparel', 'others', 'general'].includes(rawCat)) {
+        return;
       }
-      catMap[cat].items.push({
-        id: p.id,
-        name: p.name,
-        image: p.image_url
-      });
+
+      if (['men', 'mens', 'mens wear', 'mens-wear', 'male'].includes(rawCat)) {
+        catMap['Mens Wear'].items.push({
+          id: p.id,
+          name: p.name,
+          image: p.image_url,
+        });
+      } else if (['kid', 'kids', 'kids wear', 'kids-wear', 'kids collection', 'kids-collection', 'boy', 'boys', 'girl', 'girls'].includes(rawCat)) {
+        catMap['Kids Collection'].items.push({
+          id: p.id,
+          name: p.name,
+          image: p.image_url,
+        });
+      } else if (['women', 'womens', 'ladies', 'ladies wear', 'ladies-wear', 'female'].includes(rawCat)) {
+        catMap['Ladies Wear'].items.push({
+          id: p.id,
+          name: p.name,
+          image: p.image_url,
+        });
+      }
     });
-    return Object.values(catMap);
+
+    const populated = Object.values(catMap).filter((cat) => cat.items.length > 0);
+    return populated.length > 0 ? populated : productCategories;
   }, [dbProducts]);
 
   const handleNewsletterSubmit = (e) => {
@@ -171,7 +190,7 @@ const Home = () => {
               transition={{ delay: 0.6 }}
               className="flex gap-4"
             >
-              <Link to="/shop" className="px-8 py-4 editorial-gradient text-white rounded-lg font-bold tracking-wide flex items-center gap-2 group transition-all active:scale-95 shadow-2xl">
+              {/* <Link to="/shop" className="px-8 py-4 editorial-gradient text-white rounded-lg font-bold tracking-wide flex items-center gap-2 group transition-all active:scale-95 shadow-2xl">
                 Shop Collections <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <button
@@ -179,7 +198,7 @@ const Home = () => {
                 className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-lg font-bold hover:bg-white/10 transition-all active:scale-95"
               >
                 View Lookbook
-              </button>
+              </button> */}
             </motion.div>
           </div>
         </div>
