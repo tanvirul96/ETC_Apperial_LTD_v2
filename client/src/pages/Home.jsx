@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Quote, Mail } from 'lucide-react';
+import { ArrowRight, ChevronRight, Quote, Mail, Globe, Factory, ShieldCheck, Truck, Layers, Sparkles, TrendingUp, CheckCircle2 } from 'lucide-react';
 import { productCategories } from '../data/products';
 import api from '../utils/api';
 
@@ -277,6 +277,180 @@ const Home = () => {
             </motion.div>
             <div className="absolute -bottom-8 -left-8 bg-surface-container-highest p-8 max-w-[240px] hidden md:block shadow-xl border border-outline-variant/10">
               <p className="font-headline italic text-tertiary text-xl leading-relaxed">"Craft is the memory of the hands."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sourcing Bridge & Value Proposition Section (Option 1 & 2 Merged) */}
+      <section className="py-24 lg:py-32 bg-primary text-white relative overflow-hidden noise-bg">
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-secondary/5 blur-3xl pointer-events-none" />
+        <div className="absolute -left-20 bottom-0 text-[26rem] font-headline text-white/[0.02] select-none pointer-events-none">ETC</div>
+
+        <div className="container mx-auto px-6 md:px-16 relative z-10">
+          {/* Header */}
+          <div className="max-w-3xl mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-secondary/15 border border-secondary/30 mb-6">
+              <Sparkles className="w-3.5 h-3.5 text-secondary-fixed-dim" />
+              <span className="font-label text-[10px] md:text-xs uppercase tracking-[0.25em] text-secondary-fixed-dim font-bold">
+                UK-Bangladesh Apparel Sourcing Bridge
+              </span>
+            </div>
+            <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
+              Built to Build Your <span className="italic font-normal text-secondary-fixed-dim">Clothing Business.</span>
+            </h2>
+            <p className="font-body text-base md:text-lg text-on-primary-container leading-relaxed">
+              We connect global fashion vision with industrial manufacturing mastery. Operating between London and Dhaka, we empower apparel brands, high-street retailers, and scaling designers with transparent end-to-end sourcing, certified ethical production, and uncompromising craftsmanship.
+            </p>
+          </div>
+
+          {/* Core Capabilities Grid (Option 1 Core) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/10 hover:border-secondary/40 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary-fixed-dim mb-6 group-hover:scale-110 transition-transform">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-xl font-bold mb-3 group-hover:text-secondary-fixed-dim transition-colors">
+                  Design & Sampling
+                </h3>
+                <p className="font-body text-xs md:text-sm text-on-primary-container leading-relaxed mb-6">
+                  London creative insight paired with precision 3D CLO virtual prototyping and rapid physical counter-samples for accurate fit approval.
+                </p>
+              </div>
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary-fixed-dim font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Rapid Fit Approvals
+              </span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/10 hover:border-secondary/40 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary-fixed-dim mb-6 group-hover:scale-110 transition-transform">
+                  <Factory className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-xl font-bold mb-3 group-hover:text-secondary-fixed-dim transition-colors">
+                  Certified Production
+                </h3>
+                <p className="font-body text-xs md:text-sm text-on-primary-container leading-relaxed mb-6">
+                  Dedicated high-efficiency lines for Woven, Circular Knitwear, Denim, and Kids collections across tier-1 compliant factories.
+                </p>
+              </div>
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary-fixed-dim font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> BSCI & WRAP Aligned
+              </span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/10 hover:border-secondary/40 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary-fixed-dim mb-6 group-hover:scale-110 transition-transform">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-xl font-bold mb-3 group-hover:text-secondary-fixed-dim transition-colors">
+                  Quality Assurance
+                </h3>
+                <p className="font-body text-xs md:text-sm text-on-primary-container leading-relaxed mb-6">
+                  On-site QA engineers execute continuous inline checks, AQL 2.5 final audits, and 100% metal/needle detection before dispatch.
+                </p>
+              </div>
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary-fixed-dim font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Zero Quality Compromise
+              </span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bg-white/5 backdrop-blur-sm p-6 md:p-8 rounded-xl border border-white/10 hover:border-secondary/40 transition-all group flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary-fixed-dim mb-6 group-hover:scale-110 transition-transform">
+                  <Truck className="w-6 h-6" />
+                </div>
+                <h3 className="font-headline text-xl font-bold mb-3 group-hover:text-secondary-fixed-dim transition-colors">
+                  Global Logistics
+                </h3>
+                <p className="font-body text-xs md:text-sm text-on-primary-container leading-relaxed mb-6">
+                  Seamless freight management (FOB, CIF, DDP) providing real-time cargo visibility right to your European or UK distribution center.
+                </p>
+              </div>
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary-fixed-dim font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> On-Time Global Dispatch
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Value Proposition & Key Metrics Banner (Option 2 Merged) */}
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 p-8 md:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-7">
+                <span className="font-label text-xs uppercase tracking-[0.25em] text-secondary-fixed-dim font-bold block mb-3">
+                  Why Fashion Brands Partner With ETC
+                </span>
+                <h3 className="font-headline text-2xl md:text-3xl font-black mb-4 leading-tight">
+                  Flexible Scaling, Factory Direct Pricing & Material Innovation.
+                </h3>
+                <p className="font-body text-sm text-on-primary-container leading-relaxed mb-6">
+                  Whether you are launching a capsule collection requiring flexible MOQs or scaling multi-thousand piece retail orders, our dual UK-Bangladesh teams eliminate middleman markups while granting you direct access to GOTS organic cotton, recycled fibers, and eco-wash technologies.
+                </p>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    to="/contact"
+                    className="bg-secondary text-white px-7 py-3.5 rounded font-label text-xs uppercase tracking-[0.2em] font-bold shadow-lg hover:opacity-90 transition-all inline-flex items-center gap-2"
+                  >
+                    Start Sourcing Inquiry
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    to="/about"
+                    className="border border-white/20 text-white px-6 py-3.5 rounded font-label text-xs uppercase tracking-[0.2em] font-bold hover:bg-white/10 transition-all"
+                  >
+                    Discover Our Story
+                  </Link>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 grid grid-cols-2 gap-4 border-t lg:border-t-0 lg:border-l border-white/15 pt-6 lg:pt-0 lg:pl-8">
+                <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                  <span className="font-headline text-3xl font-black text-secondary-fixed-dim block mb-1">15M+</span>
+                  <span className="font-label text-[11px] uppercase tracking-wider text-white/80 font-bold block">Annual Capacity</span>
+                  <span className="font-body text-[10px] text-on-primary-container">Pieces per year</span>
+                </div>
+                <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                  <span className="font-headline text-3xl font-black text-secondary-fixed-dim block mb-1">100%</span>
+                  <span className="font-label text-[11px] uppercase tracking-wider text-white/80 font-bold block">Ethically Audited</span>
+                  <span className="font-body text-[10px] text-on-primary-container">BSCI, WRAP & Accord</span>
+                </div>
+                <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                  <span className="font-headline text-3xl font-black text-secondary-fixed-dim block mb-1">99.2%</span>
+                  <span className="font-label text-[11px] uppercase tracking-wider text-white/80 font-bold block">On-Time Delivery</span>
+                  <span className="font-body text-[10px] text-on-primary-container">Reliable supply chain</span>
+                </div>
+                <div className="p-4 bg-white/5 rounded-xl border border-white/10">
+                  <span className="font-headline text-3xl font-black text-secondary-fixed-dim block mb-1">UK & BD</span>
+                  <span className="font-label text-[11px] uppercase tracking-wider text-white/80 font-bold block">Dual Presence</span>
+                  <span className="font-body text-[10px] text-on-primary-container">London & Dhaka teams</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
