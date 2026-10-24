@@ -69,12 +69,12 @@ const Header = () => {
             </div>
 
             {/* Logo Text */}
-            <div className="flex flex-col justify-center">
-              <span className={`font-headline text-base md:text-[15px] font-black tracking-wider leading-none transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary'}`}>
+            <div className="flex flex-col justify-center items-center text-center">
+              <span className={`font-headline text-[15px] sm:text-[16px] md:text-[17px] font-black tracking-[0.06em] leading-none transition-colors duration-300 ${isTransparent ? 'text-white' : 'text-primary'}`}>
                 ETC APPAREL LIMITED
               </span>
-              <span className={`font-label text-[7px] md:text-[8px] uppercase tracking-[0.2em] mt-1 font-bold transition-colors duration-300 ${isTransparent ? 'text-white/80' : 'text-on-surface-variant'}`}>
-                UK BANGLADESH VENTURE
+              <span className={`font-body text-[7.5px] sm:text-[8px] md:text-[8.5px] tracking-[0.02em] mt-1.5 font-medium transition-colors duration-300 ${isTransparent ? 'text-white/75' : 'text-on-surface-variant'}`}>
+                Built to Build your clothing business
               </span>
             </div>
           </Link>
@@ -117,8 +117,8 @@ const Header = () => {
                   </button>
                 </>
               ) : (
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   className={`px-4 py-1.5 rounded-full font-label text-[11px] uppercase tracking-wider font-bold transition-all ${isTransparent ? 'bg-white/10 hover:bg-white/20 text-white border border-white/25' : 'bg-surface-container hover:bg-secondary hover:text-white text-primary border border-outline-variant/30 shadow-2xs'}`}
                 >
                   Sign In
