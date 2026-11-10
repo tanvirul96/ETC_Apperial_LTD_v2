@@ -233,55 +233,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Heritage Section */}
-      <section className="py-24 lg:py-32 px-6 lg:px-12 max-w-screen-2xl mx-auto bg-surface noise-bg">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-16 items-center">
-          <div className="md:col-span-5 flex flex-col justify-center">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-secondary font-label font-bold tracking-widest uppercase text-xs mb-6 block"
-            >
-              Heritage
-            </motion.span>
-            <h2 className="font-headline text-4xl md:text-5xl text-primary leading-tight mb-8">
-              A Legacy of <br />Quiet Authority
-            </h2>
-            <div className="space-y-6 text-on-surface-variant font-body text-lg leading-relaxed max-w-md">
-              <p>
-                Founded in the pursuit of the perfect silhouette, ETC Apparel represents the intersection of
-                traditional tailoring and modern utility. Our atelier works exclusively with natural fibers,
-                sourced from generational mills.
-              </p>
-              <p>
-                We believe that true luxury is found in the invisible details—the reinforced seam, the
-                hand-finished buttonhole, and the way a fabric breathes against the skin.
-              </p>
-            </div>
-            <div className="mt-12">
-              <Link to="/about" className="inline-flex items-center gap-2 font-label uppercase tracking-widest text-sm text-secondary font-semibold hover:gap-4 transition-all">
-                Our Story <ArrowRight className="text-lg" />
-              </Link>
-            </div>
-          </div>
-          <div className="md:col-span-6 md:col-start-7 relative">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="aspect-[4/5] bg-surface-container-low overflow-hidden rounded-lg shadow-2xl"
-            >
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAalLxfcyT0yY_oRq7th1Fzh_iIBrZvxlvMnz61vpd_yY_-81uyPcvjEYTQQKG2DwgODGOu4Tyumos7LY8qBx0BS1O20CJFiLXP3i8pskT4EUENpHd9szrqV_5JxvhcoEG1tjUjMyh4AKaJ5bldtvIod3_R39GaBOYcWHjFR-mzOQvnFVYmRsnoDDWQLmB4JqjDygBcjN0XW5pVHnTnRgT3D1WsGA2tUEWmy8cTxG4mIv7PqqHx-1tmQIuhYUJ3sEUrpwSCQEIOkHBv" className="w-full h-full object-cover" alt="Artisan hands" />
-            </motion.div>
-            <div className="absolute -bottom-8 -left-8 bg-surface-container-highest p-8 max-w-[240px] hidden md:block shadow-xl border border-outline-variant/10">
-              <p className="font-headline italic text-tertiary text-xl leading-relaxed">"Craft is the memory of the hands."</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Sourcing Bridge & Value Proposition Section (Option 1 & 2 Merged) */}
       <section className="py-24 lg:py-32 bg-primary text-white relative overflow-hidden noise-bg">
         <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-secondary/5 blur-3xl pointer-events-none" />
@@ -519,6 +470,144 @@ const Home = () => {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section - ETC Apparel Limited Buying Hub & Exporter */}
+      <section className="py-24 lg:py-36 px-6 lg:px-12 max-w-screen-2xl mx-auto bg-surface noise-bg relative overflow-hidden">
+        {/* Subtle decorative background watermark */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 text-[18rem] md:text-[24rem] font-headline text-surface-container-high/30 select-none pointer-events-none -z-0">
+          ETC
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+          {/* Left Column: Narrative & Highlights */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-headline text-3xl sm:text-4xl lg:text-5xl text-primary font-bold leading-[1.18] mb-8 tracking-tight"
+            >
+              Multinational Apparel Buying Hub & Exporter <br />
+              <span className="italic font-serif font-normal text-secondary">from Fabrics to Fashion.</span>
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-6 text-on-surface-variant font-body text-base lg:text-lg leading-relaxed"
+            >
+              <p>
+                <strong className="text-primary font-semibold">ETC Apparel Limited</strong> is a Multinational apparel buying hub and exporter with a vision to deliver world-class service, quality solutions and value addition services to end products for the textile industries on a global level, beginning from fabrics to fashion through market knowledge, experienced sourcing professionals. Global corporate office located at <strong className="text-primary font-semibold">Dhaka, Bangladesh</strong>. Our design. ETC Sourcing offers product sourcing, amazing design collection, best production execution with on-time shipment, best quality assurance, supply chain solutions towards building a stake holding approach to business.
+              </p>
+              <p>
+                We are associated with top rated factories (Woven, Jersey and Knitwear) in Bangladesh who are highly organized, qualified, for quality and on-time product, and of course compliance certified. We have few green certified factories as well. We have a dynamic, talented, and well-experienced team working with us and a great office structure, including fabric sourcing, garment technology & compliance.
+              </p>
+            </motion.div>
+
+            {/* Quick Value Pillars */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3.5 mt-8 pt-8 border-t border-outline-variant/15"
+            >
+              <div className="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:border-secondary/30 transition-colors">
+                <span className="block font-headline text-base sm:text-lg font-bold text-primary mb-0.5">Woven & Knit</span>
+                <span className="font-label text-[11px] text-on-surface-variant block uppercase tracking-wider">Top-Rated Factories</span>
+              </div>
+              <div className="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:border-secondary/30 transition-colors">
+                <span className="block font-headline text-base sm:text-lg font-bold text-emerald-700 mb-0.5">Green Certified</span>
+                <span className="font-label text-[11px] text-on-surface-variant block uppercase tracking-wider">Eco & Compliant</span>
+              </div>
+              <div className="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:border-secondary/30 transition-colors">
+                <span className="block font-headline text-base sm:text-lg font-bold text-primary mb-0.5">Dhaka, BD</span>
+                <span className="font-label text-[11px] text-on-surface-variant block uppercase tracking-wider">Corporate Office</span>
+              </div>
+              <div className="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/20 hover:border-secondary/30 transition-colors">
+                <span className="block font-headline text-base sm:text-lg font-bold text-primary mb-0.5">End-to-End</span>
+                <span className="font-label text-[11px] text-on-surface-variant block uppercase tracking-wider">Fabrics to Fashion</span>
+              </div>
+            </motion.div>
+
+            {/* Call to Actions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-10 flex flex-wrap items-center gap-4"
+            >
+              <Link
+                to="/about"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white rounded font-label text-xs uppercase tracking-[0.2em] font-bold hover:bg-secondary transition-all shadow-md group"
+              >
+                Our Full Story
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3.5 border border-primary/20 text-primary rounded font-label text-xs uppercase tracking-[0.2em] font-bold hover:bg-primary/5 transition-all"
+              >
+                Connect With Us
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Editorial Visual Showcase */}
+          <div className="lg:col-span-5 relative mt-8 lg:mt-0">
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-[4/5] bg-surface-container-low overflow-hidden rounded-2xl shadow-2xl border border-outline-variant/15 group"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&q=80&w=1200"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                alt="ETC Apparel Sourcing and Textile Production"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+
+              {/* Floating Caption inside image */}
+              <div className="absolute bottom-6 left-6 right-6 text-white z-10">
+                <span className="font-label text-[10px] uppercase tracking-[0.25em] text-secondary-fixed-dim font-bold block mb-1">
+                  Global Manufacturing Network
+                </span>
+                <p className="font-headline italic text-lg sm:text-xl text-white/95 leading-snug">
+                  "Beginning from fabrics to fashion through market knowledge & experienced sourcing."
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Floating Location Card (Bottom-Right / Offset) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="absolute -bottom-6 -right-6 bg-primary text-white p-4 sm:p-5 rounded-xl shadow-2xl border border-white/10 hidden sm:flex items-center gap-3.5 max-w-[280px] z-20"
+            >
+              <div className="w-10 h-10 rounded-lg bg-white/10 text-secondary-fixed-dim flex items-center justify-center shrink-0">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="font-label text-[10px] uppercase tracking-wider text-secondary-fixed-dim font-bold block">
+                  Corporate Headquarters
+                </span>
+                <span className="font-headline text-sm font-bold text-white block leading-tight">
+                  Dhaka, Bangladesh
+                </span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
